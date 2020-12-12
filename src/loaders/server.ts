@@ -8,7 +8,7 @@ import { startMocks } from '../mocks';
 dotenv.config();
 
 const { log } = console;
-const { SERVER_PORT } = process.env;
+const SERVER_PORT = process.env.PORT || 5445;
 
 export default class Server {
     private static database = new Database();

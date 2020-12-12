@@ -47,5 +47,8 @@
     "superagent": "^6.1.0",
     "supertest": "^5.0.0",
     "ts-jest": "^26.4.1"
+  },
+  "engines": {
+    "node": "^14.15.1"
   }
 }
