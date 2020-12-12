@@ -1,0 +1,10 @@
+/status:
+  get:
+    tags:
+      - Status
+    description: Indicates whether the system is available for treatment or is experiencing stability problems
+    responses: 
+      200:
+        description: The system is available
+      default:
+        description: The system is not available
