@@ -10,7 +10,7 @@
     "clear:compile": "npm run clear && npm run compile",
     "watch": "nodemon --config watch-config.json",
     "clear:watch": "nodemon --config watch-config.json --exec \"npm run clear:compile\"",
-    "start": "npm run watch"
+    "start": "npm run compile"
   },
   "keywords": [],
   "author": "Time 3",
