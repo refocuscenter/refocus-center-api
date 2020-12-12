@@ -1,0 +1,48 @@
+/user:
+  get:
+    tags:
+      - "User"
+    description: List all users
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/user/login:
+  post:
+    tags:
+      - "User"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/login"
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+definitions:
+  user:
+    properties:
+      login:
+        type: string
+      email:
+        type: string
+      fullName:
+        type: string
+      password:
+        type: string
+    example:
+      login: "000000"
+      email: meuEmail@email.com
+      fullName: Meu Nome
+      password: "123456"
+  login:
+    properties:
+      login:
+        type: string
+      password:
+        type: string
+    example:
+      login: "000000"
+      password: "123456"
