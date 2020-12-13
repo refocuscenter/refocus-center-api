@@ -1,4 +1,4 @@
 components:
   responses:
     200:
-      description: Successful!
+      description: Operation performed successfully!
