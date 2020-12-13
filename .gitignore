@@ -4,3 +4,4 @@ build
 schemaspy
 schemaspy.properties
 resource/test/output
+.env
