@@ -4,6 +4,6 @@ import PurchaseController from '../controllers/purchaseController';
 const router = Router();
 
 router.post('/buyBasket/:idProductsBasket', PurchaseController.buyBasket);
-router.post('/purchase', PurchaseController.purchase);
+router.post('/purchases', PurchaseController.purchase);
 
 export default router
