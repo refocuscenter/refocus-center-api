@@ -34,7 +34,7 @@
 
 ![doc swagger](./readme/doc.png)
 
-Na sessão "Purchase", temos um método post (/buyBasket/:idProductsBasket) que é um extra que implementamos. Ele se encaixa na nossa ideia de Loja Bank. Dado uma cesta de produtos e uma conta digital cadastrada, eu realizo a compra dessa cesta.
+Ain temos um endpoint extra que é o método post /buyBasket/:idProductsBasket. Ele se encaixa na nossa ideia de Loja Bank. Dado uma cesta de produtos e uma conta digital cadastrada, eu realizo a compra dessa cesta.
 
 ### Modelo ER Conceitual:
 ![MER Conceitual](./readme/conceitual.png)
