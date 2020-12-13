@@ -3,12 +3,6 @@
     tags:
       - "Queries"
     description: Checks that the card is able to carry out a transaction, and responds with the card balance.
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/queries"
     responses:
       200:
         $ref: "#/components/responses/200"
