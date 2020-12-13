@@ -1,15 +1,15 @@
 import { Sequelize, ModelAttributes, InitOptions, DataTypes, FindOptions } from 'sequelize'
 import { SuperModel } from '.';
 import DigitalAccountPrepay from './digitalAccount';
-import ProductBasket from './productBasket';
+import ProductsBasket from './productsBasket';
 
 export default class PurchasedBasket extends SuperModel {
     id!: number;
     idDigitalAccount!: string; //FK
-    idProductBasket!: number; //FK
+    idProductsBasket!: number; //FK
     totalValue!: number;
     
-    static basicAttributes = [ 'id' ];
+    static basicAttributes = [ 'id', 'totalValue' ];
 
     static initDefault(sequelize: Sequelize) {
 
@@ -23,15 +23,15 @@ export default class PurchasedBasket extends SuperModel {
     }
 
     static associate() {
-        PurchasedBasket.belongsTo(ProductBasket, { foreignKey: 'idProductBasket' })
-        DigitalAccountPrepay.belongsTo(DigitalAccountPrepay, { foreignKey: 'idDigitalAccount' })
+        PurchasedBasket.belongsTo(ProductsBasket, { foreignKey: 'idProductsBasket' })
+        PurchasedBasket.belongsTo(DigitalAccountPrepay, { foreignKey: 'idDigitalAccount' })
     }
 
     private static attributes: ModelAttributes = {
         id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
         totalValue: { type: DataTypes.FLOAT, allowNull: false },
         idDigitalAccount: { type: DataTypes.STRING, references: { model: DigitalAccountPrepay, key: 'id' }, allowNull: false },
-        idProductBasket: { type: DataTypes.BIGINT, references: { model: ProductBasket, key: 'id' }, allowNull: false, unique: true },
+        idProductsBasket: { type: DataTypes.BIGINT, references: { model: ProductsBasket, key: 'id' }, allowNull: false, unique: true },
     };
 
     private static defaultScope: FindOptions<any> = {

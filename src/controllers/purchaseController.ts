@@ -5,7 +5,7 @@ import DigitalAccount from '../models/digitalAccount';
 
 import { FindOptions } from 'sequelize';
 import { checkInstance } from '../utils/sequelizeUtils';
-import ProductBasket from '../models/productBasket';
+import ProductsBasket from '../models/productsBasket';
 import PurchasedBasket from '../models/purchasedBasket'
 
 const PRODUCT_BASKET_NOT_FOUND = "Product Basket not found"
@@ -21,29 +21,29 @@ export default class PurchaseController {
         */
 
         try {
-            const { idDigitalAccount, idProductBasket } = request.params;
+            const { idDigitalAccount, idProductsBasket } = request.params;
 
             const digitalAccount = await DigitalAccount.findByPk(idDigitalAccount);
-            const productBasket = await ProductBasket.findByPk(idProductBasket);
+            const productsBasket = await ProductsBasket.findByPk(idProductsBasket);
 
             if (!digitalAccount)
                 return responseError404(response, DIGITAL_ACCOUNT_NOT_FOUND);
 
-            if (!productBasket)
+            if (!productsBasket)
                 return responseError404(response, PRODUCT_BASKET_NOT_FOUND);
 
             //SUM
 
             /*
             idDigitalAccount!: string; //FK
-    idProductBasket!: number; //FK
+    idProductsBasket!: number; //FK
     totalValue!: number;
             */
 
             /*const purchasedBasket = PurchasedBasket.create({
                 idDigitalAccount: "",
-                idProductBasket: "",
-                totalValue: await ProductBasket.scope('sum').
+                idProductsBasket: "",
+                totalValue: await ProductsBasket.scope('sum').
             });*/
 
 

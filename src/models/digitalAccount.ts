@@ -7,7 +7,7 @@ import User from './user';
 export default class DigitalAccountPrepay extends SuperModel {
     id!: string;
     balance!: number;
-    idUser!: number; //fk
+    userId!: number; //fk
     idStore!: number;
 
     static basicAttributes = ['id', 'balance'];
@@ -24,7 +24,7 @@ export default class DigitalAccountPrepay extends SuperModel {
     }
 
     static associate() {
-        DigitalAccountPrepay.belongsTo(User, { foreignKey: 'idUser' })
+        DigitalAccountPrepay.belongsTo(User, { foreignKey: 'userId' })
         DigitalAccountPrepay.belongsTo(Store, { foreignKey: 'idStore' })
     }
 

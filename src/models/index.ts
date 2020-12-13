@@ -7,7 +7,7 @@ const modelList = [
     './recognitionTerm',
     './store',
     './digitalAccount',
-    './productBasket',
+    './productsBasket',
     './suppliedProduct',
     './purchasedBasket'
 ]
