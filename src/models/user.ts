@@ -2,7 +2,6 @@
 import { Sequelize, ModelAttributes, InitOptions, DataTypes, FindOptions } from 'sequelize'
 import { SuperModel } from '.';
 
-//USER IS ACCOUNT OF PAYSMART
 export default class User extends SuperModel {
     id!: string;
     login!: string;
