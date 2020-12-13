@@ -2,8 +2,9 @@
 import { Sequelize, ModelAttributes, InitOptions, DataTypes, FindOptions } from 'sequelize'
 import { SuperModel } from '.';
 
+//USER IS ACCOUNT OF PAYSMART
 export default class User extends SuperModel {
-    id!: number;
+    id!: string;
     login!: string;
     email!: string;
     fullName!: string;
@@ -33,7 +34,7 @@ export default class User extends SuperModel {
     }
 
     private static attributes: ModelAttributes = {
-        id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
+        id: { type: DataTypes.STRING, primaryKey: true },
         password: { type: DataTypes.STRING, allowNull: false },
         login: { type: DataTypes.STRING, allowNull: false, unique: true },
         email: { type: DataTypes.STRING, allowNull: false, unique: true },

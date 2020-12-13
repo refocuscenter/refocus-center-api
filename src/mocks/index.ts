@@ -7,34 +7,36 @@ import User from "../models/user";
 import ProductsBasket from "../models/productsBasket";
 import {v4 as uuid} from "uuid";
 
-const genUUID = [uuid(), uuid(), uuid(), uuid(), uuid()]
+const digitalAccountUUID = [uuid(), uuid(), uuid(), uuid(), uuid()]
+const userUUID = [uuid(), uuid(), uuid(), uuid(), uuid()]
+
 
 const users = [{
-    "id": 1,
+    "id": userUUID[0],
     "password": "s35ZjZ7z",
     "login": "King vulture",
     "email": "dthaxton0@i2i.jp",
     "fullName": "Dev Thaxton"
   }, {
-    "id": 2,
+    "id": userUUID[1],
     "password": "WVkrA8jkXeVe",
     "login": "Mongoose, banded",
     "email": "lcorringham1@cnbc.com",
     "fullName": "Lindsey Corringham"
   }, {
-    "id": 3,
+    "id": userUUID[2],
     "password": "lkvujSwW",
     "login": "Crane, stanley",
     "email": "cjendas2@mapy.cz",
     "fullName": "Correna Jendas"
   }, {
-    "id": 4,
+    "id": userUUID[3],
     "password": "bZlQcGc54m",
     "login": "Onager",
     "email": "dluker3@cmu.edu",
     "fullName": "Derril Luker"
   }, {
-    "id": 5,
+    "id": userUUID[4],
     "password": "0Pc7hL",
     "login": "Roadrunner, greater",
     "email": "jmanzell4@dyndns.org",
@@ -135,76 +137,76 @@ const stores = [{
 const productsBaskets = [{
     "id": 1,
     "amount": 55,
-    "userId": 1
+    "userId": userUUID[0]
   }, {
     "id": 2,
     "amount": 71,
-    "userId": 2
+    "userId": userUUID[1]
   }, {
     "id": 3,
     "amount": 27,
-    "userId": 3
+    "userId": userUUID[2]
   }, {
     "id": 4,
     "amount": 69,
-    "userId": 4
+    "userId": userUUID[3]
   }, {
     "id": 5,
     "amount": 82,
-    "userId": 5
+    "userId": userUUID[4]
   }];
 
 const purchasedBaskets = [{
     "id": 1,
     "totalValue": 54.93,
-    "idDigitalAccount": genUUID[0],
+    "idDigitalAccount": digitalAccountUUID[0],
     "idProductsBasket": 1
   }, {
     "id": 2,
     "totalValue": 94.06,
-    "idDigitalAccount": genUUID[1],
+    "idDigitalAccount": digitalAccountUUID[1],
     "idProductsBasket": 2
   }, {
     "id": 3,
     "totalValue": 78.02,
-    "idDigitalAccount": genUUID[2],
+    "idDigitalAccount": digitalAccountUUID[2],
     "idProductsBasket": 3
   }, {
     "id": 4,
     "totalValue": 50.42,
-    "idDigitalAccount": genUUID[3],
+    "idDigitalAccount": digitalAccountUUID[3],
     "idProductsBasket": 4
   }, {
     "id": 5,
     "totalValue": 49.43,
-    "idDigitalAccount": genUUID[4],
+    "idDigitalAccount": digitalAccountUUID[4],
     "idProductsBasket": 5
 }]
 
 const digitalAccounts = [{
-    "id": genUUID[0],
+    "id": digitalAccountUUID[0],
     "balance": 62.08,
-    "userId": 1,
+    "userId": userUUID[0],
     "idStore": 1
   }, {
-    "id": genUUID[1],
+    "id": digitalAccountUUID[1],
     "balance": 90.67,
-    "userId": 2,
+    "userId": userUUID[1],
     "idStore": 1
   }, {
-    "id": genUUID[2],
+    "id": digitalAccountUUID[2],
     "balance": 90.49,
-    "userId": 3,
+    "userId": userUUID[2],
     "idStore": 1
   }, {
-    "id": genUUID[3],
+    "id": digitalAccountUUID[3],
     "balance": 57.35,
-    "userId": 4,
+    "userId": userUUID[3],
     "idStore": 1
   }, {
-    "id": genUUID[4],
+    "id": digitalAccountUUID[4],
     "balance": 17.08,
-    "userId": 5,
+    "userId": userUUID[4],
     "idStore": 1
   }];
 

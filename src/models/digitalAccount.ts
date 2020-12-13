@@ -7,7 +7,7 @@ import User from './user';
 export default class DigitalAccountPrepay extends SuperModel {
     id!: string;
     balance!: number;
-    userId!: number; //fk
+    userId!: string; //fk
     idStore!: number;
 
     static basicAttributes = ['id', 'balance'];
@@ -37,7 +37,7 @@ export default class DigitalAccountPrepay extends SuperModel {
                 return `R$ ${parseFloat(rawValue).toFixed(2)}`
             }
         },
-        userId: { type: DataTypes.BIGINT, references: { model: User, key: 'id' }, allowNull: false },
+        userId: { type: DataTypes.STRING, references: { model: User, key: 'id' }, allowNull: false },
         idStore:  { type: DataTypes.BIGINT, references: { model: Store, key: 'id' }, allowNull: false },
     };
 

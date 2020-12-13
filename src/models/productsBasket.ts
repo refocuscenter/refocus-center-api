@@ -5,7 +5,7 @@ import User from './user';
 
 export default class ProductsBasket extends SuperModel {
     id!: number;
-    userId!: number; //fk
+    userId!: string; //fk
     amount!: number;
 
     static basicAttributes = ['id', 'amount'];
@@ -28,7 +28,7 @@ export default class ProductsBasket extends SuperModel {
     private static attributes: ModelAttributes = {
         id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
         amount: { type: DataTypes.INTEGER, allowNull: false },
-        userId: { type: DataTypes.BIGINT, references: { model: User, key: 'id' }, unique: true, allowNull: false },
+        userId: { type: DataTypes.STRING, references: { model: User, key: 'id' }, unique: true, allowNull: false },
     };
 
     private static defaultScope: FindOptions<any> = {
