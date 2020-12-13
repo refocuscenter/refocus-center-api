@@ -5,7 +5,7 @@ import ProductBasket from './productBasket';
 
 export default class PurchasedBasket extends SuperModel {
     id!: number;
-    idDigitalAccount!: number; //FK
+    idDigitalAccount!: string; //FK
     idProductBasket!: number; //FK
     totalValue!: number;
     
@@ -30,7 +30,7 @@ export default class PurchasedBasket extends SuperModel {
     private static attributes: ModelAttributes = {
         id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
         totalValue: { type: DataTypes.FLOAT, allowNull: false },
-        idDigitalAccount: { type: DataTypes.BIGINT, references: { model: DigitalAccountPrepay, key: 'id' }, allowNull: false },
+        idDigitalAccount: { type: DataTypes.STRING, references: { model: DigitalAccountPrepay, key: 'id' }, allowNull: false },
         idProductBasket: { type: DataTypes.BIGINT, references: { model: ProductBasket, key: 'id' }, allowNull: false, unique: true },
     };
 

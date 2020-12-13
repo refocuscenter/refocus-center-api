@@ -5,7 +5,7 @@ import Store from './store';
 import User from './user';
 
 export default class DigitalAccountPrepay extends SuperModel {
-    id!: number;
+    id!: string;
     balance!: number;
     idUser!: number; //fk
     idStore!: number;
@@ -29,8 +29,14 @@ export default class DigitalAccountPrepay extends SuperModel {
     }
 
     private static attributes: ModelAttributes = {
-        id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-        balance: { type: DataTypes.FLOAT, allowNull: false },
+        id: { type: DataTypes.STRING, primaryKey: true },
+        balance: {
+            type: DataTypes.DECIMAL, allowNull: false,
+            get() {
+                const rawValue = this.getDataValue('balance');
+                return `R$ ${parseFloat(rawValue).toFixed(2)}`
+            }
+        },
         userId: { type: DataTypes.BIGINT, references: { model: User, key: 'id' }, allowNull: false },
         idStore:  { type: DataTypes.BIGINT, references: { model: Store, key: 'id' }, allowNull: false },
     };
