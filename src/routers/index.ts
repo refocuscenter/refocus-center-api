@@ -4,7 +4,9 @@ const routerExport = Router();
 
 const routerFiles = [
     './status',
-    './user' 
+    './user',
+    './queries',
+    './purchase'
 ]
 
 function getImports(): Router[] {
