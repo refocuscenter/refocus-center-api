@@ -4,7 +4,7 @@ const router = Router();
 
 router.get('/status', (req, res) => {
     res.json({
-        "message": "Conrado",
+        "message": "Operação realizada com sucesso",
         "code": 0
     });
 });
