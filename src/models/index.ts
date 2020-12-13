@@ -4,11 +4,12 @@ import { Model, Sequelize } from 'sequelize'
 const modelList = [
     './user',
     './product',    
-    './productBasket',
     './recognitionTerm',
     './store',
+    './digitalAccount',
+    './productBasket',
     './suppliedProduct',
-    './digitalAccount'
+    './purchasedBasket'
 ]
 
 export class SuperModel<A extends {} = any, B extends {} = A> extends Model<A, B> {
