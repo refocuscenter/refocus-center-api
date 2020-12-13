@@ -7,7 +7,7 @@ export const swaggerJSDocOptions: Options = {
         info: {
             version: "1.0.0",
             title: "Cestou API",
-            description: "",
+            description: "[ Base URL: https://cestou-api.herokuapp.com/ ]"
         }
     },
     apis: ["src/docs/**/*.yml"]
