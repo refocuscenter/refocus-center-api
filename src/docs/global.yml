@@ -2,3 +2,7 @@ components:
   responses:
     200:
       description: Operation performed successfully!
+
+definitions:
+  object:
+    type: object

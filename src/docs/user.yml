@@ -16,33 +16,34 @@
       content:
         application/json:
           schema:
-            $ref: "#/definitions/login"
+            $ref: "#/definitions/object"
     responses:
       200:
         $ref: "#/components/responses/200"
 
-definitions:
-  user:
-    properties:
-      login:
-        type: string
-      email:
-        type: string
-      fullName:
-        type: string
-      password:
-        type: string
-    example:
-      login: "000000"
-      email: meuEmail@email.com
-      fullName: Meu Nome
-      password: "123456"
-  login:
-    properties:
-      login:
-        type: string
-      password:
-        type: string
-    example:
-      login: "000000"
-      password: "123456"
+#definitions:
+#  user:
+#    properties:
+#      login:
+#        type: string
+#      email:
+#        type: string
+#      fullName:
+#        type: string
+#      password:
+#        type: string
+#    example:
+#      login: "000000"
+#      email: meuEmail@email.com
+#      fullName: Meu Nome
+#      password: "123456"
+#  login:
+#    properties:
+#      login:
+#        type: string
+#      password:
+#        type: string
+#    example:
+#      login: "000000"
+#      password: "123456"
+#
