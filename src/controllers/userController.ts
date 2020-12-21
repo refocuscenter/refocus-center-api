@@ -3,6 +3,7 @@ import { Request, Response } from 'express';
 import User from '../models/user';
 import { FindOptions } from 'sequelize';
 import { checkInstance } from '../utils/sequelizeUtils';
+import DigitalAccountPrepay from '../models/digitalAccount';
 
 const USER_NOT_FOUND = "User not found";
 const UNDEFINED_ACCOUNT = 'Undefined account';
@@ -16,7 +17,7 @@ export default class UserController {
 
         try {
             const { id } = request.params;
-            const user = await User.findByPk(id);
+            const user = await User.findByPk(id, { include: { model: DigitalAccountPrepay } });
 
             if (!user)
                 return responseError404(response, USER_NOT_FOUND);
@@ -31,10 +32,8 @@ export default class UserController {
     static async listUsers(request: Request, response: Response) {
 
         try {
-
-            const usersList = await User.findAll();
+            const usersList = await User.findAll({ include: { model: DigitalAccountPrepay } });
             response.json(usersList);
-
         } catch (error) {
             responseError500(error, response);
         }

@@ -24,7 +24,8 @@ export default class DigitalAccountPrepay extends SuperModel {
     }
 
     static associate() {
-        DigitalAccountPrepay.belongsTo(User, { foreignKey: 'userId' })
+        User.hasOne(DigitalAccountPrepay, { foreignKey: 'userId' })
+        DigitalAccountPrepay.belongsTo(User, { foreignKey: 'userId' })   
         DigitalAccountPrepay.belongsTo(Store, { foreignKey: 'idStore' })
     }
 
