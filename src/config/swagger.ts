@@ -8,9 +8,14 @@ export const swaggerJSDocOptions: Options = {
             version: "1.0.0",
             title: "Cestou API",
         },
-        servers: [{
-            url:'https://cestou-api.herokuapp.com/'
-        }]
+        servers: [
+            {
+                url: '/',
+                //description: 'Current Server'
+            },
+            {
+                url: 'https://cestou-api.herokuapp.com/'
+            }]
     },
     apis: ["src/docs/**/*.yml"]
 };
