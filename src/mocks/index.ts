@@ -174,7 +174,7 @@ const purchasedBaskets = [{
   }, {
     "id": 4,
     "totalValue": 50.42,
-    "idDigitalAccount": digitalAccountUUID[3],
+    "idDigitalAccount": "cta-dd01aac5-1f46-4424-aafa-e4b89c05d367",
     "idProductsBasket": 4
   }, {
     "id": 5,
@@ -199,8 +199,8 @@ const digitalAccounts = [{
     "userId": userUUID[2],
     "idStore": 1
   }, {
-    "id": digitalAccountUUID[3],
-    "balance": 57.35,
+    "id": "cta-dd01aac5-1f46-4424-aafa-e4b89c05d367",
+    "balance": 570000.35,
     "userId": userUUID[3],
     "idStore": 1
   }, {
