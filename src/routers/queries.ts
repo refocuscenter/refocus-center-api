@@ -1,8 +1,8 @@
 import { Router } from 'express';
-import QueriesController from '../controllers/queriesController';
+//import QueriesController from '../controllers/queriesController';
 
 const router = Router();
 
-router.post('/queries', QueriesController.validateDigitalCard);
+//router.post('/queries', QueriesController.validateDigitalCard);
 
 export default router;

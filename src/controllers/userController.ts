@@ -1,46 +1,34 @@
 import { responseError500, responseError404 } from './../utils/serviceResponse';
 import { Request, Response } from 'express';
-import User from '../models/user';
-import { FindOptions } from 'sequelize';
-import { checkInstance } from '../utils/sequelizeUtils';
-import DigitalAccountPrepay from '../models/digitalAccount';
+import { Controller, Get, JsonController, QueryParam, QueryParams, Req, Res } from 'routing-controllers';
+//import User from '../models/user';
+//import { FindOptions } from 'sequelize';
+//import { checkInstance } from '../utils/sequelizeUtils';
+//import DigitalAccountPrepay from '../models/digitalAccount';
+//
+//const USER_NOT_FOUND = "User not found";
+//const UNDEFINED_ACCOUNT = 'Undefined account';
+//const WRONG_PASSWORD = 'Password does not match';
+//
+//const sequelize = () => checkInstance(User.sequelize)
+//
 
-const USER_NOT_FOUND = "User not found";
-const UNDEFINED_ACCOUNT = 'Undefined account';
-const WRONG_PASSWORD = 'Password does not match';
-
-const sequelize = () => checkInstance(User.sequelize)
-
+@JsonController()
 export default class UserController {
 
-    static async getUser(request: Request, response: Response) {
+    @Get('/users')
+    async listUsers(@QueryParams() query: any) {
 
         try {
-            const { id } = request.params;
-            const user = await User.findByPk(id, { include: { model: DigitalAccountPrepay } });
-
-            if (!user)
-                return responseError404(response, USER_NOT_FOUND);
-
-            response.json(user);
+            //const usersList = await User.findAll({ include: { model: DigitalAccountPrepay } });
+            return { message: "eaeee" }
         } catch (error) {
-            responseError500(error, response);
+            //responseError500(error, response);
         }
 
     }
 
-    static async listUsers(request: Request, response: Response) {
-
-        try {
-            const usersList = await User.findAll({ include: { model: DigitalAccountPrepay } });
-            response.json(usersList);
-        } catch (error) {
-            responseError500(error, response);
-        }
-
-    }
-
-    static async login(request: Request, response: Response) {
+    /*async login(request: Request, response: Response) {
 
         try {
             const { login, password } = request.body;
@@ -65,6 +53,6 @@ export default class UserController {
             responseError500(error, response);
         }
 
-    }
+    }*/
 
 }

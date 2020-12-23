@@ -1,48 +1,32 @@
+import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
 
-import { Sequelize, ModelAttributes, InitOptions, DataTypes, FindOptions } from 'sequelize'
-import { SuperModel } from '.';
+/*
+TODO: test this constraint
+//CREATE UNIQUE INDEX uq_users_phone
+//ON dbo.users(phoneAreaCode, phone);
+*/
 
-export default class User extends SuperModel {
+@Unique("uq_users_phone", ["phone", "phoneAreaCode"])
+@Entity({ name: "users" })
+export default class User {
+    @PrimaryGeneratedColumn()
     id!: string;
-    login!: string;
+
+    @Column()
+    nickname!: string;
+
+    @Column()
     email!: string;
+
+    @Column()
+    phone!: number;
+
+    @Column()
+    phoneAreaCode!: number; //(Ex.: 55021) DDD
+
+    @Column({ nullable: true })
     fullName!: string;
+
+    @Column()
     password!: string;
-
-    static basicAttributes = ['id', 'login', 'email', 'fullName'];
-
-    static createAttributes = [
-        'id', 'login', 'email', 'fullName', 'password'
-    ];
-
-    static initDefault(sequelize: Sequelize) {
-
-        const initOptions: InitOptions = {
-            sequelize: sequelize,
-            paranoid: true,
-            defaultScope: User.defaultScope,
-            scopes: {
-                login: { attributes: this.createAttributes }
-            }
-        }
-
-        User.init(User.attributes, initOptions);
-    }
-
-    static associate() {
-    }
-
-    private static attributes: ModelAttributes = {
-        id: { type: DataTypes.STRING, primaryKey: true },
-        password: { type: DataTypes.STRING, allowNull: false },
-        login: { type: DataTypes.STRING, allowNull: false, unique: true },
-        email: { type: DataTypes.STRING, allowNull: false, unique: true },
-        fullName: { type: DataTypes.STRING, allowNull: false }
-    };
-
-    private static defaultScope: FindOptions<any> = {
-        attributes: User.basicAttributes,
-        include: []
-    };
-
 }

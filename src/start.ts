@@ -1,3 +1,4 @@
+import "reflect-metadata";
 import Server from './loaders/server'
 
 console.clear();

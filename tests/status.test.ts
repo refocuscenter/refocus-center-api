@@ -1,5 +1,7 @@
 import request from 'supertest';
-import app from '../src/loaders/app'
+import { createApp } from '../src/loaders/app'
+
+const app = createApp();
 
 jest.setTimeout(15000);
 

@@ -1,10 +1,10 @@
-import DigitalAccountPrepay from "../models/digitalAccount";
+/*import DigitalAccountPrepay from "../models/digitalAccount";
 import Product from "../models/product";
 import PurchasedBasket from "../models/purchasedBasket";
 import Store from "../models/store";
 import SuppliedProduct from "../models/suppliedProduct";
 import User from "../models/user";
-import ProductsBasket from "../models/productsBasket";
+import ProductsBasket from "../models/productsBasket";*/
 import {v4 as uuid} from "uuid";
 
 const digitalAccountUUID = [uuid(), uuid(), uuid(), uuid(), uuid()]
@@ -212,12 +212,13 @@ const digitalAccounts = [{
 
 
 export async function startMocks() {
-    await User.bulkCreate(users);
+    /*await User.bulkCreate(users);
     await Product.bulkCreate(products);
     await Store.bulkCreate(stores);
     await DigitalAccountPrepay.bulkCreate(digitalAccounts);
     await ProductsBasket.bulkCreate(productsBaskets);
     await SuppliedProduct.bulkCreate(suppliedProducts);    
-    await PurchasedBasket.bulkCreate(purchasedBaskets);
+    await PurchasedBasket.bulkCreate(purchasedBaskets);*/  
     
+    console.log("Mocks criados! ")
 }

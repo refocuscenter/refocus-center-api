@@ -1,6 +1,6 @@
 import dotenv from 'dotenv';
 import { green, red, whiteBright } from 'chalk';
-import app from './app';
+import { createApp } from './app';
 import Database from './database';
 import { startMocks } from '../mocks';
 
@@ -13,17 +13,17 @@ const SERVER_PORT = process.env.PORT || 5445;
 export default class Server {
     private static database = new Database();
 
+    private static app = createApp();
+
     public async start() {
         try {
-            console.log("Iniciando servidor. . . ")
-            
+            log("Iniciando servidor. . . ")
+
             await Server.database.connect();
 
             startMocks();
 
-            console.log("Mocks criados! ")
-            
-            app.listen(SERVER_PORT, () => {
+            Server.app.listen(SERVER_PORT, () => {
                 log(`${green(`Servidor Iniciado em http://localhost:${SERVER_PORT}/`)}`)
             });
 
