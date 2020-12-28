@@ -1,11 +1,24 @@
-class Purchase {
-/*    id!: number;
-    totalValue!: number;
+import { Column, Entity, PrimaryColumn } from "typeorm";
+import { TimeStampParanoid } from "../utils/modelsUtils";
 
-    private static attributes: ModelAttributes = {
-        id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-        totalValue: { type: DataTypes.FLOAT, allowNull: false }
-    };
-*/
+export enum PaymentFormat {
+    PhysicalMoney,
+    CestouCard
+}
+
+@Entity({ name: "purchases" })
+export class Purchase extends TimeStampParanoid{
+
+    @PrimaryColumn()
+    id!: number;
+
+    @Column("bigint")
+    value!: number;
+
+    @Column()
+    amount!: number;
+
+    @Column("smallint")
+    paymentFormat!: PaymentFormat;
 
 }

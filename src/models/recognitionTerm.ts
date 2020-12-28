@@ -1,10 +1,12 @@
-class RecognitionTerm {
- /*   id!: number;
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+
+@Entity({ name: "recognition_terms" })
+export class RecognitionTerm {
+    
+    @PrimaryGeneratedColumn()
+    id!: number;
+
+    @Column()
     term!: string;
 
-    private static attributes: ModelAttributes = {
-        id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-        term: { type: DataTypes.STRING, allowNull: false }
-    };
-*/
 }

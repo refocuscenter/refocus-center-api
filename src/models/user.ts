@@ -1,16 +1,16 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToOne, JoinColumn } from "typeorm";
+import { TimeStampParanoid } from "../utils/modelsUtils";
+import AdvancedUser from "./advancedUser";
 
-/*
-TODO: test this constraint
-//CREATE UNIQUE INDEX uq_users_phone
-//ON dbo.users(phoneAreaCode, phone);
-*/
+export enum PermissionLevel {
+    BasicUser = 0,
+    Owner = 99
+}
 
-@Unique("uq_users_phone", ["phone", "phoneAreaCode"])
 @Entity({ name: "users" })
-export default class User {
+export default class User extends TimeStampParanoid {
     @PrimaryGeneratedColumn()
-    id!: string;
+    id!: number;
 
     @Column()
     nickname!: string;
@@ -18,15 +18,20 @@ export default class User {
     @Column()
     email!: string;
 
-    @Column()
-    phone!: number;
-
-    @Column()
-    phoneAreaCode!: number; //(Ex.: 55021) DDD
+    @Column({ length: 20, unique: true })
+    phone!: string;
 
     @Column({ nullable: true })
     fullName!: string;
 
     @Column()
     password!: string;
+
+    @Column("smallint", { default: 0, select: false })
+    permissionLevel!: PermissionLevel; 
+    //NOTE: Caution with the injections of this attribute in controller 
+    //TODO: find a way to prevent injections of this with typeorm
+
+    @OneToOne(() => User, user => user.advancedUser, { nullable: true })
+    advancedUser!: AdvancedUser | null;
 }

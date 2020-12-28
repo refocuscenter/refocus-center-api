@@ -1,16 +1,21 @@
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-class Product {
-    /*id!: number;
-    barCode!: string;
+@Entity({ name: "products" })
+export class Product {
+
+    @PrimaryGeneratedColumn()
+    id!: number;
+
+    @Column("varchar", { nullable: true })
+    barCode!: string | null;
+
+    @Column()
     name!: string;
-    image!: Blob;
+
+    @Column("bytea")
+    image!: Buffer;
+
+    @Column("text")
     description!: string;
 
-    private static attributes: ModelAttributes = {
-        id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-        barCode: { type: DataTypes.STRING, allowNull: false },
-        name: { type: DataTypes.STRING, allowNull: false },
-        image: { type: DataTypes.BLOB },
-        description: { type: DataTypes.TEXT, allowNull: false }
-    };*/
 }

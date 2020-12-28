@@ -1,12 +1,19 @@
-class Store {
-/*    id!: number;
+import { Column, Entity, PrimaryColumn } from "typeorm";
+import { TimeStampParanoid } from "../utils/modelsUtils";
+import { UnitStore } from "./unitStore";
+
+@Entity({ name: "stores" })
+export class Store extends TimeStampParanoid {
+
+    @PrimaryColumn()
+    id!: number;
+
+    @Column("bigint", { unique: true })
     cnpj!: number;
+
+    @Column()
     name!: string;
 
-    private static attributes: ModelAttributes = {
-        id: { type: DataTypes.BIGINT, primaryKey: true, autoIncrement: true },
-        cnpj: { type: DataTypes.BIGINT, allowNull: false, unique: true },
-        name: { type: DataTypes.STRING, allowNull: false },
-    };
-*/
+    //TODO
+    store!: UnitStore[]
 }
