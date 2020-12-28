@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
-import Address from './address'
+import { Address } from './address'
 import { DeliveryMan } from "./deliveryMan";
 import { Purchase } from "./purchase";
 
@@ -15,7 +15,7 @@ export class Delivery extends TimeStampParanoid {
 
     @Column("bigint")
     value!: number;
-    
+
     //TODO
     deliveryAddress!: Address
     deliveryMan!: DeliveryMan

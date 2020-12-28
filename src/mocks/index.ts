@@ -7,7 +7,7 @@ import User from "../models/user";
 import ProductsBasket from "../models/productsBasket";*/
 import { getRepository } from "typeorm";
 import { v4 as uuid } from "uuid";
-import User from "../models/user";
+import { User } from "../models/user";
 
 const digitalAccountUUID = [uuid(), uuid(), uuid(), uuid(), uuid()]
 const userUUID = [uuid(), uuid(), uuid(), uuid(), uuid()]
@@ -224,7 +224,7 @@ export async function startMocks() {
 
 
   const userRepository = getRepository(User)
-  
+
   await userRepository.insert([{
     password: "s35ZjZ7z",
     nickname: "King vulture",

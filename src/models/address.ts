@@ -1,6 +1,6 @@
 import { Entity, Column, PrimaryGeneratedColumn, JoinTable, OneToOne, ManyToOne } from "typeorm"
 import { TimeStampParanoid } from "../utils/modelsUtils"
-import AdvancedUser from "./advancedUser";
+import { AdvancedUser } from "./advancedUser";
 
 export enum CountryCode {
     Brazil = 30
@@ -13,7 +13,7 @@ export enum LocalityType {
 }
 
 @Entity({ name: "address" })
-export default class Address extends TimeStampParanoid {
+export class Address extends TimeStampParanoid {
 
     @PrimaryGeneratedColumn()
     id!: number;

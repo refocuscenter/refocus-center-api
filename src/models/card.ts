@@ -1,6 +1,6 @@
 import { Entity, Column, Unique, OneToOne, JoinColumn, PrimaryColumn, OneToMany, ManyToOne } from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
-import AdvancedUser from "./advancedUser";
+import { AdvancedUser } from "./advancedUser";
 
 export enum ExistenceType {
     Virtual,
@@ -13,7 +13,7 @@ export enum FinancialType {
 }
 
 @Entity({ name: "card" })
-export default class Card extends TimeStampParanoid {
+export class Card extends TimeStampParanoid {
     @PrimaryColumn("uuid")
     id!: number;
 

@@ -2,7 +2,7 @@ import { responseError500, responseError404 } from './../utils/serviceResponse';
 import { Request, Response } from 'express';
 import { Controller, Get, Post, QueryParams, Req, Res } from 'routing-controllers';
 import { DeepPartial, getRepository, getManager } from 'typeorm';
-import User from '../models/user';
+import { User } from '../models/user';
 import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
 import { filterKeys, removeKeys } from '../utils/controllerUtils';
 

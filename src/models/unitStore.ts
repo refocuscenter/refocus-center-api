@@ -1,5 +1,5 @@
 import { Column, Entity, PrimaryColumn } from "typeorm";
-import Address from "./address";
+import { Address } from "./address";
 import { Store } from "./store";
 
 @Entity({ name: "unit_stores" })

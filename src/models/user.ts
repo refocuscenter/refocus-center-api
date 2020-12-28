@@ -1,6 +1,6 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToOne, JoinColumn } from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
-import AdvancedUser from "./advancedUser";
+import { AdvancedUser } from "./advancedUser";
 
 export enum PermissionLevel {
     BasicUser = 0,
@@ -8,7 +8,7 @@ export enum PermissionLevel {
 }
 
 @Entity({ name: "users" })
-export default class User extends TimeStampParanoid {
+export class User extends TimeStampParanoid {
     @PrimaryGeneratedColumn()
     id!: number;
 
@@ -28,7 +28,7 @@ export default class User extends TimeStampParanoid {
     password!: string;
 
     @Column("smallint", { default: 0, select: false })
-    permissionLevel!: PermissionLevel; 
+    permissionLevel!: PermissionLevel;
     //NOTE: Caution with the injections of this attribute in controller 
     //TODO: find a way to prevent injections of this with typeorm
 

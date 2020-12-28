@@ -1,19 +1,19 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique, Check, PrimaryColumn, OneToOne, JoinColumn, OneToMany } from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
-import Address from "./address";
-import Card from "./card";
-import User from "./user";
+import { Address } from "./address";
+import { Card } from "./card";
+import { User } from "./user";
 
 /**
  * Pessoa física ou Jurídica
  */
-export enum Person{
+export enum Person {
     NaturalPerson,
     JuridicalPerson
 }
-  
+
 @Entity({ name: "advanced_users" })
-export default class AdvancedUser extends TimeStampParanoid {
+export class AdvancedUser extends TimeStampParanoid {
     @PrimaryColumn("uuid")
     id!: string;
 
@@ -21,12 +21,12 @@ export default class AdvancedUser extends TimeStampParanoid {
     identityDocumentNumber!: string; //RG
 
     @Column("smallint")
-    person!: Person; 
+    person!: Person;
 
     @Column()
-    birthDate!: Date;    
+    birthDate!: Date;
 
-    @OneToOne(() => User, 
+    @OneToOne(() => User,
         user => user.advancedUser)
     @JoinColumn()
     user!: User;
