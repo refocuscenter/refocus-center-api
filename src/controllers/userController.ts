@@ -1,31 +1,63 @@
 import { responseError500, responseError404 } from './../utils/serviceResponse';
 import { Request, Response } from 'express';
-import { Controller, Get, JsonController, QueryParam, QueryParams, Req, Res } from 'routing-controllers';
-//import User from '../models/user';
-//import { FindOptions } from 'sequelize';
-//import { checkInstance } from '../utils/sequelizeUtils';
-//import DigitalAccountPrepay from '../models/digitalAccount';
-//
-//const USER_NOT_FOUND = "User not found";
-//const UNDEFINED_ACCOUNT = 'Undefined account';
-//const WRONG_PASSWORD = 'Password does not match';
-//
-//const sequelize = () => checkInstance(User.sequelize)
-//
+import { Controller, Get, Post, QueryParams, Req, Res } from 'routing-controllers';
+import { DeepPartial, getRepository, getManager } from 'typeorm';
+import User from '../models/user';
+import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
+import { filterKeys, removeKeys } from '../utils/controllerUtils';
 
-@JsonController()
+const USER_NOT_FOUND = "User not found";
+//const WRONG_PASSWORD = 'Password does not match';
+
+
+@Controller()
 export default class UserController {
 
+    private userRepository = getRepository(User)
+
     @Get('/users')
-    async listUsers(@QueryParams() query: any) {
+    async listUsers(@QueryParams() query: any, @Res() response: Response) {
 
         try {
-            //const usersList = await User.findAll({ include: { model: DigitalAccountPrepay } });
-            return { message: "eaeee" }
+            const users = await this.userRepository.find()
+            return users;
         } catch (error) {
-            //responseError500(error, response);
+            responseError500(error, response);
         }
+    }
 
+    @Get('/user/:id')
+    async getUser(@Req() request: Request, @Res() response: Response) {
+
+        const { id } = request.params;
+
+        try {
+            const user = await this.userRepository.findOne(id);
+
+            if (user === undefined)
+                return response.status(404).send(USER_NOT_FOUND);
+
+            return user;
+        } catch (error) {
+            responseError500(error, response);
+        }
+    }
+
+    @Post('/signin')
+    async signIn(@Req() request: Request, @Res() response: Response) {
+
+        const keysToRemove = ['id'];
+
+        const userData: DeepPartial<User> =
+            removeKeys(request.body, keysToRemove);
+
+        console.log(userData);
+
+        const newUser = await this.userRepository.create(userData);
+
+        await this.userRepository.save(newUser, { transaction: true });
+
+        return newUser;
     }
 
     /*async login(request: Request, response: Response) {
