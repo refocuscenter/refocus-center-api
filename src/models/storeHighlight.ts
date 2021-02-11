@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
 import { SignedPlan } from "./signedPlan";
 import { UnitStore } from "./unitStore";
 
@@ -14,7 +14,11 @@ export class StoreHighlight {
     @Column()
     title!: String;
 
-    //TODO
+    @ManyToOne(() => UnitStore, uStore => uStore.storeHighlights)
+    @JoinColumn()
     unitStore!: UnitStore;
+
+    @ManyToOne(() => SignedPlan, sig => sig.storeHighlight)
+    @JoinColumn()
     signedPlan!: SignedPlan | null;
 }

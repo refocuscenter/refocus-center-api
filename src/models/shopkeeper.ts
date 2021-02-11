@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
 import { AdvancedUser } from "./advancedUser";
 import { SignedPlan } from "./signedPlan";
@@ -10,8 +10,14 @@ export class Shopkeeper extends TimeStampParanoid {
     @PrimaryGeneratedColumn()
     id!: number;
 
-    //TODO
+    @OneToOne(() => AdvancedUser, advUser => advUser.shopkeeper)
+    @JoinColumn()
     advancedUser!: AdvancedUser
+
+    @ManyToMany(() => UnitStore, uStore => uStore.shopkeepers)
+    @JoinTable()
     unitStore!: UnitStore[]
+
+    @OneToMany(() => SignedPlan, sPlan => sPlan.shopkeeper)
     signedPlan!: SignedPlan[] | null
 }

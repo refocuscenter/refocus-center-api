@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { SignedPlan } from "./signedPlan";
 
 export enum SubscriptionType {
@@ -23,6 +23,6 @@ export class HighlightsPlan {
     @Column("smallint")
     subscriptionType!: SubscriptionType;
 
-    //TODO
-    signedPlan!: SignedPlan[]
+    @OneToMany(() => SignedPlan, sPlan => sPlan.highlightPlan)
+    signedPlan!: SignedPlan[] | null
 }

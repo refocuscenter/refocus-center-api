@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Product } from "./product";
 
 @Entity({ name: "recognition_terms" })
 export class RecognitionTerm {
@@ -8,5 +9,9 @@ export class RecognitionTerm {
 
     @Column()
     term!: string;
+
+    @ManyToOne(() => Product, prod => prod.recognitionTerm)
+    @JoinColumn()
+    product!: Product;
 
 }

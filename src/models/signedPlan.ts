@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
 import { HighlightsPlan } from "./highlightPlan";
 import { Purchase } from "./purchase";
@@ -14,9 +14,19 @@ export class SignedPlan extends TimeStampParanoid {
     @Column("bigint")
     contractedValue!: number;
 
-    //TODO
+    @ManyToOne(() => Shopkeeper, sk => sk.signedPlan)
+    @JoinColumn()
     shopkeeper!: Shopkeeper
+
+    @ManyToOne(() => HighlightsPlan, hPlan => hPlan.signedPlan)
+    @JoinColumn()
     highlightPlan!: HighlightsPlan
+
+    @OneToMany(() => StoreHighlight, shl => shl.signedPlan)
+    @JoinColumn()
     storeHighlight!: StoreHighlight[] | null
-    purchase!: Purchase[]
+
+    @OneToMany(() => Purchase, purch => purch.signedPlan)
+    @JoinColumn()
+    purchases!: Purchase[]
 }

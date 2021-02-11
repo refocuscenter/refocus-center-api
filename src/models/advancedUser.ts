@@ -1,7 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, Check, PrimaryColumn, OneToOne, JoinColumn, OneToMany } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Unique, Check, PrimaryColumn, OneToOne, JoinColumn, OneToMany, JoinTable } from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
 import { Address } from "./address";
 import { Card } from "./card";
+import { DeliveryMan } from "./deliveryMan";
+import { Shopkeeper } from "./shopkeeper";
 import { User } from "./user";
 
 /**
@@ -20,6 +22,9 @@ export class AdvancedUser extends TimeStampParanoid {
     @Column()
     identityDocumentNumber!: string; //RG
 
+    @Column("varchar", { nullable: true })
+    cpfCnpj!: string | null;
+
     @Column("smallint")
     person!: Person;
 
@@ -32,8 +37,18 @@ export class AdvancedUser extends TimeStampParanoid {
     user!: User;
 
     @OneToMany(() => Address, address => address.advancedUser)
+    @JoinColumn()
     address!: Address[];
 
     @OneToMany(() => Card, card => card.advancedUser)
-    card!: Card[] | null;
+    @JoinColumn()
+    cards!: Card[] | null;
+
+    @OneToOne(() => DeliveryMan, deliv => deliv.advancedUser)
+    deliveryMan!: DeliveryMan | null
+
+    @OneToOne(() => Shopkeeper, sKeeper => sKeeper.advancedUser)
+    shopkeeper!: Shopkeeper | null
+
+
 }

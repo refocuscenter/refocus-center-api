@@ -2,8 +2,32 @@ import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToOne, JoinColumn } 
 import { TimeStampParanoid } from "../utils/modelsUtils";
 import { AdvancedUser } from "./advancedUser";
 
+//TALVEZ EU DEVA TIRAR ISSO, N FAZ SENTIDO, JÁ DA PRA SABER QUEM É QUEM SÓ PELO FATO DE EXISTIR OU NÃO RELAÇÃO
+//OU TALVEZ ISSO DEVA FICAR EM UM SERVIÇO PARA O FRONT SABER O QUE ELE É
 export enum PermissionLevel {
+    /**
+     * Usuário comum, sem dados suficientes para compra
+     */
     BasicUser = 0,
+
+    /**
+     * Usuário avançado (comprador), possui dados suficientes para realizar compras 
+     */
+    AdvancedUser = 1,
+
+    /**
+     * Usuário lojista
+     */
+    shopKeeperUser = 2,
+
+    /**
+     * Usuário entregador
+     */
+    deliveryManUser = 3,
+
+    /**
+     * Usuário administrador
+     */
     Owner = 99
 }
 

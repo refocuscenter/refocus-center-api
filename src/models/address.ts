@@ -1,6 +1,8 @@
-import { Entity, Column, PrimaryGeneratedColumn, JoinTable, OneToOne, ManyToOne } from "typeorm"
+import { Entity, Column, PrimaryGeneratedColumn, JoinTable, OneToOne, ManyToOne, OneToMany } from "typeorm"
 import { TimeStampParanoid } from "../utils/modelsUtils"
 import { AdvancedUser } from "./advancedUser";
+import { Delivery } from "./delivery";
+import { UnitStore } from "./unitStore";
 
 export enum CountryCode {
     Brazil = 30
@@ -47,6 +49,11 @@ export class Address extends TimeStampParanoid {
 
     @ManyToOne(() => AdvancedUser,
         advancedUser => advancedUser.address)
-    @JoinTable()
-    advancedUser!: AdvancedUser;
+    advancedUser!: AdvancedUser | null
+
+    @OneToMany(() => Delivery, deliv => deliv.deliveryAddress)
+    deliveries!: Delivery[] | null
+
+    @OneToOne(() => UnitStore, uStore => uStore.address)
+    unitStore!: UnitStore | null
 }

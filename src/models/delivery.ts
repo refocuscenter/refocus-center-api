@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
 import { Address } from './address'
 import { DeliveryMan } from "./deliveryMan";
@@ -16,8 +16,17 @@ export class Delivery extends TimeStampParanoid {
     @Column("bigint")
     value!: number;
 
-    //TODO
+    @ManyToOne(() => Address, addr => addr.deliveries)
+    @JoinColumn()
     deliveryAddress!: Address
+
+    @ManyToOne(() => DeliveryMan, addr => addr.deliveries)
+    @JoinColumn()
     deliveryMan!: DeliveryMan
+
+    @OneToOne(() => Purchase, addr => addr.delivery)
+    @JoinColumn()
     purchase!: Purchase
+
+    
 }
