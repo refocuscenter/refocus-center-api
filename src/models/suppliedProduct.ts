@@ -2,7 +2,7 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToOne, OneToOne, PrimaryGene
 import { Product } from "./product";
 import { UnitStore } from "./unitStore";
 
-@Entity({ name: "suppliedProducts" })
+@Entity({ name: "supplied_products" })
 export class SuppliedProduct {
     
     @PrimaryGeneratedColumn()

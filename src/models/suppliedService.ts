@@ -1,7 +1,7 @@
 import { Column, Entity, PrimaryGeneratedColumn, ManyToOne } from "typeorm";
 import { UnitStore } from "./unitStore";
 
-@Entity({ name: "suppliedServices" })
+@Entity({ name: "supplied_services" })
 export class SuppliedService {
     
     @PrimaryGeneratedColumn()

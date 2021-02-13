@@ -3,6 +3,7 @@ import { TimeStampParanoid } from "../utils/modelsUtils";
 import { AdvancedUser } from "./advancedUser";
 import { Purchase } from "./purchase";
 import { Store } from "./store";
+import { InStoreUserAccount } from "./inStoreUserAccount";
 
 export enum ExistenceType {
     Virtual,
@@ -49,14 +50,11 @@ export class Card extends TimeStampParanoid {
     @Column()
     cardHolder!: string;
 
-    @ManyToOne(() => AdvancedUser, adUser => adUser.cards)
-    advancedUser!: AdvancedUser;
-
-    @ManyToOne(() => Store, st => st.cards)
-    @JoinColumn()
-    store!: Store;
-
     @OneToMany(() => Purchase, purch => purch.card)
     @JoinColumn()
     purchases!: Purchase[] | null;
+
+    @OneToOne(() => InStoreUserAccount, sUserAccount => sUserAccount.card)
+    @JoinColumn()
+    inStoreUserAccount!: InStoreUserAccount;
 }

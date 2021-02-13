@@ -1,13 +1,14 @@
 import { Column, Entity, JoinColumn, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { Product } from "./product";
 import { Purchase } from "./purchase";
+import { SignedPlan } from "./signedPlan";
 import { SuppliedService } from "./suppliedService";
 import { UnitStore } from "./unitStore";
 
 /**
  * Produtos de extrato
  */
-@Entity({ name: "statementItems" })
+@Entity({ name: "statement_items" })
 export class StatementItem {
     
     @PrimaryGeneratedColumn()
@@ -25,7 +26,7 @@ export class StatementItem {
     @Column("text")
     description!: string;
 
-    @OneToOne(() => Purchase, purchase => purchase.statementItem)
+    @ManyToOne(() => Purchase, purchase => purchase.statementItems)
     @JoinColumn()
     purchase!: Purchase
 
@@ -40,4 +41,8 @@ export class StatementItem {
     @ManyToOne(() => SuppliedService)
     @JoinColumn()
     suppliedService!: SuppliedService | null
+
+    @ManyToOne(() => SignedPlan)
+    @JoinColumn()
+    signedPlan!: SignedPlan | null;
 }

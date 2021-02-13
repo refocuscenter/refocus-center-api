@@ -26,7 +26,4 @@ export class SignedPlan extends TimeStampParanoid {
     @JoinColumn()
     storeHighlight!: StoreHighlight[] | null
 
-    @OneToMany(() => Purchase, purch => purch.signedPlan)
-    @JoinColumn()
-    purchases!: Purchase[]
 }

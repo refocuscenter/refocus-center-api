@@ -3,8 +3,10 @@ import { TimeStampParanoid } from "../utils/modelsUtils";
 import { Address } from "./address";
 import { Card } from "./card";
 import { DeliveryMan } from "./deliveryMan";
+import { Purchase } from "./purchase";
 import { Shopkeeper } from "./shopkeeper";
 import { User } from "./user";
+import { InStoreUserAccount } from "./inStoreUserAccount";
 
 /**
  * Pessoa física ou Jurídica
@@ -43,9 +45,9 @@ export class AdvancedUser extends TimeStampParanoid {
     @JoinColumn()
     addresses!: Address[];
 
-    @OneToMany(() => Card, card => card.advancedUser)
+    @OneToMany(() => InStoreUserAccount, sUserAccount => sUserAccount.advancedUser)
     @JoinColumn()
-    cards!: Card[] | null;
+    inStoreUserAccounts!: InStoreUserAccount[] | null;
 
     @OneToOne(() => DeliveryMan, deliv => deliv.advancedUser)
     deliveryMan!: DeliveryMan | null
