@@ -19,11 +19,14 @@ export class AdvancedUser extends TimeStampParanoid {
     @PrimaryColumn("uuid")
     id!: string;
 
-    @Column()
+    @Column({ nullable: true })
+    fullName!: string;
+
+    @Column({ unique: true })
     identityDocumentNumber!: string; //RG
 
-    @Column("varchar", { nullable: true })
-    cpfCnpj!: string | null;
+    //@Column("varchar", { nullable: true, unique: true })
+    //cpfCnpj!: string | null;
 
     @Column("smallint")
     person!: Person;
@@ -38,7 +41,7 @@ export class AdvancedUser extends TimeStampParanoid {
 
     @OneToMany(() => Address, address => address.advancedUser)
     @JoinColumn()
-    address!: Address[];
+    addresses!: Address[];
 
     @OneToMany(() => Card, card => card.advancedUser)
     @JoinColumn()

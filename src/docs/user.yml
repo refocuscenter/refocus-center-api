@@ -1,8 +1,17 @@
-/user:
+/users:
   get:
     tags:
       - "User"
     description: List all users
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/user/{id}:
+  get:
+    tags:
+      - "User"
+    description: return a user details
     responses:
       200:
         $ref: "#/components/responses/200"
@@ -17,9 +26,210 @@
         application/json:
           schema:
             $ref: "#/definitions/object"
+          example: {
+            "email": "conradopsa@gmail.com", #optional (or phone)
+            "password": "123456"
+          }
     responses:
       200:
         $ref: "#/components/responses/200"
+        example: {
+          "teste": "teste"
+        }
+
+/user/basic-register:
+  post:
+    tags:
+      - "User"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: {
+            "displayName": "Conrado",
+            "email": "conradopsa@gmail.com",
+            "phone": "21988888888",
+            "password": "123456",
+          }
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/user/{id}/complete-register:
+  put:
+    tags:
+      - "User"
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The user ID
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: {
+            "displayName": "Conrado",
+            "fullName": "Conrado Pinheiro",
+            "identityDocumentNumber": "222222226",
+            "person": 0,
+            "birthDate": "2000-12-20",
+            "addresses": [
+              {
+                "localityType": 0,
+                "addressLines": [
+                  "Rua Acacia Avenue 666"
+                ],
+                "city": "Nova Iguaçu",
+                "state": "RJ",
+                "neighborhood": "Belford Roxo",
+                "zipCode": "21123410",
+                "countryCode": 55,
+              }
+            ]
+          }
+      description: >
+          <h3>Fields:</h3>
+
+          <h4>person:</h4>
+          0 = natural person (pessoa física) <br/>
+          1 = juridical person (pessoa jurídica) <br/>
+          <br/>
+
+          <h4>localityType:</h4>
+          0 = residence (local de residência) <br/>
+          1 = workplace (local de trabalho) <br/>
+          99 = other <br/>
+          <br/>
+
+          <h4>countryCode:</h4>
+          55 = Brazil <br/>
+      
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/user/{id}/change-email:
+  patch:
+    tags:
+      - "User"
+    description:
+      "Change email"
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The user ID
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: {
+            "newEmail": "secondEmail@tmail.com",
+            "password": "123456"
+          }
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+
+/user/{id}/change-phone:
+  patch:
+    tags:
+      - "User"
+    description:
+      "Change email"
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The user ID
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: {
+            "newPhone": "21977777777",
+            "password": "123456"
+          }
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/user/{id}/change-password:
+  patch:
+    tags:
+      - "User"
+    description:
+      "Change password"
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The user ID
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: {
+            "oldPassword": "123",
+            "newPassword": "321"
+          }
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/user/recover-password:
+  patch:
+    tags:
+      - "User"
+    description:
+      "Change password"
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The user ID
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: {
+            "phone": "988888888", #optional (or email)
+            "email": "anyEmail@tmail.com" #optional (or phone)
+          }
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+
 
 #definitions:
 #  user:

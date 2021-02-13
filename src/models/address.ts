@@ -5,12 +5,12 @@ import { Delivery } from "./delivery";
 import { UnitStore } from "./unitStore";
 
 export enum CountryCode {
-    Brazil = 30
+    Brazil = 55
 }
 
 export enum LocalityType {
-    Residence,
-    Workplace,
+    Residence, //Local de residência
+    Workplace, //Local de trabalho
     Other = 99
 }
 
@@ -39,7 +39,7 @@ export class Address extends TimeStampParanoid {
     state!: string
 
     @Column()
-    neighborhood!: string
+    neighborhood!: string //bairro
 
     @Column()
     zipCode!: string
@@ -48,7 +48,7 @@ export class Address extends TimeStampParanoid {
     countryCode!: CountryCode
 
     @ManyToOne(() => AdvancedUser,
-        advancedUser => advancedUser.address)
+        advancedUser => advancedUser.addresses)
     advancedUser!: AdvancedUser | null
 
     @OneToMany(() => Delivery, deliv => deliv.deliveryAddress)

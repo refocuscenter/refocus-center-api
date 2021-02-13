@@ -6,7 +6,7 @@ export default class UserController {
 
     @Get('/status')
     async getStatus(@Res() response: Response) {
-        response.json({
+        return response.json({
             "message": "Operação realizada com sucesso",
             "code": 0
         });

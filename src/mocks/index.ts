@@ -227,10 +227,9 @@ export async function startMocks() {
 
   await userRepository.insert([{
     password: "s35ZjZ7z",
-    nickname: "King vulture",
+    displayName: "King vulture",
     phone: "5521999999999",
-    email: "dthaxton0@i2i.jp",
-    fullName: "Dev Thaxton"
+    email: "dthaxton0@i2i.jp"
   }]);
 
   console.log("Mocks criados! ")
