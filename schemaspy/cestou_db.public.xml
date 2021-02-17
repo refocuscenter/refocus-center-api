@@ -1,0 +1,440 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="cestou_db" schema="public" type="PostgreSQL - 13.1">
+   <sequences>
+      <sequence increment="1" name="address_id_seq" startValue="1"/>
+      <sequence increment="1" name="categories_id_seq" startValue="1"/>
+      <sequence increment="1" name="delivery_id_seq" startValue="1"/>
+      <sequence increment="1" name="delivery_people_id_seq" startValue="1"/>
+      <sequence increment="1" name="highlights_plans_id_seq" startValue="1"/>
+      <sequence increment="1" name="products_id_seq" startValue="1"/>
+      <sequence increment="1" name="recognition_terms_id_seq" startValue="1"/>
+      <sequence increment="1" name="shopkeepers_id_seq" startValue="1"/>
+      <sequence increment="1" name="signed_plans_id_seq" startValue="1"/>
+      <sequence increment="1" name="statement_items_id_seq" startValue="1"/>
+      <sequence increment="1" name="store_highlights_id_seq" startValue="1"/>
+      <sequence increment="1" name="supplied_products_id_seq" startValue="1"/>
+      <sequence increment="1" name="supplied_services_id_seq" startValue="1"/>
+      <sequence increment="1" name="users_id_seq" startValue="1"/>
+   </sequences>
+   <tables>
+      <table name="address" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="0" name="createdAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="updatedAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="deletedAt" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="true" defaultValue="nextval('address_id_seq'::regclass)" digits="0" id="3" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="deliveryAddressId" foreignKey="FK_582743f78b383fea88b416f0f85" implied="false" onDeleteCascade="false" schema="public" table="delivery"/>
+            <child column="addressId" foreignKey="FK_12d1ca00be776215e6ff77fcaad" implied="false" onDeleteCascade="false" schema="public" table="unit_stores"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="localityType" nullable="false" remarks="" size="5" type="int2" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="addressLine1" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="addressLine2" nullable="true" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="addressLine3" nullable="true" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="city" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="state" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="neighborhood" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="zipCode" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="countryCode" nullable="false" remarks="" size="5" type="int2" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="13" name="advancedUserId" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent column="id" foreignKey="FK_6845a7318692b30485a476d79c9" implied="false" onDeleteCascade="false" schema="public" table="advanced_users"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_d92de1f82754668b5f5f5dd4fd5" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="advanced_users" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="0" name="createdAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="updatedAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="deletedAt" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="id" nullable="false" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <child column="advancedUserId" foreignKey="FK_6845a7318692b30485a476d79c9" implied="false" onDeleteCascade="false" schema="public" table="address"/>
+            <child column="advancedUserId" foreignKey="FK_6d8cd3dee2b49d2a4b65b1cf154" implied="false" onDeleteCascade="false" schema="public" table="delivery_people"/>
+            <child column="advancedUserId" foreignKey="FK_7a7d7e2ed00718253ae54624929" implied="false" onDeleteCascade="false" schema="public" table="in_store_user_accounts"/>
+            <child column="advancedUserId" foreignKey="FK_25f54d727ff9daa71fefb3008fb" implied="false" onDeleteCascade="false" schema="public" table="shopkeepers"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="fullName" nullable="true" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="identityDocumentNumber" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="person" nullable="false" remarks="" size="5" type="int2" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="7" name="birthDate" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="userId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_62804b8b148aa4a701586889ba4" implied="false" onDeleteCascade="false" schema="public" table="users"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_24ff5bcd1d2c240a5debfacc0a2" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="REL_62804b8b148aa4a701586889ba" unique="true">
+            <column ascending="true" name="userId"/>
+         </index>
+         <index name="UQ_d11b7342ae6f968a34fdf30575b" unique="true">
+            <column ascending="true" name="identityDocumentNumber"/>
+         </index>
+      </table>
+      <table name="card" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="0" name="createdAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="updatedAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="deletedAt" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="id" nullable="false" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <child column="cardId" foreignKey="FK_da1b39ac49d68a229245eb0dc3f" implied="false" onDeleteCascade="false" schema="public" table="purchases"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="financialType" nullable="false" remarks="" size="5" type="int2" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="existenceType" nullable="false" remarks="" size="5" type="int2" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="limit" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="balance" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="pan" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="cvv" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="10" name="dateExp" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="11" name="cardHolder" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="12" name="inStoreUserAccountId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_fa1dc3b423deb96938c0624e5e6" implied="false" onDeleteCascade="false" schema="public" table="in_store_user_accounts"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_9451069b6f1199730791a7f4ae4" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="REL_fa1dc3b423deb96938c0624e5e" unique="true">
+            <column ascending="true" name="inStoreUserAccountId"/>
+         </index>
+      </table>
+      <table name="categories" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('categories_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="categoriesId" foreignKey="FK_dcbd028e554a81deb0a89cc3e8a" implied="false" onDeleteCascade="true" schema="public" table="categories_products_products"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_24dbc6126a28ff948da33e97d3b" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="categories_products_products" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="categoriesId" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_dcbd028e554a81deb0a89cc3e8a" implied="false" onDeleteCascade="true" schema="public" table="categories"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="productsId" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_b5a4476a30f188bf0d672b985b7" implied="false" onDeleteCascade="true" schema="public" table="products"/>
+         </column>
+         <primaryKey column="categoriesId" sequenceNumberInPK="1"/>
+         <primaryKey column="productsId" sequenceNumberInPK="2"/>
+         <index name="PK_df11914ffb834bdef013f7e660e" unique="true">
+            <column ascending="true" name="categoriesId"/>
+            <column ascending="true" name="productsId"/>
+         </index>
+         <index name="IDX_b5a4476a30f188bf0d672b985b" unique="false">
+            <column ascending="true" name="productsId"/>
+         </index>
+         <index name="IDX_dcbd028e554a81deb0a89cc3e8" unique="false">
+            <column ascending="true" name="categoriesId"/>
+         </index>
+      </table>
+      <table name="delivery" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="0" name="createdAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="updatedAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="deletedAt" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="true" defaultValue="nextval('delivery_id_seq'::regclass)" digits="0" id="3" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="scheduledDateTime" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="value" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="deliveryAddressId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_582743f78b383fea88b416f0f85" implied="false" onDeleteCascade="false" schema="public" table="address"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="deliveryManId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_1cd79f37d0637b763e0803f696b" implied="false" onDeleteCascade="false" schema="public" table="delivery_people"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="purchaseId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_46fe2019dc4b7a98a8873bc8635" implied="false" onDeleteCascade="false" schema="public" table="purchases"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_ffad7bf84e68716cd9af89003b0" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="REL_46fe2019dc4b7a98a8873bc863" unique="true">
+            <column ascending="true" name="purchaseId"/>
+         </index>
+      </table>
+      <table name="delivery_people" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('delivery_people_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="deliveryManId" foreignKey="FK_1cd79f37d0637b763e0803f696b" implied="false" onDeleteCascade="false" schema="public" table="delivery"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="advancedUserId" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent column="id" foreignKey="FK_6d8cd3dee2b49d2a4b65b1cf154" implied="false" onDeleteCascade="false" schema="public" table="advanced_users"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_d0d85669c5780e940acb0ac19af" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="REL_6d8cd3dee2b49d2a4b65b1cf15" unique="true">
+            <column ascending="true" name="advancedUserId"/>
+         </index>
+      </table>
+      <table name="highlights_plans" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('highlights_plans_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="highlightPlanId" foreignKey="FK_b104f9443dcfad74b9904075e88" implied="false" onDeleteCascade="false" schema="public" table="signed_plans"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="description" nullable="true" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="value" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="subscriptionType" nullable="false" remarks="" size="5" type="int2" typeCode="5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_fe24f43ca09cd0e8b5efc82b336" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="in_store_user_accounts" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="0" name="createdAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="updatedAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="deletedAt" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <child column="inStoreUserAccountId" foreignKey="FK_fa1dc3b423deb96938c0624e5e6" implied="false" onDeleteCascade="false" schema="public" table="card"/>
+            <child column="inStoreUserAccountId" foreignKey="FK_7bd059954324a4ca8ca39c94b80" implied="false" onDeleteCascade="false" schema="public" table="purchases"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="advancedUserId" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent column="id" foreignKey="FK_7a7d7e2ed00718253ae54624929" implied="false" onDeleteCascade="false" schema="public" table="advanced_users"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="storeId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_12711a249d7c3ccd10770462f08" implied="false" onDeleteCascade="false" schema="public" table="stores"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_8a3ef30483f10912fd7a8ab76e6" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="products" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('products_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="productsId" foreignKey="FK_b5a4476a30f188bf0d672b985b7" implied="false" onDeleteCascade="true" schema="public" table="categories_products_products"/>
+            <child column="productId" foreignKey="FK_ec7b14181f14db2033528fefbe7" implied="false" onDeleteCascade="false" schema="public" table="recognition_terms"/>
+            <child column="productId" foreignKey="FK_647295e0ce61cc6f9a6db7e8679" implied="false" onDeleteCascade="false" schema="public" table="statement_items"/>
+            <child column="productId" foreignKey="FK_5865bfe7621d7f55f3ba17938b9" implied="false" onDeleteCascade="false" schema="public" table="supplied_products"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="barCode" nullable="true" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="name" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="image" nullable="false" remarks="" size="2147483647" type="bytea" typeCode="-2"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="description" nullable="false" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_0806c755e0aca124e67c0cf6d7d" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="purchases" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="0" name="createdAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="updatedAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="deletedAt" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <child column="purchaseId" foreignKey="FK_46fe2019dc4b7a98a8873bc8635" implied="false" onDeleteCascade="false" schema="public" table="delivery"/>
+            <child column="purchaseId" foreignKey="FK_cc4e7c00f6976c6c1b66dece766" implied="false" onDeleteCascade="false" schema="public" table="statement_items"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="value" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="amount" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="paymentFormat" nullable="false" remarks="" size="5" type="int2" typeCode="5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="inStoreUserAccountId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_7bd059954324a4ca8ca39c94b80" implied="false" onDeleteCascade="false" schema="public" table="in_store_user_accounts"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="cardId" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent column="id" foreignKey="FK_da1b39ac49d68a229245eb0dc3f" implied="false" onDeleteCascade="false" schema="public" table="card"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_1d55032f37a34c6eceacbbca6b8" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="recognition_terms" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('recognition_terms_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="term" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="productId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_ec7b14181f14db2033528fefbe7" implied="false" onDeleteCascade="false" schema="public" table="products"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_62196efe33b0dfc3ebb63b8e31b" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="shopkeepers" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="0" name="createdAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="updatedAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="deletedAt" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="true" defaultValue="nextval('shopkeepers_id_seq'::regclass)" digits="0" id="3" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="shopkeepersId" foreignKey="FK_151e98a133d61167747288d7344" implied="false" onDeleteCascade="true" schema="public" table="shopkeepers_unit_store_unit_stores"/>
+            <child column="shopkeeperId" foreignKey="FK_6f938ed608780def94786ba449b" implied="false" onDeleteCascade="false" schema="public" table="signed_plans"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="advancedUserId" nullable="true" remarks="" size="2147483647" type="uuid" typeCode="1111">
+            <parent column="id" foreignKey="FK_25f54d727ff9daa71fefb3008fb" implied="false" onDeleteCascade="false" schema="public" table="advanced_users"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_e54a8b4eb59e231f51e3a725b9b" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="REL_25f54d727ff9daa71fefb3008f" unique="true">
+            <column ascending="true" name="advancedUserId"/>
+         </index>
+      </table>
+      <table name="shopkeepers_unit_store_unit_stores" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="shopkeepersId" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_151e98a133d61167747288d7344" implied="false" onDeleteCascade="true" schema="public" table="shopkeepers"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="unitStoresId" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_fd7cb0e2ccb710d9600393e03e5" implied="false" onDeleteCascade="true" schema="public" table="unit_stores"/>
+         </column>
+         <primaryKey column="shopkeepersId" sequenceNumberInPK="1"/>
+         <primaryKey column="unitStoresId" sequenceNumberInPK="2"/>
+         <index name="PK_fd956e53083de65e7a4ba54d422" unique="true">
+            <column ascending="true" name="shopkeepersId"/>
+            <column ascending="true" name="unitStoresId"/>
+         </index>
+         <index name="IDX_151e98a133d61167747288d734" unique="false">
+            <column ascending="true" name="shopkeepersId"/>
+         </index>
+         <index name="IDX_fd7cb0e2ccb710d9600393e03e" unique="false">
+            <column ascending="true" name="unitStoresId"/>
+         </index>
+      </table>
+      <table name="signed_plans" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="0" name="createdAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="updatedAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="deletedAt" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="true" defaultValue="nextval('signed_plans_id_seq'::regclass)" digits="0" id="3" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="signedPlanId" foreignKey="FK_c56421c6d6944254f2b6f43da76" implied="false" onDeleteCascade="false" schema="public" table="statement_items"/>
+            <child column="signedPlanId" foreignKey="FK_63051e6ccbd57e37098843b3cbc" implied="false" onDeleteCascade="false" schema="public" table="store_highlights"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="contractedValue" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="shopkeeperId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_6f938ed608780def94786ba449b" implied="false" onDeleteCascade="false" schema="public" table="shopkeepers"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="highlightPlanId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_b104f9443dcfad74b9904075e88" implied="false" onDeleteCascade="false" schema="public" table="highlights_plans"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_23151b400472bb55a69734f570a" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="statement_items" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('statement_items_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="value" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="amount" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="name" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="description" nullable="false" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="purchaseId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_cc4e7c00f6976c6c1b66dece766" implied="false" onDeleteCascade="false" schema="public" table="purchases"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="unitStoreId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_135c6febd8a44402ec8f9cdcd27" implied="false" onDeleteCascade="false" schema="public" table="unit_stores"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="productId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_647295e0ce61cc6f9a6db7e8679" implied="false" onDeleteCascade="false" schema="public" table="products"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="8" name="suppliedServiceId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_a17ef889bcc8d44c8e958740a04" implied="false" onDeleteCascade="false" schema="public" table="supplied_services"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="9" name="signedPlanId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_c56421c6d6944254f2b6f43da76" implied="false" onDeleteCascade="false" schema="public" table="signed_plans"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_e8ff71331040f470ff288981c99" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="store_highlights" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('store_highlights_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="bannerImage" nullable="false" remarks="" size="2147483647" type="bytea" typeCode="-2"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="title" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="unitStoreId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_8df980c117150d58cda4c5ac931" implied="false" onDeleteCascade="false" schema="public" table="unit_stores"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="signedPlanId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_63051e6ccbd57e37098843b3cbc" implied="false" onDeleteCascade="false" schema="public" table="signed_plans"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_f10316f698d8c04c55f192744ea" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="stores" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="0" name="createdAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="updatedAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="deletedAt" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <child column="storeId" foreignKey="FK_12711a249d7c3ccd10770462f08" implied="false" onDeleteCascade="false" schema="public" table="in_store_user_accounts"/>
+            <child column="storeId" foreignKey="FK_b87fd94bea8fc36a822e8d01daf" implied="false" onDeleteCascade="false" schema="public" table="unit_stores"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="cnpj" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="name" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_7aa6e7d71fa7acdd7ca43d7c9cb" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="UQ_1b0c68bf8b79c9bf8076e378dd5" unique="true">
+            <column ascending="true" name="cnpj"/>
+         </index>
+      </table>
+      <table name="supplied_products" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('supplied_products_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="value" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="stockAmount" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="unitStoreId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_9159a9e1f3cb3b80836650afd99" implied="false" onDeleteCascade="false" schema="public" table="unit_stores"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="productId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_5865bfe7621d7f55f3ba17938b9" implied="false" onDeleteCascade="false" schema="public" table="products"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_8bbf6ca66de94431273322c71da" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="supplied_services" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('supplied_services_id_seq'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="suppliedServiceId" foreignKey="FK_a17ef889bcc8d44c8e958740a04" implied="false" onDeleteCascade="false" schema="public" table="statement_items"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="name" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="value" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="description" nullable="false" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="presentationImage" nullable="false" remarks="" size="2147483647" type="bytea" typeCode="-2"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="unitStoreId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_13b76004f04f47eecbcc676cda8" implied="false" onDeleteCascade="false" schema="public" table="unit_stores"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_0dd6b46006934eb21e9a1455b0d" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="unit_stores" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="10" type="int4" typeCode="4">
+            <child column="unitStoresId" foreignKey="FK_fd7cb0e2ccb710d9600393e03e5" implied="false" onDeleteCascade="true" schema="public" table="shopkeepers_unit_store_unit_stores"/>
+            <child column="unitStoreId" foreignKey="FK_135c6febd8a44402ec8f9cdcd27" implied="false" onDeleteCascade="false" schema="public" table="statement_items"/>
+            <child column="unitStoreId" foreignKey="FK_8df980c117150d58cda4c5ac931" implied="false" onDeleteCascade="false" schema="public" table="store_highlights"/>
+            <child column="unitStoreId" foreignKey="FK_9159a9e1f3cb3b80836650afd99" implied="false" onDeleteCascade="false" schema="public" table="supplied_products"/>
+            <child column="unitStoreId" foreignKey="FK_13b76004f04f47eecbcc676cda8" implied="false" onDeleteCascade="false" schema="public" table="supplied_services"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="storeId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_b87fd94bea8fc36a822e8d01daf" implied="false" onDeleteCascade="false" schema="public" table="stores"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="addressId" nullable="true" remarks="" size="10" type="int4" typeCode="4">
+            <parent column="id" foreignKey="FK_12d1ca00be776215e6ff77fcaad" implied="false" onDeleteCascade="false" schema="public" table="address"/>
+         </column>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_a82ece11866041ea1e3126fee73" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="REL_12d1ca00be776215e6ff77fcaa" unique="true">
+            <column ascending="true" name="addressId"/>
+         </index>
+      </table>
+      <table name="users" numRows="1" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="0" name="createdAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="now()" digits="6" id="1" name="updatedAt" nullable="false" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="deletedAt" nullable="true" remarks="" size="29" type="timestamp" typeCode="93"/>
+         <column autoUpdated="true" defaultValue="nextval('users_id_seq'::regclass)" digits="0" id="3" name="id" nullable="false" remarks="" size="10" type="serial" typeCode="4">
+            <child column="userId" foreignKey="FK_62804b8b148aa4a701586889ba4" implied="false" onDeleteCascade="false" schema="public" table="advanced_users"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="displayName" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="5" name="phone" nullable="false" remarks="" size="20" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="6" name="email" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="7" name="password" nullable="false" remarks="" size="2147483647" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="'0'::smallint" digits="0" id="8" name="permissionLevel" nullable="false" remarks="" size="5" type="int2" typeCode="5"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PK_a3ffb1c0c8416b9fc6f907b7433" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="UQ_a000cca60bcf04454e727699490" unique="true">
+            <column ascending="true" name="phone"/>
+         </index>
+      </table>
+   </tables>
+</database>

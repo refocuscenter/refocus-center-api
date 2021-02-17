@@ -18,7 +18,7 @@ export function createApp() {
     app.use(urlencoded({
         extended: true
     }));
-    
+
     app.use(json());
 
     app.use('/docs',
@@ -27,11 +27,14 @@ export function createApp() {
             swaggerJSDoc(swaggerJSDocOptions),
             swaggerUiOptions));
 
+
+    app.use('/schemaspy', express.static(__dirname + '/../../../schemaspy'));
+
     //Routers
-    useExpressServer(app, {        
+    useExpressServer(app, {
         controllers: [__dirname + '/../controllers/**/*.js']
     });
-    
+
     //Middlewares After Router
     app.all('*', redirectToDocs)
 

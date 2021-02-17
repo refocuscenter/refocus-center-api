@@ -7,6 +7,7 @@ export const swaggerJSDocOptions: Options = {
         info: {
             version: "1.0.0",
             title: "Cestou API",
+            description: "<a href='/schemaspy'>Click here</a> to see database schema"
         },
         servers: [
             {

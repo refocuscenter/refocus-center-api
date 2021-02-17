@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<database name="CESTOU-DB" schema="public" type="PostgreSQL - 13.1">
+   <sequences>
+      <sequence increment="1" name="Product_id_seq" startValue="1"/>
+      <sequence increment="1" name="ProductsBasket_id_seq" startValue="1"/>
+      <sequence increment="1" name="PurchasedBasket_id_seq" startValue="1"/>
+      <sequence increment="1" name="RecognitionTerm_id_seq" startValue="1"/>
+      <sequence increment="1" name="Store_id_seq" startValue="1"/>
+      <sequence increment="1" name="SuppliedProduct_id_seq" startValue="1"/>
+   </sequences>
+   <tables>
+      <table name="DigitalAccountPrepay" numRows="5" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="255" type="varchar" typeCode="12">
+            <child column="idDigitalAccount" foreignKey="PurchasedBasket_idDigitalAccount_fkey" implied="false" onDeleteCascade="false" schema="public" table="PurchasedBasket"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="balance" nullable="false" remarks="" size="131089" type="numeric" typeCode="2"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="userId" nullable="false" remarks="" size="255" type="varchar" typeCode="12">
+            <parent column="id" foreignKey="DigitalAccountPrepay_userId_fkey" implied="false" onDeleteCascade="false" schema="public" table="User"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="idStore" nullable="false" remarks="" size="19" type="int8" typeCode="-5">
+            <parent column="id" foreignKey="DigitalAccountPrepay_idStore_fkey" implied="false" onDeleteCascade="false" schema="public" table="Store"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="deletedAt" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="DigitalAccountPrepay_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="Product" numRows="5" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Product_id_seq&quot;'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5">
+            <child column="idProduct" foreignKey="SuppliedProduct_idProduct_fkey" implied="false" onDeleteCascade="false" schema="public" table="SuppliedProduct"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="barCode" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="name" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="image" nullable="true" remarks="" size="2147483647" type="bytea" typeCode="-2"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="description" nullable="false" remarks="" size="2147483647" type="text" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="7" name="deletedAt" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="Product_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="ProductsBasket" numRows="5" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;ProductsBasket_id_seq&quot;'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5">
+            <child column="idProductsBasket" foreignKey="PurchasedBasket_idProductsBasket_fkey" implied="false" onDeleteCascade="false" schema="public" table="PurchasedBasket"/>
+            <child column="idProductsBasket" foreignKey="SuppliedProduct_idProductsBasket_fkey" implied="false" onDeleteCascade="false" schema="public" table="SuppliedProduct"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="amount" nullable="false" remarks="" size="10" type="int4" typeCode="4"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="userId" nullable="false" remarks="" size="255" type="varchar" typeCode="12">
+            <parent column="id" foreignKey="ProductsBasket_userId_fkey" implied="false" onDeleteCascade="false" schema="public" table="User"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="3" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="deletedAt" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="ProductsBasket_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="ProductsBasket_userId_key" unique="true">
+            <column ascending="true" name="userId"/>
+         </index>
+      </table>
+      <table name="PurchasedBasket" numRows="5" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;PurchasedBasket_id_seq&quot;'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="17" id="1" name="totalValue" nullable="false" remarks="" size="17" type="float8" typeCode="8"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="idDigitalAccount" nullable="false" remarks="" size="255" type="varchar" typeCode="12">
+            <parent column="id" foreignKey="PurchasedBasket_idDigitalAccount_fkey" implied="false" onDeleteCascade="false" schema="public" table="DigitalAccountPrepay"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="idProductsBasket" nullable="false" remarks="" size="19" type="int8" typeCode="-5">
+            <parent column="id" foreignKey="PurchasedBasket_idProductsBasket_fkey" implied="false" onDeleteCascade="false" schema="public" table="ProductsBasket"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="deletedAt" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="PurchasedBasket_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="PurchasedBasket_idProductsBasket_key" unique="true">
+            <column ascending="true" name="idProductsBasket"/>
+         </index>
+      </table>
+      <table name="RecognitionTerm" numRows="0" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;RecognitionTerm_id_seq&quot;'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="term" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="2" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="3" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="deletedAt" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="RecognitionTerm_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="Store" numRows="5" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;Store_id_seq&quot;'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5">
+            <child column="idStore" foreignKey="DigitalAccountPrepay_idStore_fkey" implied="false" onDeleteCascade="false" schema="public" table="DigitalAccountPrepay"/>
+            <child column="idStore" foreignKey="SuppliedProduct_idStore_fkey" implied="false" onDeleteCascade="false" schema="public" table="SuppliedProduct"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="cnpj" nullable="false" remarks="" size="19" type="int8" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="name" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="3" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="4" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="deletedAt" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="Store_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="Store_cnpj_key" unique="true">
+            <column ascending="true" name="cnpj"/>
+         </index>
+      </table>
+      <table name="SuppliedProduct" numRows="5" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="true" defaultValue="nextval('&quot;SuppliedProduct_id_seq&quot;'::regclass)" digits="0" id="0" name="id" nullable="false" remarks="" size="19" type="bigserial" typeCode="-5"/>
+         <column autoUpdated="false" defaultValue="null" digits="17" id="1" name="value" nullable="false" remarks="" size="17" type="float8" typeCode="8"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="idProductsBasket" nullable="true" remarks="" size="19" type="int8" typeCode="-5">
+            <parent column="id" foreignKey="SuppliedProduct_idProductsBasket_fkey" implied="false" onDeleteCascade="false" schema="public" table="ProductsBasket"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="idProduct" nullable="true" remarks="" size="19" type="int8" typeCode="-5">
+            <parent column="id" foreignKey="SuppliedProduct_idProduct_fkey" implied="false" onDeleteCascade="false" schema="public" table="Product"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="idStore" nullable="true" remarks="" size="19" type="int8" typeCode="-5">
+            <parent column="id" foreignKey="SuppliedProduct_idStore_fkey" implied="false" onDeleteCascade="false" schema="public" table="Store"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="7" name="deletedAt" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="SuppliedProduct_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+      </table>
+      <table name="User" numRows="5" remarks="" schema="public" type="TABLE">
+         <column autoUpdated="false" defaultValue="null" digits="0" id="0" name="id" nullable="false" remarks="" size="255" type="varchar" typeCode="12">
+            <child column="userId" foreignKey="DigitalAccountPrepay_userId_fkey" implied="false" onDeleteCascade="false" schema="public" table="DigitalAccountPrepay"/>
+            <child column="userId" foreignKey="ProductsBasket_userId_fkey" implied="false" onDeleteCascade="false" schema="public" table="ProductsBasket"/>
+         </column>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="1" name="password" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="2" name="login" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="3" name="email" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="0" id="4" name="fullName" nullable="false" remarks="" size="255" type="varchar" typeCode="12"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="5" name="createdAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="6" name="updatedAt" nullable="false" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <column autoUpdated="false" defaultValue="null" digits="6" id="7" name="deletedAt" nullable="true" remarks="" size="35" type="timestamptz" typeCode="93"/>
+         <primaryKey column="id" sequenceNumberInPK="1"/>
+         <index name="User_pkey" unique="true">
+            <column ascending="true" name="id"/>
+         </index>
+         <index name="User_email_key" unique="true">
+            <column ascending="true" name="email"/>
+         </index>
+         <index name="User_login_key" unique="true">
+            <column ascending="true" name="login"/>
+         </index>
+      </table>
+   </tables>
+</database>
