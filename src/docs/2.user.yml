@@ -2,16 +2,34 @@
   get:
     tags:
       - "User"
-    description: List all users
+    summary: (*) List all users
+    parameters:
+      - $ref: "#/components/paginationParams/page"
+      - $ref: "#/components/paginationParams/limit"
     responses:
       200:
         $ref: "#/components/responses/200"
 
 /user/{id}:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
   get:
     tags:
       - "User"
-    description: return a user details
+    summary: (*) Return a user details
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+  delete:
+    tags:
+      - "User"
+    description: delete a user
     responses:
       200:
         $ref: "#/components/responses/200"
@@ -33,9 +51,6 @@
     responses:
       200:
         $ref: "#/components/responses/200"
-        example: {
-          "teste": "teste"
-        }
 
 /user/basic-register:
   post:
@@ -58,17 +73,17 @@
         $ref: "#/components/responses/200"
 
 /user/{id}/complete-register:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
   put:
     tags:
       - "User"
-    parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          minimum: 1
-        description: The user ID
     requestBody:
       required: true
       content:
@@ -117,10 +132,18 @@
         $ref: "#/components/responses/200"
 
 /user/{id}/change-email:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
   patch:
     tags:
       - "User"
-    description:
+    summary:
       "Change email"
     parameters:
       - in: path
@@ -146,11 +169,19 @@
 
 
 /user/{id}/change-phone:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
   patch:
     tags:
       - "User"
-    description:
-      "Change email"
+    summary:
+      "Change phone"
     parameters:
       - in: path
         name: id
@@ -174,10 +205,18 @@
         $ref: "#/components/responses/200"
 
 /user/{id}/change-password:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
   patch:
     tags:
       - "User"
-    description:
+    summary:
       "Change password"
     parameters:
       - in: path
@@ -205,16 +244,8 @@
   patch:
     tags:
       - "User"
-    description:
-      "Change password"
-    parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          minimum: 1
-        description: The user ID
+    summary:
+      "Recover password"
     requestBody:
       required: true
       content:
@@ -228,6 +259,43 @@
     responses:
       200:
         $ref: "#/components/responses/200"
+
+/user/{id}/favorite:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
+  post:
+    tags:
+      - "User"
+    summary:
+      "Insert favorite unit store (pushing)"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: {
+            "unitStoreID": 1
+          }
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/user/{id}/favorite/{unit_store_id}:
+    delete:
+      tags:
+        - "User"
+      summary:
+        "Remove favorite unit store"
+      responses:
+        200:
+          $ref: "#/components/responses/200"
 
 
 

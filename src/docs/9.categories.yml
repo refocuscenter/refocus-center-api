@@ -1,0 +1,75 @@
+/store/{store_id}/categories:
+  parameters:
+    - in: path
+      name: store_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The store ID
+  get:
+    tags:
+      - "Sales Categories"
+    summary: (*) List categories from store
+    parameters:
+      - $ref: "#/components/paginationParams/page"
+      - $ref: "#/components/paginationParams/limit"
+
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/object"
+
+/store/{store_id}/category:
+  parameters:
+    - in: path
+      name: store_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The store ID
+  post:
+    tags:
+      - "Sales Categories"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          $ref: "#/components/unitStoreResponse"
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/category/{category_id}:
+  parameters:
+    - in: path
+      name: category_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The category ID
+  put:
+    tags:
+      - "Sales Categories"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+            example:
+              {}
+  delete:
+    tags:
+      - "Sales Categories"
+    description: delete a category
+    responses:
+      200:
+        $ref: "#/components/responses/200"

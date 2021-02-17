@@ -1,0 +1,22 @@
+components:
+  paginationParams:
+    page:
+        in: query
+        name: page
+        schema:
+          type: integer
+        description: page
+    limit:
+        in: query
+        name: limit
+        schema:
+          type: integer
+        description: limit of elements per page
+        
+  responses:
+    200:
+      description: Operation performed successfully!
+
+definitions:
+  object:
+    type: object

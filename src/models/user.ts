@@ -1,6 +1,7 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, Unique, OneToOne, JoinColumn, ManyToMany, JoinTable, ManyToOne, OneToMany } from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
 import { AdvancedUser } from "./advancedUser";
+import { UnitStore } from "./unitStore";
 
 //TALVEZ EU DEVA TIRAR ISSO, N FAZ SENTIDO, JÁ DA PRA SABER QUEM É QUEM SÓ PELO FATO DE EXISTIR OU NÃO RELAÇÃO
 //OU TALVEZ ISSO DEVA FICAR EM UM SERVIÇO PARA O FRONT SABER O QUE ELE É
@@ -53,4 +54,10 @@ export class User extends TimeStampParanoid {
 
     @OneToOne(() => User, user => user.advancedUser, { nullable: true })
     advancedUser!: AdvancedUser | null;
+
+    //Isso aqui pode vir de uma base de dados não relacional
+    @ManyToMany(() => UnitStore)
+    @JoinTable()
+    favoriteUnitStores!: UnitStore[];
+
 }

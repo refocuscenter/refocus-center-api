@@ -1,0 +1,152 @@
+components:
+  schemas:
+    PurchaseRequest:
+      type: object
+      example: {
+        "product_ids": [1, 10, 94, 4],
+        "service_ids": [],
+        "status": 5,
+        "description": "quero assim assim assado"
+      }
+      description: >
+          <h3>Fields:</h3>
+
+          <h4>status:</h4>
+          5 = aguardando confirmação do lojista <br/>
+          10 = aguardando cesto <br/>
+          15 = cesto recebido <br/>
+          20 = cesto verificado <br/>
+          25 = serviço concluído <br/>
+          30 = aguardando retirada <br/>
+          35 = pedido realizado <br/>
+          40 = pedido avaliado <br/>
+          <br/>
+
+/user/{user_id}/purchases:
+  parameters:
+    - in: path
+      name: user_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
+  get:
+    tags:
+      - "Purchase"
+    summary: (*) List purchases (and in progress purchases (see status)) of a user
+    parameters:
+      - $ref: "#/components/paginationParams/page"
+      - $ref: "#/components/paginationParams/limit"
+      - in: query
+        name: statusGroup
+        required: true
+        schema:
+          type: integer
+          minimum: 0
+        description: >
+          <h4>statusGroup:</h4>
+          0 = all (default) <br/>
+          1 = success <br/>
+          2 = in progress <br/>
+          3 = canceled <br/>
+          <br/>
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+
+/unit-store/{unit_store_id}/purchases:
+  parameters:
+    - in: path
+      name: unit_store_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The unit store ID
+  get:
+    tags:
+      - "Purchase"
+    summary: (*) List purchases (and in progress purchases (see status)) of a unit store
+    parameters:
+      - $ref: "#/components/paginationParams/page"
+      - $ref: "#/components/paginationParams/limit"
+      - in: query
+        name: statusGroup
+        required: true
+        schema:
+          type: integer
+          minimum: 0
+        description: >
+          <h4>statusGroup:</h4>
+          0 = all (default) <br/>
+          1 = success <br/>
+          2 = in progress <br/>
+          3 = canceled <br/>
+          <br/>
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/purchase/{purchase_id}:
+  parameters:
+    - in: path
+      name: purchase_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The purchase ID
+  get:
+    tags:
+      - "Purchase"
+    summary: (*) Get a purchase details
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/object"
+            example: {}
+  put:
+    tags:
+      - "Purchase"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PurchaseRequest"
+          example: {
+            "status": 5
+          }
+      description: 
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+
+
+/user/{user_id}/purchase:
+  parameters:
+    - in: path
+      name: user_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
+  post:
+    tags:
+      - "Purchase"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/PurchaseRequest"
+    responses:
+      200:
+        $ref: "#/components/responses/200"

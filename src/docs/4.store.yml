@@ -1,0 +1,84 @@
+definitions:
+  storeResponse:
+    example:
+      {
+        "name": "Mercadinhoinho",
+        "cnpj": 67225300000140,
+        "unitStores": [{}],
+      }
+  storeResponseArray:
+    example:
+      [
+        {
+          "name": "Mercadinhoinho",
+          "cnpj": 67225300000140,
+          "unitStores": [{}],
+        },
+      ]
+
+/stores:
+  get:
+    tags:
+      - "Store"
+    summary: (*) List stores
+    parameters:
+      - $ref: "#/components/paginationParams/page"
+      - $ref: "#/components/paginationParams/limit"
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/object"
+            $ref: "#/definitions/storeResponseArray"
+
+/store:
+  post:
+    tags:
+      - "Store"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: 
+            {}
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/object"
+            $ref: "#/definitions/storeResponseArray"
+
+/store/{id}:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The store ID
+  get:
+    tags:
+      - "Store"
+    summary: (*) Return a store details
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/object"
+            $ref: "#/definitions/storeResponse"
+  delete:
+    tags:
+      - "Store"
+    description: delete a store
+    responses:
+      200:
+        $ref: "#/components/responses/200"

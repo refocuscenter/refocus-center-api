@@ -1,0 +1,134 @@
+/unit-store/{unit_store_id}/sales:
+  get:
+    tags:
+      - "Unit Store Sales (Products & Services)"
+    summary: (*) List sales from unit store
+    parameters:
+      - in: path
+        name: unit_store_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The unit store ID 
+      - $ref: "#/components/paginationParams/page"
+      - $ref: "#/components/paginationParams/limit"
+      - in: query
+        name: search
+        schema:
+          type: string
+        description: Search for name
+      - in: query
+        name: categories
+        schema:
+          type: string
+        description: filter by categories (ex ["drinks"])
+      - in: query
+        name: type
+        schema:
+          type: string
+        description: service | product | any (default)
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/unit-store/{unit_store_id}/sale:
+  post:
+    tags:
+      - "Unit Store Sales (Products & Services)"
+    parameters:
+      - in: path
+        name: unit_store_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The unit store ID 
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: {
+              "categories": ["refrigerantes"],
+              "type": "service",
+              "name": "Lavagem 8kg",
+              "value": 1000
+            }
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/product/{product_id}:
+  parameters:
+    - in: path
+      name: product_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The product ID 
+  get:
+    tags:
+      -  "Unit Store Sales (Products & Services)"
+    summary: (*) Return a product details
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+  put:
+    tags:
+      - "Unit Store Sales (Products & Services)"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"      
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+  delete:
+    tags:
+      - "Unit Store Sales (Products & Services)"
+    summary: Delete a product
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/service/{service_id}:
+  parameters:
+    - in: path
+      name: service_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The service ID 
+  get:
+    tags:
+      -  "Unit Store Sales (Products & Services)"
+    summary: (*) Return a service details
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+  put:
+    tags:
+      - "Unit Store Sales (Products & Services)"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"      
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+  delete:
+    tags:
+      - "Unit Store Sales (Products & Services)"
+    summary: Delete a service
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+

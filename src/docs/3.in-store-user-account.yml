@@ -1,0 +1,80 @@
+store/{store_id}/user-accounts:
+  parameters:
+    - in: path
+      name: store_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The store ID
+  get:
+    tags:
+      - "User Account (In Store)"
+    summary: (*) List user accounts of a store
+    parameters:
+      - $ref: "#/components/paginationParams/page"
+      - $ref: "#/components/paginationParams/limit"
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+user/{user_id}/user-accounts:
+  parameters:
+    - in: path
+      name: user_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
+  get:
+    tags:
+      - "User Account (In Store)"
+    summary: (*) List user accounts of a user
+    parameters:
+      - $ref: "#/components/paginationParams/page"
+      - $ref: "#/components/paginationParams/limit"
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+user-account/{user_account_id}:
+  parameters:
+    - in: path
+      name: user_account_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user account (in store) ID
+  get:
+    tags:
+      - "User Account (In Store)"
+    summary: (*) Get a user account
+    parameters:
+      - $ref: "#/components/paginationParams/page"
+      - $ref: "#/components/paginationParams/limit"
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+  delete:
+    tags:
+      - "User Account (In Store)"
+    description: delete a user account
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+  put:
+    tags:
+      - "User Account (In Store)"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: {}
+      description:
+    responses:
+      200:
+        $ref: "#/components/responses/200"

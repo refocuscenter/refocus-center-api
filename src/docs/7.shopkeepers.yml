@@ -1,0 +1,119 @@
+definitions:
+  shopkeeperResponse:
+    example: { "user": {}, "unitStores": [{}] }
+  shopkeeperResponseArray:
+    example: [{ "user": {}, "unitStores": [{}] }]
+
+/shopkeepers:
+  get:
+    tags:
+      - "Shopkeeper"
+    parameters:
+      - $ref: "#/components/paginationParams/page"
+      - $ref: "#/components/paginationParams/limit"
+    summary: (*) List all shopkeepers
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/object"
+            $ref: "#/definitions/shopkeeperResponseArray"
+
+/shopkeeper/{id}:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The shopkeeper ID
+  get:
+    tags:
+      - "Shopkeeper"
+    summary: (*) get a shopkeeper details
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/object"
+            $ref: "#/definitions/shopkeeperResponse"
+  put:
+    tags:
+      - "Shopkeeper"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: {}
+      summary:
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+  delete:
+    tags:
+      - "Shopkeeper"
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/user/{user_id}/shopkeeper:
+  parameters:
+    - in: path
+      name: user_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
+  post:
+    tags:
+      - "Shopkeeper"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          example: { "unitStoreIDs": [1] }
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/shopkeeper/{shopkeeper_id}/unit-store/{unit_store_id}:
+  parameters:
+    - in: path
+      name: shopkeeper_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The shopkeeper ID
+    - in: path
+      name: unit_store_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The unit store ID
+  patch:
+    tags:
+      - "Shopkeeper"
+    summary: relate unit store to a shopkeeper (pushing)
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+    parameters:
+      - in: path
+        name: unit_store_id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description:

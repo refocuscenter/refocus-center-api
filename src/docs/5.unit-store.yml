@@ -1,0 +1,97 @@
+components:
+  unitStoreResponse:
+    value: { "shopkeeperWebSocketInfo": {}, "unitStore": {} }
+  unitStoreResponseArray:
+    example: []
+
+/unit-stores:
+  get:
+    tags:
+      - "Unit Store"
+    summary: (*) List unitary stores
+    parameters:
+      - $ref: "#/components/paginationParams/page"
+      - $ref: "#/components/paginationParams/limit"
+      - in: query
+        name: latitude
+        required: true
+        schema:
+          type: float
+        description: Latitude
+      - in: query
+        name: longitude
+        required: true
+        schema:
+          type: float
+        description: Longitude
+      - in: query
+        name: radius
+        required: true
+        schema:
+          type: float
+        description: Radius
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/object"
+            $ref: "#/components/unitStoreResponseArray"
+
+/unit-store/{id}:
+  parameters:
+    - in: path
+      name: id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The unit store ID
+  get:
+    tags:
+      - "Unit Store"
+    summary: (*) Return a unit store details
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: "#/definitions/object"
+            examples:
+              objectExample:
+                $ref: "#/components/unitStoreResponse"
+  put:
+    tags:
+      - "Unit Store"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+            example:
+              {}
+  delete:
+    tags:
+      - "Unit Store"
+    description: delete a unit store
+    responses:
+      200:
+        $ref: "#/components/responses/200"
+
+/unit-store:
+  post:
+    tags:
+      - "Unit Store"
+    requestBody:
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: "#/definitions/object"
+          $ref: "#/components/unitStoreResponse"
+    responses:
+      200:
+        $ref: "#/components/responses/200"
