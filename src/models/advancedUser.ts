@@ -11,48 +11,47 @@ import { InStoreUserAccount } from "./inStoreUserAccount";
 /**
  * Pessoa física ou Jurídica
  */
-export enum Person {
+/*export enum Person {
     NaturalPerson,
     JuridicalPerson
-}
+}*/
 
 @Entity({ name: "advanced_users" })
 export class AdvancedUser extends TimeStampParanoid {
-    @PrimaryColumn("uuid")
+    @PrimaryColumn()
     id!: string;
 
     @Column({ nullable: true })
     fullName!: string;
 
     @Column({ unique: true })
-    identityDocumentNumber!: string; //RG
+    identityDocumentNumber!: number; //RG
 
     //@Column("varchar", { nullable: true, unique: true })
     //cpfCnpj!: string | null;
 
-    @Column("smallint")
-    person!: Person;
+    //@Column("smallint")
+    //person!: Person;
 
     @Column()
     birthDate!: Date;
 
     @OneToOne(() => User,
         user => user.advancedUser)
-    @JoinColumn()
     user!: User;
 
-    @OneToMany(() => Address, address => address.advancedUser)
+    @OneToMany(() => Address, address => address.advancedUser, { cascade: ["insert", "update"], eager: true })
     @JoinColumn()
     addresses!: Address[];
 
     @OneToMany(() => InStoreUserAccount, sUserAccount => sUserAccount.advancedUser)
     @JoinColumn()
-    inStoreUserAccounts!: InStoreUserAccount[] | null;
+    inStoreUserAccounts!: InStoreUserAccount[];
 
     @OneToOne(() => DeliveryMan, deliv => deliv.advancedUser)
     deliveryMan!: DeliveryMan | null
 
-    @OneToOne(() => Shopkeeper, sKeeper => sKeeper.advancedUser)
+    @OneToOne(() => Shopkeeper, sKeeper => sKeeper.advancedUser, { cascade: ["insert", "update"], eager: true })
     shopkeeper!: Shopkeeper | null
 
 

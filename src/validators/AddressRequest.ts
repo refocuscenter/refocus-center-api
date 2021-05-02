@@ -1,6 +1,5 @@
 import { IsDate, isDate, IsEmail, IsOptional, Length } from "class-validator";
 import { LocalityType } from "../models/address";
-import { Person } from "../models/advancedUser";
 
 export class AddressRequest {
     localityType!: LocalityType;

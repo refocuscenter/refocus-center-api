@@ -16,7 +16,7 @@ export class Shopkeeper extends TimeStampParanoid {
 
     @ManyToMany(() => UnitStore, uStore => uStore.shopkeepers)
     @JoinTable()
-    unitStore!: UnitStore[]
+    unitStores!: UnitStore[]
 
     @OneToMany(() => SignedPlan, sPlan => sPlan.shopkeeper)
     signedPlan!: SignedPlan[] | null

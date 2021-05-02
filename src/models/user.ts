@@ -52,8 +52,9 @@ export class User extends TimeStampParanoid {
     @Column("smallint", { default: 0, select: false })
     permissionLevel!: PermissionLevel;
 
-    @OneToOne(() => User, user => user.advancedUser, { nullable: true })
-    advancedUser!: AdvancedUser | null;
+    @OneToOne(() => AdvancedUser, advUser => advUser.user, { cascade: ["insert", "update"], eager: true })
+    @JoinColumn()
+    advancedUser!: AdvancedUser;
 
     //Isso aqui pode vir de uma base de dados não relacional
     @ManyToMany(() => UnitStore)

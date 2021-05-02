@@ -42,7 +42,7 @@ export class Address extends TimeStampParanoid {
     neighborhood!: string //bairro
 
     @Column()
-    zipCode!: string
+    zipCode!: number
 
     @Column("smallint", { unsigned: true })
     countryCode!: CountryCode

@@ -1,4 +1,4 @@
-import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { Address } from "./address";
 import { Card } from "./card";
 import { Shopkeeper } from "./shopkeeper";
@@ -10,10 +10,10 @@ import { SuppliedService } from "./suppliedService";
 @Entity({ name: "unit_stores" })
 export class UnitStore {
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id!: number;
 
-    @ManyToMany(() => Shopkeeper, model => model.unitStore)
+    @ManyToMany(() => Shopkeeper, model => model.unitStores)
     shopkeepers!: Shopkeeper[];
 
     @OneToMany(() => StoreHighlight, model => model.unitStore)

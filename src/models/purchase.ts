@@ -1,5 +1,5 @@
 import { DEFAULT_ECDH_CURVE } from "tls";
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
 import { AdvancedUser } from "./advancedUser";
 import { Card } from "./card";
@@ -16,7 +16,7 @@ export enum PaymentFormat {
 @Entity({ name: "purchases" })
 export class Purchase extends TimeStampParanoid{
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @Column("bigint")

@@ -1,4 +1,4 @@
-import { Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn } from "typeorm";
+import { Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
 import { AdvancedUser } from "./advancedUser";
 import { Card } from "./card";
@@ -8,7 +8,7 @@ import { Store } from "./store";
 @Entity({ name: "in_store_user_accounts" })
 export class InStoreUserAccount extends TimeStampParanoid{
 
-    @PrimaryColumn()
+    @PrimaryGeneratedColumn()
     id!: number;
 
     @OneToMany(() => Purchase, purch => purch.inStoreUserAccount)
