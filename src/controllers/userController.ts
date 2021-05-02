@@ -19,7 +19,7 @@ export default class UserController {
     async listUsers(@QueryParams() query: any, @Res() response: Response) {
 
         try {
-            const users = await this.userRepository.find()
+            const users = await this.userRepository.find({ loadEagerRelations: true })
             return users;
         } catch (error) {
             responseError500(error, response);
