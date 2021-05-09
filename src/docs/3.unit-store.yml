@@ -4,7 +4,7 @@ components:
   unitStoreResponseArray:
     example: []
 
-/unit-stores:
+/unit-store:
   get:
     tags:
       - "Unit Store"
@@ -62,36 +62,36 @@ components:
             examples:
               objectExample:
                 $ref: "#/components/unitStoreResponse"
-  put:
-    tags:
-      - "Unit Store"
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/object"
-            example:
-              {}
-  delete:
-    tags:
-      - "Unit Store"
-    description: delete a unit store
-    responses:
-      200:
-        $ref: "#/components/responses/200"
+#  put:
+#    tags:
+#      - "Unit Store"
+#    requestBody:
+#      required: true
+#      content:
+#        application/json:
+#          schema:
+#            $ref: "#/definitions/object"
+#            example:
+#              {}
+#  delete:
+#    tags:
+#      - "Unit Store"
+#    description: delete a unit store
+#    responses:
+#      200:
+#        $ref: "#/components/responses/200"
 
-/unit-store:
-  post:
-    tags:
-      - "Unit Store"
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/object"
-          $ref: "#/components/unitStoreResponse"
-    responses:
-      200:
-        $ref: "#/components/responses/200"
+#/unit-store:
+#  post:
+#    tags:
+#      - "Unit Store"
+#    requestBody:
+#      required: true
+#      content:
+#        application/json:
+#          schema:
+#            $ref: "#/definitions/object"
+#          $ref: "#/components/unitStoreResponse"
+#    responses:
+#      200:
+#        $ref: "#/components/responses/200"

@@ -15,7 +15,7 @@ export default class UserController {
 
     private userRepository = getRepository(User)
 
-    @Get('/users')
+    @Get('/user')
     async listUsers(@QueryParams() query: any, @Res() response: Response) {
 
         try {

@@ -1,14 +1,19 @@
-/users:
+/user:
   get:
     tags:
       - "User"
-    summary: (*) List all users
+    summary: List all users
+    description:
     parameters:
       - $ref: "#/components/paginationParams/page"
       - $ref: "#/components/paginationParams/limit"
     responses:
       200:
-        $ref: "#/components/responses/200"
+        description: A JSON array of user
+        content:
+          application/json:
+            schema:
+                $ref: "#/components/schemas/UsersResponse"
 
 /user/{id}:
   parameters:
@@ -22,282 +27,284 @@
   get:
     tags:
       - "User"
-    summary: (*) Return a user details
+    summary: Return a user details
     responses:
-      200:
-        $ref: "#/components/responses/200"
-  delete:
-    tags:
-      - "User"
-    description: delete a user
-    responses:
-      200:
-        $ref: "#/components/responses/200"
+       200:
+        description: A JSON array of user
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserResponse"
+#  delete:
+#    tags:
+#      - "User"
+#    description: delete a user
+#    responses:
+#      200:
+#        $ref: "#/components/responses/200"
 
-/user/login:
-  post:
-    tags:
-      - "User"
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/object"
-          example: {
-            "email": "conradopsa@gmail.com", #optional (or phone)
-            "password": "123456"
-          }
-    responses:
-      200:
-        $ref: "#/components/responses/200"
-
-/user/basic-register:
-  post:
-    tags:
-      - "User"
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/object"
-          example: {
-            "displayName": "Conrado",
-            "email": "conradopsa@gmail.com",
-            "phone": "21988888888",
-            "password": "123456",
-          }
-    responses:
-      200:
-        $ref: "#/components/responses/200"
-
-/user/{id}/complete-register:
-  parameters:
-    - in: path
-      name: id
-      required: true
-      schema:
-        type: integer
-        minimum: 1
-      description: The user ID
-  put:
-    tags:
-      - "User"
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/object"
-          example: {
-            "displayName": "Conrado",
-            "fullName": "Conrado Pinheiro",
-            "identityDocumentNumber": "222222226",
-            "person": 0,
-            "birthDate": "2000-12-20",
-            "addresses": [
-              {
-                "localityType": 0,
-                "addressLines": [
-                  "Rua Acacia Avenue 666"
-                ],
-                "city": "Nova Iguaçu",
-                "state": "RJ",
-                "neighborhood": "Belford Roxo",
-                "zipCode": "21123410",
-                "countryCode": 55,
-              }
-            ]
-          }
-      description: >
-          <h3>Fields:</h3>
-
-          <h4>person:</h4>
-          0 = natural person (pessoa física) <br/>
-          1 = juridical person (pessoa jurídica) <br/>
-          <br/>
-
-          <h4>localityType:</h4>
-          0 = residence (local de residência) <br/>
-          1 = workplace (local de trabalho) <br/>
-          99 = other <br/>
-          <br/>
-
-          <h4>countryCode:</h4>
-          55 = Brazil <br/>
-      
-    responses:
-      200:
-        $ref: "#/components/responses/200"
-
-/user/{id}/change-email:
-  parameters:
-    - in: path
-      name: id
-      required: true
-      schema:
-        type: integer
-        minimum: 1
-      description: The user ID
-  patch:
-    tags:
-      - "User"
-    summary:
-      "Change email"
-    parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          minimum: 1
-        description: The user ID
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/object"
-          example: {
-            "newEmail": "secondEmail@tmail.com",
-            "password": "123456"
-          }
-    responses:
-      200:
-        $ref: "#/components/responses/200"
-
-
-/user/{id}/change-phone:
-  parameters:
-    - in: path
-      name: id
-      required: true
-      schema:
-        type: integer
-        minimum: 1
-      description: The user ID
-  patch:
-    tags:
-      - "User"
-    summary:
-      "Change phone"
-    parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          minimum: 1
-        description: The user ID
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/object"
-          example: {
-            "newPhone": "21977777777",
-            "password": "123456"
-          }
-    responses:
-      200:
-        $ref: "#/components/responses/200"
-
-/user/{id}/change-password:
-  parameters:
-    - in: path
-      name: id
-      required: true
-      schema:
-        type: integer
-        minimum: 1
-      description: The user ID
-  patch:
-    tags:
-      - "User"
-    summary:
-      "Change password"
-    parameters:
-      - in: path
-        name: id
-        required: true
-        schema:
-          type: integer
-          minimum: 1
-        description: The user ID
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/object"
-          example: {
-            "oldPassword": "123",
-            "newPassword": "321"
-          }
-    responses:
-      200:
-        $ref: "#/components/responses/200"
-
-/user/recover-password:
-  patch:
-    tags:
-      - "User"
-    summary:
-      "Recover password"
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/object"
-          example: {
-            "phone": "988888888", #optional (or email)
-            "email": "anyEmail@tmail.com" #optional (or phone)
-          }
-    responses:
-      200:
-        $ref: "#/components/responses/200"
-
-/user/{id}/favorite:
-  parameters:
-    - in: path
-      name: id
-      required: true
-      schema:
-        type: integer
-        minimum: 1
-      description: The user ID
-  post:
-    tags:
-      - "User"
-    summary:
-      "Insert favorite unit store (pushing)"
-    requestBody:
-      required: true
-      content:
-        application/json:
-          schema:
-            $ref: "#/definitions/object"
-          example: {
-            "unitStoreID": 1
-          }
-    responses:
-      200:
-        $ref: "#/components/responses/200"
-
-/user/{id}/favorite/{unit_store_id}:
-    delete:
-      tags:
-        - "User"
-      summary:
-        "Remove favorite unit store"
-      responses:
-        200:
-          $ref: "#/components/responses/200"
-
-
+#/user/login:
+#  post:
+#    tags:
+#      - "User"
+#    requestBody:
+#      required: true
+#      content:
+#        application/json:
+#          schema:
+#            $ref: "#/definitions/object"
+#          example: {
+#            "email": "conradopsa@gmail.com", #optional (or phone)
+#            "password": "123456"
+#          }
+#    responses:
+#      200:
+#        $ref: "#/components/responses/200"
+#
+#/user/basic-register:
+#  post:
+#    tags:
+#      - "User"
+#    requestBody:
+#      required: true
+#      content:
+#        application/json:
+#          schema:
+#            $ref: "#/definitions/object"
+#          example: {
+#            "displayName": "Conrado",
+#            "email": "conradopsa@gmail.com",
+#            "phone": "21988888888",
+#            "password": "123456",
+#          }
+#    responses:
+#      200:
+#        $ref: "#/components/responses/200"
+#
+#/user/{id}/complete-register:
+#  parameters:
+#    - in: path
+#      name: id
+#      required: true
+#      schema:
+#        type: integer
+#        minimum: 1
+#      description: The user ID
+#  put:
+#    tags:
+#      - "User"
+#    requestBody:
+#      required: true
+#      content:
+#        application/json:
+#          schema:
+#            $ref: "#/definitions/object"
+#          example: {
+#            "displayName": "Conrado",
+#            "fullName": "Conrado Pinheiro",
+#            "identityDocumentNumber": "222222226",
+#            "person": 0,
+#            "birthDate": "2000-12-20",
+#            "addresses": [
+#              {
+#                "localityType": 0,
+#                "addressLines": [
+#                  "Rua Acacia Avenue 666"
+#                ],
+#                "city": "Nova Iguaçu",
+#                "state": "RJ",
+#                "neighborhood": "Belford Roxo",
+#                "zipCode": "21123410",
+#                "countryCode": 55,
+#              }
+#            ]
+#          }
+#      description: >
+#          <h3>Fields:</h3>
+#
+#          <h4>person:</h4>
+#          0 = natural person (pessoa física) <br/>
+#          1 = juridical person (pessoa jurídica) <br/>
+#          <br/>
+#
+#          <h4>localityType:</h4>
+#          0 = residence (local de residência) <br/>
+#          1 = workplace (local de trabalho) <br/>
+#          99 = other <br/>
+#          <br/>
+#
+#          <h4>countryCode:</h4>
+#          55 = Brazil <br/>
+#
+#    responses:
+#      200:
+#        $ref: "#/components/responses/200"
+#
+#/user/{id}/change-email:
+#  parameters:
+#    - in: path
+#      name: id
+#      required: true
+#      schema:
+#        type: integer
+#        minimum: 1
+#      description: The user ID
+#  patch:
+#    tags:
+#      - "User"
+#    summary:
+#      "Change email"
+#    parameters:
+#      - in: path
+#        name: id
+#        required: true
+#        schema:
+#          type: integer
+#          minimum: 1
+#        description: The user ID
+#    requestBody:
+#      required: true
+#      content:
+#        application/json:
+#          schema:
+#            $ref: "#/definitions/object"
+#          example: {
+#            "newEmail": "secondEmail@tmail.com",
+#            "password": "123456"
+#          }
+#    responses:
+#      200:
+#        $ref: "#/components/responses/200"
+#
+#
+#/user/{id}/change-phone:
+#  parameters:
+#    - in: path
+#      name: id
+#      required: true
+#      schema:
+#        type: integer
+#        minimum: 1
+#      description: The user ID
+#  patch:
+#    tags:
+#      - "User"
+#    summary:
+#      "Change phone"
+#    parameters:
+#      - in: path
+#        name: id
+#        required: true
+#        schema:
+#          type: integer
+#          minimum: 1
+#        description: The user ID
+#    requestBody:
+#      required: true
+#      content:
+#        application/json:
+#          schema:
+#            $ref: "#/definitions/object"
+#          example: {
+#            "newPhone": "21977777777",
+#            "password": "123456"
+#          }
+#    responses:
+#      200:
+#        $ref: "#/components/responses/200"
+#
+#/user/{id}/change-password:
+#  parameters:
+#    - in: path
+#      name: id
+#      required: true
+#      schema:
+#        type: integer
+#        minimum: 1
+#      description: The user ID
+#  patch:
+#    tags:
+#      - "User"
+#    summary:
+#      "Change password"
+#    parameters:
+#      - in: path
+#        name: id
+#        required: true
+#        schema:
+#          type: integer
+#          minimum: 1
+#        description: The user ID
+#    requestBody:
+#      required: true
+#      content:
+#        application/json:
+#          schema:
+#            $ref: "#/definitions/object"
+#          example: {
+#            "oldPassword": "123",
+#            "newPassword": "321"
+#          }
+#    responses:
+#      200:
+#        $ref: "#/components/responses/200"
+#
+#/user/recover-password:
+#  patch:
+#    tags:
+#      - "User"
+#    summary:
+#      "Recover password"
+#    requestBody:
+#      required: true
+#      content:
+#        application/json:
+#          schema:
+#            $ref: "#/definitions/object"
+#          example: {
+#            "phone": "988888888", #optional (or email)
+#            "email": "anyEmail@tmail.com" #optional (or phone)
+#          }
+#    responses:
+#      200:
+#        $ref: "#/components/responses/200"
+#
+#/user/{id}/favorite:
+#  parameters:
+#    - in: path
+#      name: id
+#      required: true
+#      schema:
+#        type: integer
+#        minimum: 1
+#      description: The user ID
+#  post:
+#    tags:
+#      - "User"
+#    summary:
+#      "Insert favorite unit store (pushing)"
+#    requestBody:
+#      required: true
+#      content:
+#        application/json:
+#          schema:
+#            $ref: "#/definitions/object"
+#          example: {
+#            "unitStoreID": 1
+#          }
+#    responses:
+#      200:
+#        $ref: "#/components/responses/200"
+#
+#/user/{id}/favorite/{unit_store_id}:
+#    delete:
+#      tags:
+#        - "User"
+#      summary:
+#        "Remove favorite unit store"
+#      responses:
+#        200:
+#          $ref: "#/components/responses/200"
 
 #definitions:
 #  user:

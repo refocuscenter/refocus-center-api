@@ -1,3 +1,5 @@
+#generated with ts-to-openapi
+
 components:
   paginationParams:
     page:
