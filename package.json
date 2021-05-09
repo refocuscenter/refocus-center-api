@@ -11,7 +11,8 @@
     "watch": "nodemon --config watch-config.json",
     "clear:watch": "nodemon --config watch-config.json --exec \"npm run clear:compile\"",
     "start": "npm run compile",
-    "schemaspy": "schemaspy && schemaspy\\index.html"
+    "schemaspy": "schemaspy && schemaspy\\index.html",
+    "docs:schemas": "ts-to-openapi -f ./src/types/responses/responses.ts --no-as-comment > ./src/docs/_schemas.yml"
   },
   "keywords": [],
   "author": "Time 3",
