@@ -32,7 +32,7 @@ export function createApp() {
 
     //Routers
     useExpressServer(app, {
-        controllers: [__dirname + '/../controllers/**/*.js']
+        controllers: [__dirname + '/../controllers/**/*']
     });
 
     //Middlewares After Router
