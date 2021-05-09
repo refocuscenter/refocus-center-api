@@ -1,19 +1,19 @@
-import { IsDate, isDate, IsEmail, IsOptional, Length } from "class-validator";
+import { Length } from "class-validator";
 import { LocalityType } from "../models/address";
 
 export class AddressRequest {
-    localityType!: LocalityType;
+	localityType!: LocalityType;
 
-    @Length(1, 3)
-    addressLines!: String[];
+	@Length(1, 3)
+	addressLines!: String[];
 
-    city!: String;
+	city!: String;
 
-    state!: String;
+	state!: String;
 
-    neighborhood!: String;
+	neighborhood!: String;
 
-    zipCode!: String;
+	zipCode!: String;
 
-    countryCode!: number;
+	countryCode!: number;
 }

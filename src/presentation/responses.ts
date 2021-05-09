@@ -1,25 +1,25 @@
 import { OfferXorCombo, Store, StoreUserAccount, User } from "./models";
 
 export interface Pagination {
-  hasNextPage: boolean;
+	hasNextPage: boolean;
 }
 
 export interface UsersResponse extends Pagination {
-  users: User[];
+	users: User[];
 }
 
 export interface UserResponse extends Pagination {
-  user: User;
+	user: User;
 }
 
 export interface UnitStoreResponse extends Pagination {
-  store: Store;
+	store: Store;
 }
 
 export interface UnitStoreOfferResponse extends Pagination {
-  offers: OfferXorCombo[];
+	offers: OfferXorCombo[];
 }
 
 export interface UserStoreAccountResponse extends Pagination {
-  storeAccount: StoreUserAccount;
+	storeAccount: StoreUserAccount;
 }

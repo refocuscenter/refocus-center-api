@@ -1,12 +1,17 @@
-import { Entity, PrimaryGeneratedColumn, Column, Unique, Check, PrimaryColumn, OneToOne, JoinColumn, OneToMany, JoinTable } from "typeorm";
+import {
+	Column,
+	Entity,
+	JoinColumn,
+	OneToMany,
+	OneToOne,
+	PrimaryColumn,
+} from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
 import { Address } from "./address";
-import { Card } from "./card";
 import { DeliveryMan } from "./deliveryMan";
-import { Purchase } from "./purchase";
+import { InStoreUserAccount } from "./inStoreUserAccount";
 import { Shopkeeper } from "./shopkeeper";
 import { User } from "./user";
-import { InStoreUserAccount } from "./inStoreUserAccount";
 
 /**
  * Pessoa física ou Jurídica
@@ -18,41 +23,47 @@ import { InStoreUserAccount } from "./inStoreUserAccount";
 
 @Entity({ name: "advanced_users" })
 export class AdvancedUser extends TimeStampParanoid {
-    @PrimaryColumn()
-    id!: string;
+	@PrimaryColumn()
+	id!: string;
 
-    @Column({ nullable: true })
-    fullName!: string;
+	@Column({ nullable: true })
+	fullName!: string;
 
-    @Column({ unique: true })
-    identityDocumentNumber!: number; //RG
+	@Column({ unique: true })
+	identityDocumentNumber!: number; //RG
 
-    //@Column("varchar", { nullable: true, unique: true })
-    //cpfCnpj!: string | null;
+	//@Column("varchar", { nullable: true, unique: true })
+	//cpfCnpj!: string | null;
 
-    //@Column("smallint")
-    //person!: Person;
+	//@Column("smallint")
+	//person!: Person;
 
-    @Column()
-    birthDate!: Date;
+	@Column()
+	birthDate!: Date;
 
-    @OneToOne(() => User,
-        user => user.advancedUser)
-    user!: User;
+	@OneToOne(() => User, (user) => user.advancedUser)
+	user!: User;
 
-    @OneToMany(() => Address, address => address.advancedUser, { cascade: ["insert", "update"], eager: true })
-    @JoinColumn()
-    addresses!: Address[];
+	@OneToMany(() => Address, (address) => address.advancedUser, {
+		cascade: ["insert", "update"],
+		eager: true,
+	})
+	@JoinColumn()
+	addresses!: Address[];
 
-    @OneToMany(() => InStoreUserAccount, sUserAccount => sUserAccount.advancedUser)
-    @JoinColumn()
-    inStoreUserAccounts!: InStoreUserAccount[];
+	@OneToMany(
+		() => InStoreUserAccount,
+		(sUserAccount) => sUserAccount.advancedUser
+	)
+	@JoinColumn()
+	inStoreUserAccounts!: InStoreUserAccount[];
 
-    @OneToOne(() => DeliveryMan, deliv => deliv.advancedUser)
-    deliveryMan!: DeliveryMan | null
+	@OneToOne(() => DeliveryMan, (deliv) => deliv.advancedUser)
+	deliveryMan!: DeliveryMan | null;
 
-    @OneToOne(() => Shopkeeper, sKeeper => sKeeper.advancedUser, { cascade: ["insert", "update"], eager: true })
-    shopkeeper!: Shopkeeper | null
-
-
+	@OneToOne(() => Shopkeeper, (sKeeper) => sKeeper.advancedUser, {
+		cascade: ["insert", "update"],
+		eager: true,
+	})
+	shopkeeper!: Shopkeeper | null;
 }

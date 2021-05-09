@@ -1,29 +1,29 @@
 import { XOR } from "../app/operators";
 
 export interface User {
-  id: number;
-  displayName: string;
-  profilePhoto: string;
+	id: number;
+	displayName: string;
+	profilePhoto: string;
 }
 
 export interface UserAccountStore {
-  balance: number;
-  store: Store;
-  basket: Basket;
+	balance: number;
+	store: Store;
+	basket: Basket;
 }
 
 export interface Basket {
-  basketItems: BasketItem[];
+	basketItems: BasketItem[];
 }
 
 export interface BasketItem {
-  // totalValue?: number;
-  portion: Portion;
+	// totalValue?: number;
+	portion: Portion;
 }
 
 export interface Portion {
-  amount: number;
-  offer: OfferXorCombo;
+	amount: number;
+	offer: OfferXorCombo;
 }
 
 /**
@@ -31,17 +31,17 @@ export interface Portion {
  * What is offered (service or product)
  */
 export interface Offer {
-  id: number;
-  name: string;
-  image: string;
-  value: number;
+	id: number;
+	name: string;
+	image: string;
+	value: number;
 }
 
 export interface Combo<Offer> {
-  id: number;
-  name: string;
-  value: number;
-  offers: Offer[];
+	id: number;
+	name: string;
+	value: number;
+	offers: Offer[];
 }
 
 export type OfferXorCombo = XOR<Offer, Combo<Offer>>;
@@ -53,29 +53,28 @@ export interface Product extends Offer {}
 export interface Service extends Offer {}
 
 export interface OfferCategory {
-  offer: Offer;
-  categories: string[];
+	offer: Offer;
+	categories: string[];
 }
 
 export interface UnitStore {
-  id: number;
-  name?: string;
-  image?: string;
-  store: Store;
-
+	id: number;
+	name?: string;
+	image?: string;
+	store: Store;
 }
 
 export interface Store {
-  id: number;
-  name: string;
-  sector: string;
-  image: string;
-  cnpj: number;
+	id: number;
+	name: string;
+	sector: string;
+	image: string;
+	cnpj: number;
 }
 
 export interface StoreUserAccount {
-    id: number;
-    user: User;
-    balance: number;
-    store: Store;
+	id: number;
+	user: User;
+	balance: number;
+	store: Store;
 }

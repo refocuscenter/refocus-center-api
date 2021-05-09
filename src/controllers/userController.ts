@@ -1,66 +1,67 @@
-import { responseError500, responseError404 } from './../utils/serviceResponse';
-import { Request, Response } from 'express';
-import { Controller, Get, Post, QueryParams, Req, Res } from 'routing-controllers';
-import { DeepPartial, getRepository, getManager } from 'typeorm';
-import { User } from '../models/user';
-import { QueryDeepPartialEntity } from 'typeorm/query-builder/QueryPartialEntity';
-import { filterKeys, removeKeys } from '../utils/controllerUtils';
+import { Request, Response } from "express";
+import {
+	Controller,
+	Get,
+	Post,
+	QueryParams,
+	Req,
+	Res,
+} from "routing-controllers";
+import { DeepPartial, getRepository } from "typeorm";
+import { User } from "../models/user";
+import { removeKeys } from "../utils/controllerUtils";
+import { responseError500 } from "./../utils/serviceResponse";
 
 const USER_NOT_FOUND = "User not found";
 //const WRONG_PASSWORD = 'Password does not match';
 
-
 @Controller()
 export default class UserController {
+	private userRepository = getRepository(User);
 
-    private userRepository = getRepository(User)
+	@Get("/user")
+	async listUsers(@QueryParams() query: any, @Res() response: Response) {
+		try {
+			const users = await this.userRepository.find({
+				loadEagerRelations: true,
+			});
+			return users;
+		} catch (error) {
+			responseError500(error, response);
+		}
+	}
 
-    @Get('/user')
-    async listUsers(@QueryParams() query: any, @Res() response: Response) {
+	@Get("/user/:id")
+	async getUser(@Req() request: Request, @Res() response: Response) {
+		const { id } = request.params;
 
-        try {
-            const users = await this.userRepository.find({ loadEagerRelations: true })
-            return users;
-        } catch (error) {
-            responseError500(error, response);
-        }
-    }
+		try {
+			const user = await this.userRepository.findOne(id);
 
-    @Get('/user/:id')
-    async getUser(@Req() request: Request, @Res() response: Response) {
+			if (user === undefined) return response.status(404).send(USER_NOT_FOUND);
 
-        const { id } = request.params;
+			return user;
+		} catch (error) {
+			responseError500(error, response);
+		}
+	}
 
-        try {
-            const user = await this.userRepository.findOne(id);
+	@Post("/signin")
+	async signIn(@Req() request: Request, @Res() response: Response) {
+		const keysToRemove = ["id"];
 
-            if (user === undefined)
-                return response.status(404).send(USER_NOT_FOUND);
+		const userData: DeepPartial<User> = removeKeys(request.body, keysToRemove);
 
-            return user;
-        } catch (error) {
-            responseError500(error, response);
-        }
-    }
+		console.log(userData);
 
-    @Post('/signin')
-    async signIn(@Req() request: Request, @Res() response: Response) {
+		const newUser = await this.userRepository.create(userData);
 
-        const keysToRemove = ['id'];
+		await this.userRepository.save(newUser, { transaction: true });
 
-        const userData: DeepPartial<User> =
-            removeKeys(request.body, keysToRemove);
+		return newUser;
+	}
 
-        console.log(userData);
-
-        const newUser = await this.userRepository.create(userData);
-
-        await this.userRepository.save(newUser, { transaction: true });
-
-        return newUser;
-    }
-
-    /*async login(request: Request, response: Response) {
+	/*async login(request: Request, response: Response) {
 
         try {
             const { login, password } = request.body;
@@ -86,5 +87,4 @@ export default class UserController {
         }
 
     }*/
-
 }

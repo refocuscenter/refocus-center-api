@@ -1,29 +1,33 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import {
+	Column,
+	Entity,
+	JoinColumn,
+	ManyToOne,
+	OneToMany,
+	PrimaryGeneratedColumn,
+} from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
 import { HighlightsPlan } from "./highlightPlan";
-import { Purchase } from "./purchase";
 import { Shopkeeper } from "./shopkeeper";
 import { StoreHighlight } from "./storeHighlight";
 
 @Entity({ name: "signed_plans" })
 export class SignedPlan extends TimeStampParanoid {
-    
-    @PrimaryGeneratedColumn()
-    id!: number;
+	@PrimaryGeneratedColumn()
+	id!: number;
 
-    @Column("bigint")
-    contractedValue!: number;
+	@Column("bigint")
+	contractedValue!: number;
 
-    @ManyToOne(() => Shopkeeper, sk => sk.signedPlan)
-    @JoinColumn()
-    shopkeeper!: Shopkeeper
+	@ManyToOne(() => Shopkeeper, (sk) => sk.signedPlan)
+	@JoinColumn()
+	shopkeeper!: Shopkeeper;
 
-    @ManyToOne(() => HighlightsPlan, hPlan => hPlan.signedPlan)
-    @JoinColumn()
-    highlightPlan!: HighlightsPlan
+	@ManyToOne(() => HighlightsPlan, (hPlan) => hPlan.signedPlan)
+	@JoinColumn()
+	highlightPlan!: HighlightsPlan;
 
-    @OneToMany(() => StoreHighlight, shl => shl.signedPlan)
-    @JoinColumn()
-    storeHighlight!: StoreHighlight[] | null
-
+	@OneToMany(() => StoreHighlight, (shl) => shl.signedPlan)
+	@JoinColumn()
+	storeHighlight!: StoreHighlight[] | null;
 }

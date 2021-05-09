@@ -1,17 +1,21 @@
-import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+	Column,
+	Entity,
+	JoinColumn,
+	ManyToOne,
+	PrimaryGeneratedColumn,
+} from "typeorm";
 import { Product } from "./product";
 
 @Entity({ name: "recognition_terms" })
 export class RecognitionTerm {
-    
-    @PrimaryGeneratedColumn()
-    id!: number;
+	@PrimaryGeneratedColumn()
+	id!: number;
 
-    @Column()
-    term!: string;
+	@Column()
+	term!: string;
 
-    @ManyToOne(() => Product, prod => prod.recognitionTerm)
-    @JoinColumn()
-    product!: Product;
-
+	@ManyToOne(() => Product, (prod) => prod.recognitionTerm)
+	@JoinColumn()
+	product!: Product;
 }

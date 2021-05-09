@@ -1,12 +1,12 @@
-import { IsEmail, IsOptional, Length } from "class-validator";
+import { IsEmail, IsOptional } from "class-validator";
 
 export class LoginRequest {
-    @IsOptional()
-    phone!: string;
+	@IsOptional()
+	phone!: string;
 
-    @IsEmail()
-    @IsOptional()
-    email!: string;  
-    
-    password!: string;
-  }
+	@IsEmail()
+	@IsOptional()
+	email!: string;
+
+	password!: string;
+}

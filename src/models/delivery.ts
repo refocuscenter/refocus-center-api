@@ -1,32 +1,36 @@
-import { Column, Entity, JoinColumn, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import {
+	Column,
+	Entity,
+	JoinColumn,
+	ManyToOne,
+	OneToOne,
+	PrimaryGeneratedColumn,
+} from "typeorm";
 import { TimeStampParanoid } from "../utils/modelsUtils";
-import { Address } from './address'
+import { Address } from "./address";
 import { DeliveryMan } from "./deliveryMan";
 import { Purchase } from "./purchase";
 
 @Entity({ name: "delivery" })
 export class Delivery extends TimeStampParanoid {
+	@PrimaryGeneratedColumn()
+	id!: number;
 
-    @PrimaryGeneratedColumn()
-    id!: number;
+	@Column("timestamp")
+	scheduledDateTime!: Date;
 
-    @Column("timestamp")
-    scheduledDateTime!: Date;
+	@Column("bigint")
+	value!: number;
 
-    @Column("bigint")
-    value!: number;
+	@ManyToOne(() => Address, (addr) => addr.deliveries)
+	@JoinColumn()
+	deliveryAddress!: Address;
 
-    @ManyToOne(() => Address, addr => addr.deliveries)
-    @JoinColumn()
-    deliveryAddress!: Address
+	@ManyToOne(() => DeliveryMan, (addr) => addr.deliveries)
+	@JoinColumn()
+	deliveryMan!: DeliveryMan;
 
-    @ManyToOne(() => DeliveryMan, addr => addr.deliveries)
-    @JoinColumn()
-    deliveryMan!: DeliveryMan
-
-    @OneToOne(() => Purchase, addr => addr.delivery)
-    @JoinColumn()
-    purchase!: Purchase
-
-    
+	@OneToOne(() => Purchase, (addr) => addr.delivery)
+	@JoinColumn()
+	purchase!: Purchase;
 }

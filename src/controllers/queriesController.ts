@@ -23,9 +23,9 @@
 //                "message": "Operação realizada com sucesso.",
 //                "code": 0,
 //                "authorization_id": 165876,
-//                "balance": { 
+//                "balance": {
 //                    "amount": 0,
-//                    "currency_code": 986    
+//                    "currency_code": 986
 //                }
 //            });
 //        } catch (error) {

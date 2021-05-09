@@ -1,17 +1,17 @@
-import { IsDate, isDate, IsEmail, IsOptional, Length } from "class-validator";
+import { Length } from "class-validator";
 import { AddressRequest } from "./AddressRequest";
 
 export class CompleteRegisterRequest {
-    @Length(1, 25)
-    displayName!: string;
+	@Length(1, 25)
+	displayName!: string;
 
-    fullName!: string;
+	fullName!: string;
 
-    identityDocumentNumber!: string;
+	identityDocumentNumber!: string;
 
-    birthDate!: Date;
+	birthDate!: Date;
 
-    phone!: string;
+	phone!: string;
 
-    addresses!: AddressRequest[];
+	addresses!: AddressRequest[];
 }
