@@ -9,6 +9,8 @@
     ],
     "watch": [
         ".env",
+        ".hom.env",
+        ".prd.env",
         "*.*"
     ],
     "ext": "ts,js,json,html,yml"
