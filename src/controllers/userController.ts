@@ -10,6 +10,7 @@ import {
 import { DeepPartial, getRepository } from "typeorm";
 import { User } from "../models/user";
 import { responseError500 } from "../utils/serviceResponse";
+import { UserConvert } from "./convert/UserConvert";
 
 const USER_NOT_FOUND = "User not found";
 //const WRONG_PASSWORD = 'Password does not match';
@@ -20,11 +21,18 @@ export default class UserController {
 
 	@Get("/user")
 	async listUsers(@QueryParams() query: any, @Res() response: Response) {
+		const { page = 0, limit = 1 } = query;
+
 		try {
-			const users = await this.userRepository.find({
+			const [users, count] = await this.userRepository.findAndCount({
 				loadEagerRelations: true,
+				take: limit,
+				skip: page * limit,
 			});
-			return users;
+
+			const { toUsersResponse } = UserConvert();
+
+			return toUsersResponse(users, count);
 		} catch (error) {
 			responseError500(error, response);
 		}
@@ -37,9 +45,13 @@ export default class UserController {
 		try {
 			const user = await this.userRepository.findOne(id);
 
-			if (user === undefined) return response.status(404).send(USER_NOT_FOUND);
+			if (user === undefined) {
+				return response.status(404).send(USER_NOT_FOUND);
+			}
 
-			return user;
+			const { toUserResponse } = UserConvert();
+
+			return toUserResponse(user);
 		} catch (error) {
 			responseError500(error, response);
 		}

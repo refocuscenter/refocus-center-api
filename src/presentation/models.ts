@@ -3,7 +3,7 @@ import { XOR } from "../utils/operators";
 export interface User {
 	id: number;
 	displayName: string;
-	profilePhoto: string;
+	// profilePhoto: string;
 }
 
 export interface UserAccountStore {

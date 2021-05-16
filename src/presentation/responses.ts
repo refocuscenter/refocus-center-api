@@ -1,25 +1,25 @@
 import { OfferXorCombo, Store, StoreUserAccount, User } from "./models";
 
-export interface Pagination {
-	hasNextPage: boolean;
+export interface ListMetaData {
+	count: number;
 }
 
-export interface UsersResponse extends Pagination {
+export interface UsersResponse extends ListMetaData {
 	users: User[];
 }
 
-export interface UserResponse extends Pagination {
+export interface UserResponse {
 	user: User;
 }
 
-export interface UnitStoreResponse extends Pagination {
+export interface UnitStoreResponse {
 	store: Store;
 }
 
-export interface UnitStoreOfferResponse extends Pagination {
+export interface UnitStoreOfferResponse extends ListMetaData {
 	offers: OfferXorCombo[];
 }
 
-export interface UserStoreAccountResponse extends Pagination {
+export interface UserStoreAccountResponse {
 	storeAccount: StoreUserAccount;
 }
