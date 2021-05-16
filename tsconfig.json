@@ -61,6 +61,6 @@
     "resolveJsonModule": true
   },
   "include": [
-    "src", "tests"
+    "src"
   ]
 }

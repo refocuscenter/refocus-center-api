@@ -10,7 +10,7 @@ import {
 import { DeepPartial, getRepository } from "typeorm";
 import { User } from "../models/user";
 import { removeKeys } from "../utils/controllerUtils";
-import { responseError500 } from "./../utils/serviceResponse";
+import { responseError500 } from "../utils/serviceResponse";
 
 const USER_NOT_FOUND = "User not found";
 //const WRONG_PASSWORD = 'Password does not match';
