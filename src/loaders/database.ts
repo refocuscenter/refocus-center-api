@@ -11,12 +11,6 @@ export default class Database {
 			this.connection = await createConnection();
 
 			await this.connection.synchronize();
-
-			//1. Authenticate (test)
-			//2. Init Models
-			//3. Sync (if Sync)
-			//3.1 Associate Models
-			//3.2 PopulateModels
 		} catch (exception) {
 			error(`${red("[TypeORM] Erro ao conectar-se ao banco de dados: ")}`);
 			error(`${red(exception.stack)}`);

@@ -9,7 +9,6 @@ import {
 } from "routing-controllers";
 import { DeepPartial, getRepository } from "typeorm";
 import { User } from "../models/user";
-import { removeKeys } from "../utils/controllerUtils";
 import { responseError500 } from "../utils/serviceResponse";
 
 const USER_NOT_FOUND = "User not found";
@@ -48,9 +47,7 @@ export default class UserController {
 
 	@Post("/signin")
 	async signIn(@Req() request: Request, @Res() response: Response) {
-		const keysToRemove = ["id"];
-
-		const userData: DeepPartial<User> = removeKeys(request.body, keysToRemove);
+		const userData: DeepPartial<User> = request.body;
 
 		console.log(userData);
 

@@ -5,8 +5,11 @@ import { useExpressServer } from "routing-controllers";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import { corsConfig } from "../config/cors";
+import { routingControllersOptions } from "../config/routing-controller";
 import { swaggerJSDocOptions, swaggerUiOptions } from "../config/swagger";
 import { redirectToDocs } from "../middlewares/redirect";
+
+const SCHEMASPY_OUTPUT = __dirname + "/../../../schemaspy";
 
 export function createApp() {
 	const app = express();
@@ -28,12 +31,10 @@ export function createApp() {
 		swaggerUi.setup(swaggerJSDoc(swaggerJSDocOptions), swaggerUiOptions)
 	);
 
-	app.use("/schemaspy", express.static(__dirname + "/../../../schemaspy"));
+	app.use("/schemaspy", express.static(SCHEMASPY_OUTPUT));
 
 	//Routers
-	useExpressServer(app, {
-		controllers: [__dirname + "/../controllers/**/*"],
-	});
+	useExpressServer(app, routingControllersOptions);
 
 	//Middlewares After Router
 	app.all("*", redirectToDocs);

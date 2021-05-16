@@ -1,5 +1,5 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
-import { TimeStampParanoid } from "../utils/modelsUtils";
+import { TimeStampParanoid } from "../utils/timeStampModels";
 import { InStoreUserAccount } from "./inStoreUserAccount";
 import { UnitStore } from "./unitStore";
 

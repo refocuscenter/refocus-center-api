@@ -1,4 +1,4 @@
-import { XOR } from "../app/operators";
+import { XOR } from "../utils/operators";
 
 export interface User {
 	id: number;
