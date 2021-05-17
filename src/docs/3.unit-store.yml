@@ -16,19 +16,19 @@ components:
         name: latitude
         required: true
         schema:
-          type: float
+          type: number
         description: Latitude
       - in: query
         name: longitude
         required: true
         schema:
-          type: float
+          type: number
         description: Longitude
       - in: query
         name: radius
         required: true
         schema:
-          type: float
+          type: number
         description: Radius
     responses:
       200:

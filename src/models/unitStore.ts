@@ -28,14 +28,22 @@ export class UnitStore {
 	@OneToMany(() => SuppliedProduct, (model) => model.unitStore)
 	suppliedProducts!: SuppliedProduct[] | null;
 
-	@OneToMany(() => SuppliedProduct, (model) => model.unitStore)
+	@OneToMany(() => SuppliedService, (model) => model.unitStore, {
+		cascade: ["insert", "update"],
+		eager: true,
+	})
 	suppliedServices!: SuppliedService[] | null;
 
-	@ManyToOne(() => Store, (model) => model.unitaryStores)
+	@ManyToOne(() => Store, (model) => model.unitaryStores, {
+		eager: true,
+	})
 	@JoinColumn()
 	store!: Store;
 
-	@OneToOne(() => Address, (model) => model.unitStore)
+	@OneToOne(() => Address, (model) => model.unitStore, {
+		cascade: ["insert", "update"],
+		eager: true,
+	})
 	@JoinColumn()
 	address!: Address;
 }

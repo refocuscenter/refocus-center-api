@@ -21,7 +21,7 @@ export default class UserController {
 
 	@Get("/user")
 	async listUsers(@QueryParams() query: any, @Res() response: Response) {
-		const { page = 0, limit = 1 } = query;
+		const { page = 0, limit = 10 } = query;
 
 		try {
 			const [users, count] = await this.userRepository.findAndCount({

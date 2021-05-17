@@ -1,19 +1,23 @@
-import { OfferXorCombo, Store, StoreUserAccount, User } from "./models";
+import { OfferXorCombo, StoreUserAccount, UnitStore, User } from "./models";
 
 export interface ListMetaData {
 	count: number;
-}
-
-export interface UsersResponse extends ListMetaData {
-	users: User[];
 }
 
 export interface UserResponse {
 	user: User;
 }
 
+export interface UsersResponse extends ListMetaData {
+	users: User[];
+}
+
 export interface UnitStoreResponse {
-	store: Store;
+	unitStore: UnitStore;
+}
+
+export interface UnitStoresResponse extends ListMetaData {
+	unitStores: UnitStore[];
 }
 
 export interface UnitStoreOfferResponse extends ListMetaData {

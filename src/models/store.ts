@@ -27,7 +27,9 @@ export class Store extends TimeStampParanoid {
 	@Column("bytea")
 	image!: Buffer;
 
-	@OneToMany(() => UnitStore, (model) => model.store)
+	@OneToMany(() => UnitStore, (model) => model.store, {
+		cascade: ["insert", "update"],
+	})
 	unitaryStores!: UnitStore[];
 
 	@OneToMany(() => InStoreUserAccount, (model) => model.store)
