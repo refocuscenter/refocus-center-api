@@ -1,9 +1,3 @@
-components:
-  unitStoreResponse:
-    value: { "shopkeeperWebSocketInfo": {}, "unitStore": {} }
-  unitStoreResponseArray:
-    example: []
-
 /unit-store:
   get:
     tags:
@@ -36,8 +30,7 @@ components:
         content:
           application/json:
             schema:
-              $ref: "#/definitions/object"
-            $ref: "#/components/unitStoreResponseArray"
+              $ref: "#/components/schemas/UnitStoreResponse"
 
 /unit-store/{id}:
   parameters:
@@ -58,10 +51,7 @@ components:
         content:
           application/json:
             schema:
-              $ref: "#/definitions/object"
-            examples:
-              objectExample:
-                $ref: "#/components/unitStoreResponse"
+              $ref: "#/components/schemas/UnitStoreResponse"
 #  put:
 #    tags:
 #      - "Unit Store"

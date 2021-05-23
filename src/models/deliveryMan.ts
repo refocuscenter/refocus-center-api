@@ -5,8 +5,8 @@ import {
 	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
-import { AdvancedUser } from "./advancedUser";
 import { Delivery } from "./delivery";
+import { UserDetails } from "./userDetails";
 
 @Entity({ name: "delivery_people" })
 export class DeliveryMan {
@@ -16,7 +16,7 @@ export class DeliveryMan {
 	@OneToMany(() => Delivery, (deliv) => deliv.deliveryMan)
 	deliveries!: Delivery[] | null;
 
-	@OneToOne(() => AdvancedUser, (adUser) => adUser.deliveryMan)
+	@OneToOne(() => UserDetails, (userDetails) => userDetails.deliveryMan)
 	@JoinColumn()
-	advancedUser!: AdvancedUser;
+	userDetails!: UserDetails;
 }

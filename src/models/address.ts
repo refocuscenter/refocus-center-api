@@ -7,9 +7,9 @@ import {
 	PrimaryGeneratedColumn,
 } from "typeorm";
 import { TimeStampParanoid } from "../utils/timeStampModels";
-import { AdvancedUser } from "./advancedUser";
 import { Delivery } from "./delivery";
 import { UnitStore } from "./unitStore";
+import { UserDetails } from "./userDetails";
 
 export enum CountryCode {
 	Brazil = 55,
@@ -53,8 +53,8 @@ export class Address extends TimeStampParanoid {
 	@Column("smallint", { unsigned: true })
 	countryCode!: CountryCode;
 
-	@ManyToOne(() => AdvancedUser, (advancedUser) => advancedUser.addresses)
-	advancedUser!: AdvancedUser | null;
+	@ManyToOne(() => UserDetails, (userDetails) => userDetails.addresses)
+	userDetails!: UserDetails | null;
 
 	@OneToMany(() => Delivery, (deliv) => deliv.deliveryAddress)
 	deliveries!: Delivery[] | null;

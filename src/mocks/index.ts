@@ -65,7 +65,7 @@ const users: DeepPartial<User>[] = [
 		password: "123",
 		phone: "5521999999999",
 		email: "conradopsa@gmail.com",
-		advancedUser: {
+		userDetails: {
 			id: uuid(),
 			fullName: "Conrado Pinheiro ...",
 			birthDate: "2010-05-08",
@@ -88,7 +88,7 @@ const users: DeepPartial<User>[] = [
 		password: "123",
 		phone: "5521999999998",
 		email: "leoyukku@gmail.com",
-		advancedUser: {
+		userDetails: {
 			id: uuid(),
 			fullName: "Leonardo ...",
 			birthDate: "01/02/2000",

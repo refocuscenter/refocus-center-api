@@ -1,5 +1,36 @@
 components:
   schemas:
+    Address:
+      additionalProperties: false
+      properties:
+        addressLines:
+          items:
+            type: string
+          type: array
+        city:
+          type: string
+        countryCode:
+          type: number
+        id:
+          type: number
+        localityType:
+          type: string
+        neighborhood:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: number
+      required:
+        - id
+        - addressLines
+        - localityType
+        - city
+        - state
+        - neighborhood
+        - zipCode
+        - countryCode
+      type: object
     ListMetaData:
       additionalProperties: false
       properties:
@@ -119,11 +150,40 @@ components:
       properties:
         displayName:
           type: string
+        email:
+          type: string
         id:
           type: number
+        phone:
+          type: string
+        userDetails:
+          $ref: '#/components/schemas/UserDetails'
       required:
         - id
         - displayName
+        - phone
+        - email
+        - userDetails
+      type: object
+    UserDetails:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: '#/components/schemas/Address'
+          type: array
+        birthDate:
+          format: date-time
+          type: string
+        fullName:
+          type: string
+        identityDocumentNumber:
+          type: number
+      required:
+        - fullName
+        - identityDocumentNumber
+        - birthDate
+        - addresses
       type: object
     UserResponse:
       additionalProperties: false

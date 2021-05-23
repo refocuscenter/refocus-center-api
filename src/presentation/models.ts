@@ -3,7 +3,28 @@ import { XOR } from "../utils/operators";
 export interface User {
 	id: number;
 	displayName: string;
+	phone: string;
+	email: string;
+	userDetails: UserDetails;
 	// profilePhoto: string;
+}
+
+export interface UserDetails {
+	fullName: string;
+	identityDocumentNumber: number;
+	birthDate: Date;
+	addresses: Address[];
+}
+
+export interface Address {
+	id: number;
+	addressLines: string[];
+	localityType: string;
+	city: string;
+	state: string;
+	neighborhood: string;
+	zipCode: number;
+	countryCode: number;
 }
 
 export interface UserAccountStore {

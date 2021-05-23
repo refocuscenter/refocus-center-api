@@ -1,4 +1,5 @@
 import {
+	Column,
 	Entity,
 	JoinColumn,
 	ManyToOne,
@@ -7,7 +8,6 @@ import {
 	PrimaryGeneratedColumn,
 } from "typeorm";
 import { TimeStampParanoid } from "../utils/timeStampModels";
-import { AdvancedUser } from "./advancedUser";
 import { Card } from "./card";
 import { Purchase } from "./purchase";
 import { Store } from "./store";
@@ -17,15 +17,18 @@ export class InStoreUserAccount extends TimeStampParanoid {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
+	/**
+	 * Value in centavos
+	 */
+	@Column({ default: 0 })
+	balance!: number;
+
 	@OneToMany(() => Purchase, (purch) => purch.inStoreUserAccount)
 	@JoinColumn()
 	purchases!: Purchase[] | null;
 
 	@OneToOne(() => Card, (card) => card.inStoreUserAccount)
 	card!: Card | null;
-
-	@ManyToOne(() => AdvancedUser, (adUser) => adUser.inStoreUserAccounts)
-	advancedUser!: AdvancedUser;
 
 	@ManyToOne(() => Store, (st) => st.inStoreUserAccounts)
 	@JoinColumn()

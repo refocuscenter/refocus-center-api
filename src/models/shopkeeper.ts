@@ -8,18 +8,18 @@ import {
 	PrimaryGeneratedColumn,
 } from "typeorm";
 import { TimeStampParanoid } from "../utils/timeStampModels";
-import { AdvancedUser } from "./advancedUser";
 import { SignedPlan } from "./signedPlan";
 import { UnitStore } from "./unitStore";
+import { UserDetails } from "./userDetails";
 
 @Entity({ name: "shopkeepers" })
 export class Shopkeeper extends TimeStampParanoid {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
-	@OneToOne(() => AdvancedUser, (advUser) => advUser.shopkeeper)
+	@OneToOne(() => UserDetails, (advUser) => advUser.shopkeeper)
 	@JoinColumn()
-	advancedUser!: AdvancedUser;
+	userDetails!: UserDetails;
 
 	@ManyToMany(() => UnitStore, (uStore) => uStore.shopkeepers)
 	@JoinTable()

@@ -9,7 +9,6 @@ import {
 import { TimeStampParanoid } from "../utils/timeStampModels";
 import { Address } from "./address";
 import { DeliveryMan } from "./deliveryMan";
-import { InStoreUserAccount } from "./inStoreUserAccount";
 import { Shopkeeper } from "./shopkeeper";
 import { User } from "./user";
 
@@ -21,8 +20,8 @@ import { User } from "./user";
     JuridicalPerson
 }*/
 
-@Entity({ name: "advanced_users" })
-export class AdvancedUser extends TimeStampParanoid {
+@Entity({ name: "user_details" })
+export class UserDetails extends TimeStampParanoid {
 	@PrimaryColumn()
 	id!: string;
 
@@ -41,27 +40,20 @@ export class AdvancedUser extends TimeStampParanoid {
 	@Column()
 	birthDate!: Date;
 
-	@OneToOne(() => User, (user) => user.advancedUser)
+	@OneToOne(() => User, (user) => user.userDetails)
 	user!: User;
 
-	@OneToMany(() => Address, (address) => address.advancedUser, {
+	@OneToMany(() => Address, (address) => address.userDetails, {
 		cascade: ["insert", "update"],
 		eager: true,
 	})
 	@JoinColumn()
 	addresses!: Address[];
 
-	@OneToMany(
-		() => InStoreUserAccount,
-		(sUserAccount) => sUserAccount.advancedUser
-	)
-	@JoinColumn()
-	inStoreUserAccounts!: InStoreUserAccount[];
-
-	@OneToOne(() => DeliveryMan, (deliv) => deliv.advancedUser)
+	@OneToOne(() => DeliveryMan, (deliv) => deliv.userDetails)
 	deliveryMan!: DeliveryMan | null;
 
-	@OneToOne(() => Shopkeeper, (sKeeper) => sKeeper.advancedUser, {
+	@OneToOne(() => Shopkeeper, (sKeeper) => sKeeper.userDetails, {
 		cascade: ["insert", "update"],
 		eager: true,
 	})
