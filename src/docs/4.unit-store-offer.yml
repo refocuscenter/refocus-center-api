@@ -13,21 +13,23 @@
         description: The unit store ID 
       - $ref: "#/components/paginationParams/page"
       - $ref: "#/components/paginationParams/limit"
-      - in: query
-        name: search
-        schema:
-          type: string
-        description: Search for name
-      - in: query
-        name: categories
-        schema:
-          type: string
-        description: filter by categories (ex ["drinks"])
-      - in: query
-        name: type
-        schema:
-          type: string
-        description: service | product | any (default)
+      # - in: query
+      #   name: search
+      #   schema:
+      #     type: string
+      #   description: Search for name
+      # - in: query
+      #   name: categories
+      #   schema:
+      #     type: string
+      #   description: filter by categories (ex ["drinks"])
+      # - in: query
+      #   name: type
+      #   schema:
+      #     type: array
+      #     items:
+      #       type: string
+      #   description: service | product | any (default)
     responses:
       200:
         $ref: "#/components/responses/200"

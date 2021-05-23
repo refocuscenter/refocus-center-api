@@ -11,8 +11,7 @@ import { Address } from "./address";
 import { Shopkeeper } from "./shopkeeper";
 import { Store } from "./store";
 import { StoreHighlight } from "./storeHighlight";
-import { SuppliedProduct } from "./suppliedProduct";
-import { SuppliedService } from "./suppliedService";
+import { SuppliedOffer } from "./suppliedOffer";
 
 @Entity({ name: "unit_stores" })
 export class UnitStore {
@@ -25,14 +24,8 @@ export class UnitStore {
 	@OneToMany(() => StoreHighlight, (model) => model.unitStore)
 	storeHighlights!: StoreHighlight[] | null;
 
-	@OneToMany(() => SuppliedProduct, (model) => model.unitStore)
-	suppliedProducts!: SuppliedProduct[] | null;
-
-	@OneToMany(() => SuppliedService, (model) => model.unitStore, {
-		cascade: ["insert", "update"],
-		eager: true,
-	})
-	suppliedServices!: SuppliedService[] | null;
+	@OneToMany(() => SuppliedOffer, (model) => model.unitStore)
+	suppliedOffers!: SuppliedOffer[] | null;
 
 	@ManyToOne(() => Store, (model) => model.unitaryStores, {
 		eager: true,

@@ -7,12 +7,14 @@ components:
         name: page
         schema:
           type: integer
+          example: 0
         description: page (start at 0)
     limit:
         in: query
         name: limit
         schema:
           type: integer
+          example: 20
         description: limit of elements per page
         
   responses:

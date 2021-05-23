@@ -5,10 +5,9 @@ import {
 	ManyToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
-import { Product } from "./product";
+import { Offer } from "./offer";
 import { Purchase } from "./purchase";
 import { SignedPlan } from "./signedPlan";
-import { SuppliedService } from "./suppliedService";
 import { UnitStore } from "./unitStore";
 
 /**
@@ -39,13 +38,9 @@ export class StatementItem {
 	@JoinColumn()
 	unitStore!: UnitStore;
 
-	@ManyToOne(() => Product)
+	@ManyToOne(() => Offer)
 	@JoinColumn()
-	product!: Product | null;
-
-	@ManyToOne(() => SuppliedService)
-	@JoinColumn()
-	suppliedService!: SuppliedService | null;
+	offer!: Offer | null;
 
 	@ManyToOne(() => SignedPlan)
 	@JoinColumn()

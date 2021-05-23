@@ -19,24 +19,30 @@ const stores: DeepPartial<Store>[] = [
 		image: Buffer.from("./imgs/kit-clean-logo.png"),
 		unitaryStores: [
 			{
-				suppliedServices: [
+				suppliedOffers: [
 					{
-						name: "Lavagem Sem Produto",
-						description: "Lavagem com produto do morador",
-						presentationImage: Buffer.from("./imgs/kit-clean-service-1.png"),
 						value: 550,
+						offer: {
+							name: "Lavagem Sem Produto",
+							description: "Lavagem com produto do morador",
+							presentationImage: Buffer.from("./imgs/kit-clean-service-1.png"),
+						},
 					},
 					{
-						name: "Lavagem Com Produto",
-						description: "Lavagem com produto da empresa",
-						presentationImage: Buffer.from("./imgs/kit-clean-service-2.png"),
 						value: 750,
+						offer: {
+							name: "Lavagem Com Produto",
+							description: "Lavagem com produto da empresa",
+							presentationImage: Buffer.from("./imgs/kit-clean-service-2.png"),
+						},
 					},
 					{
-						name: "Secagem",
-						description: "Secagem de roupas",
-						presentationImage: Buffer.from("./imgs/kit-clean-service-3.png"),
 						value: 550,
+						offer: {
+							name: "Secagem",
+							description: "Secagem de roupas",
+							presentationImage: Buffer.from("./imgs/kit-clean-service-3.png"),
+						},
 					},
 				],
 				address: {

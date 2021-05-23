@@ -5,11 +5,11 @@ import {
 	ManyToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
-import { Product } from "./product";
+import { Offer } from "./offer";
 import { UnitStore } from "./unitStore";
 
-@Entity({ name: "supplied_products" })
-export class SuppliedProduct {
+@Entity({ name: "supplied_offers" })
+export class SuppliedOffer {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
@@ -19,11 +19,11 @@ export class SuppliedProduct {
 	@Column()
 	stockAmount!: number;
 
-	@ManyToOne(() => UnitStore, (model) => model.suppliedProducts)
+	@ManyToOne(() => UnitStore, (model) => model.suppliedOffers)
 	@JoinColumn()
 	unitStore!: UnitStore;
 
-	@ManyToOne(() => Product, (model) => model.suppliedProducts)
+	@ManyToOne(() => Offer, (model) => model.suppliedOffers, { eager: true })
 	@JoinColumn()
-	product!: Product;
+	offer!: Offer;
 }

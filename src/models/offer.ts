@@ -7,21 +7,18 @@ import {
 } from "typeorm";
 import { Category } from "./category";
 import { RecognitionTerm } from "./recognitionTerm";
-import { SuppliedProduct } from "./suppliedProduct";
+import { SuppliedOffer } from "./suppliedOffer";
 
-@Entity({ name: "products" })
-export class Product {
+@Entity({ name: "offers" })
+export class Offer {
 	@PrimaryGeneratedColumn()
 	id!: number;
-
-	@Column("varchar", { nullable: true })
-	barCode!: string | null;
 
 	@Column()
 	name!: string;
 
 	@Column("bytea")
-	image!: Buffer;
+	presentationImage!: Buffer;
 
 	@Column("text")
 	description!: string;
@@ -29,8 +26,8 @@ export class Product {
 	@ManyToMany(() => Category, (categ) => categ.products)
 	categories!: Category[];
 
-	@OneToMany(() => SuppliedProduct, (sup) => sup.product)
-	suppliedProducts!: SuppliedProduct[] | null;
+	@OneToMany(() => SuppliedOffer, (sup) => sup.offer)
+	suppliedOffers!: SuppliedOffer[] | null;
 
 	@OneToMany(() => RecognitionTerm, (recog) => recog.product)
 	recognitionTerm!: RecognitionTerm[] | null;

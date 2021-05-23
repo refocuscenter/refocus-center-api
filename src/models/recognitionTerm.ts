@@ -5,7 +5,7 @@ import {
 	ManyToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
-import { Product } from "./product";
+import { Offer } from "./offer";
 
 @Entity({ name: "recognition_terms" })
 export class RecognitionTerm {
@@ -15,7 +15,7 @@ export class RecognitionTerm {
 	@Column()
 	term!: string;
 
-	@ManyToOne(() => Product, (prod) => prod.recognitionTerm)
+	@ManyToOne(() => Offer, (prod) => prod.recognitionTerm)
 	@JoinColumn()
-	product!: Product;
+	product!: Offer;
 }
