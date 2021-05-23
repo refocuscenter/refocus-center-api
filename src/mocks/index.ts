@@ -8,14 +8,14 @@ import ProductsBasket from "../models/productsBasket";*/
 import { DeepPartial, getRepository } from "typeorm";
 import { v4 as uuid } from "uuid";
 import { LocalityType } from "../models/address";
-import { Store, StoreType } from "../models/store";
+import { Store, StoreSector } from "../models/store";
 import { User } from "../models/user";
 
 const stores: DeepPartial<Store>[] = [
 	{
 		cnpj: 57120966000180,
 		name: "Kit Clean",
-		type: StoreType.Laundry,
+		sector: StoreSector.Laundry,
 		image: Buffer.from("./imgs/kit-clean-logo.png"),
 		unitaryStores: [
 			{

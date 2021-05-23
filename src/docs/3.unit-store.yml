@@ -12,24 +12,24 @@ components:
     parameters:
       - $ref: "#/components/paginationParams/page"
       - $ref: "#/components/paginationParams/limit"
-      - in: query
-        name: latitude
-        required: true
-        schema:
-          type: number
-        description: Latitude
-      - in: query
-        name: longitude
-        required: true
-        schema:
-          type: number
-        description: Longitude
-      - in: query
-        name: radius
-        required: true
-        schema:
-          type: number
-        description: Radius
+      #- in: query
+      #  name: latitude
+      #  required: true
+      #  schema:
+      #    type: number
+      #  description: Latitude
+      #- in: query
+      #  name: longitude
+      #  required: true
+      #  schema:
+      #    type: number
+      #  description: Longitude
+      #- in: query
+      #  name: radius
+      #  required: true
+      #  schema:
+      #    type: number
+      #  description: Radius
     responses:
       200:
         description: Ok

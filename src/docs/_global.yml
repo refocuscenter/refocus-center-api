@@ -7,7 +7,7 @@ components:
         name: page
         schema:
           type: integer
-        description: page
+        description: page (start at 0)
     limit:
         in: query
         name: limit

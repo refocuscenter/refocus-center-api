@@ -1,5 +1,482 @@
 components:
   schemas:
+    Address:
+      additionalProperties: false
+      properties:
+        addressLine1:
+          type: string
+        addressLine2:
+          anyOf:
+            - type: string
+            - type: 'null'
+        addressLine3:
+          anyOf:
+            - type: string
+            - type: 'null'
+        advancedUser:
+          anyOf:
+            - $ref: '#/components/schemas/AdvancedUser'
+            - type: 'null'
+        city:
+          type: string
+        countryCode:
+          $ref: '#/components/schemas/CountryCode'
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        deliveries:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/Delivery'
+              type: array
+            - type: 'null'
+        id:
+          type: number
+        localityType:
+          $ref: '#/components/schemas/LocalityType'
+        neighborhood:
+          type: string
+        state:
+          type: string
+        unitStore:
+          anyOf:
+            - $ref: '#/components/schemas/UnitStore'
+            - type: 'null'
+        updatedAt:
+          format: date-time
+          type: string
+        zipCode:
+          type: number
+      required:
+        - addressLine1
+        - addressLine2
+        - addressLine3
+        - advancedUser
+        - city
+        - countryCode
+        - createdAt
+        - deletedAt
+        - deliveries
+        - id
+        - localityType
+        - neighborhood
+        - state
+        - unitStore
+        - updatedAt
+        - zipCode
+      type: object
+    AddressRequest:
+      additionalProperties: false
+      properties:
+        addressLines:
+          items:
+            additionalProperties:
+              type: string
+            properties:
+              length:
+                type: number
+            required:
+              - length
+            type: object
+          type: array
+        city:
+          additionalProperties:
+            type: string
+          properties:
+            length:
+              type: number
+          required:
+            - length
+          type: object
+        countryCode:
+          type: number
+        localityType:
+          $ref: '#/components/schemas/LocalityType'
+        neighborhood:
+          additionalProperties:
+            type: string
+          properties:
+            length:
+              type: number
+          required:
+            - length
+          type: object
+        state:
+          additionalProperties:
+            type: string
+          properties:
+            length:
+              type: number
+          required:
+            - length
+          type: object
+        zipCode:
+          additionalProperties:
+            type: string
+          properties:
+            length:
+              type: number
+          required:
+            - length
+          type: object
+      required:
+        - localityType
+        - addressLines
+        - city
+        - state
+        - neighborhood
+        - zipCode
+        - countryCode
+      type: object
+    AdvancedUser:
+      additionalProperties: false
+      description: Pessoa física ou Jurídica
+      properties:
+        addresses:
+          items:
+            $ref: '#/components/schemas/Address'
+          type: array
+        birthDate:
+          format: date-time
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        deliveryMan:
+          anyOf:
+            - $ref: '#/components/schemas/DeliveryMan'
+            - type: 'null'
+        fullName:
+          type: string
+        id:
+          type: string
+        identityDocumentNumber:
+          type: number
+        inStoreUserAccounts:
+          items:
+            $ref: '#/components/schemas/InStoreUserAccount'
+          type: array
+        shopkeeper:
+          anyOf:
+            - $ref: '#/components/schemas/Shopkeeper'
+            - type: 'null'
+        updatedAt:
+          format: date-time
+          type: string
+        user:
+          $ref: '#/components/schemas/User'
+      required:
+        - addresses
+        - birthDate
+        - createdAt
+        - deletedAt
+        - deliveryMan
+        - fullName
+        - id
+        - identityDocumentNumber
+        - inStoreUserAccounts
+        - shopkeeper
+        - updatedAt
+        - user
+      type: object
+    Basket:
+      additionalProperties: false
+      properties:
+        basketItems:
+          items:
+            $ref: '#/components/schemas/BasketItem'
+          type: array
+      required:
+        - basketItems
+      type: object
+    BasketItem:
+      additionalProperties: false
+      properties:
+        portion:
+          $ref: '#/components/schemas/Portion'
+      required:
+        - portion
+      type: object
+    Card:
+      additionalProperties: false
+      properties:
+        balance:
+          description: Value in centavos
+          type: number
+        cardHolder:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        cvv:
+          type: string
+        dateExp:
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        existenceType:
+          $ref: '#/components/schemas/ExistenceType'
+        financialType:
+          $ref: '#/components/schemas/FinancialType'
+        id:
+          type: number
+        inStoreUserAccount:
+          $ref: '#/components/schemas/InStoreUserAccount'
+        limit:
+          anyOf:
+            - type: number
+            - type: 'null'
+          description: Value in centavos
+        pan:
+          type: string
+        purchases:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/Purchase'
+              type: array
+            - type: 'null'
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - balance
+        - cardHolder
+        - createdAt
+        - cvv
+        - dateExp
+        - deletedAt
+        - existenceType
+        - financialType
+        - id
+        - inStoreUserAccount
+        - limit
+        - pan
+        - purchases
+        - updatedAt
+      type: object
+    Category:
+      additionalProperties: false
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        products:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/Product'
+              type: array
+            - type: 'null'
+      required:
+        - id
+        - name
+        - products
+      type: object
+    CompleteRegisterRequest:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: '#/components/schemas/AddressRequest'
+          type: array
+        birthDate:
+          format: date-time
+          type: string
+        displayName:
+          type: string
+        fullName:
+          type: string
+        identityDocumentNumber:
+          type: string
+        phone:
+          type: string
+      required:
+        - displayName
+        - fullName
+        - identityDocumentNumber
+        - birthDate
+        - phone
+        - addresses
+      type: object
+    CountryCode:
+      const: 55
+      type: number
+    Database:
+      additionalProperties: false
+      type: object
+    Delivery:
+      additionalProperties: false
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        deliveryAddress:
+          $ref: '#/components/schemas/Address'
+        deliveryMan:
+          $ref: '#/components/schemas/DeliveryMan'
+        id:
+          type: number
+        purchase:
+          $ref: '#/components/schemas/Purchase'
+        scheduledDateTime:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        value:
+          type: number
+      required:
+        - createdAt
+        - deletedAt
+        - deliveryAddress
+        - deliveryMan
+        - id
+        - purchase
+        - scheduledDateTime
+        - updatedAt
+        - value
+      type: object
+    DeliveryMan:
+      additionalProperties: false
+      properties:
+        advancedUser:
+          $ref: '#/components/schemas/AdvancedUser'
+        deliveries:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/Delivery'
+              type: array
+            - type: 'null'
+        id:
+          type: number
+      required:
+        - id
+        - deliveries
+        - advancedUser
+      type: object
+    ErrorMessage:
+      additionalProperties: false
+      properties:
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+        - message
+      type: object
+    ExistenceType:
+      enum:
+        - 0
+        - 1
+      type: number
+    FinancialType:
+      enum:
+        - 0
+        - 1
+      type: number
+    HighlightsPlan:
+      additionalProperties: false
+      properties:
+        description:
+          anyOf:
+            - type: string
+            - type: 'null'
+        id:
+          type: number
+        signedPlan:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/SignedPlan'
+              type: array
+            - type: 'null'
+        subscriptionType:
+          $ref: '#/components/schemas/SubscriptionType'
+        value:
+          type: number
+      required:
+        - id
+        - description
+        - value
+        - subscriptionType
+        - signedPlan
+      type: object
+    InStoreUserAccount:
+      additionalProperties: false
+      properties:
+        advancedUser:
+          $ref: '#/components/schemas/AdvancedUser'
+        card:
+          anyOf:
+            - $ref: '#/components/schemas/Card'
+            - type: 'null'
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        id:
+          type: number
+        purchases:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/Purchase'
+              type: array
+            - type: 'null'
+        store:
+          $ref: '#/components/schemas/Store'
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - advancedUser
+        - card
+        - createdAt
+        - deletedAt
+        - id
+        - purchases
+        - store
+        - updatedAt
+      type: object
+    ListMetaData:
+      additionalProperties: false
+      properties:
+        count:
+          type: number
+      required:
+        - count
+      type: object
+    LocalityType:
+      enum:
+        - 0
+        - 1
+        - 99
+      type: number
+    LoginRequest:
+      additionalProperties: false
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+      required:
+        - phone
+        - email
+        - password
+      type: object
     Offer:
       additionalProperties: false
       description: "Aquilo que se oferece (serviço ou produto)\r\nWhat is offered (service or product)"
@@ -18,36 +495,515 @@ components:
         - image
         - value
       type: object
+    OfferCategory:
+      additionalProperties: false
+      properties:
+        categories:
+          items:
+            type: string
+          type: array
+        offer:
+          $ref: '#/components/schemas/Offer'
+      required:
+        - offer
+        - categories
+      type: object
     OfferXorCombo:
       $ref: '#/components/schemas/XOR%3COffer%2CCombo%3COffer%3E%3E'
-    Pagination:
+    Paranoid:
       additionalProperties: false
       properties:
-        hasNextPage:
-          type: boolean
+        deletedAt:
+          format: date-time
+          type: string
       required:
-        - hasNextPage
+        - deletedAt
       type: object
-    Store:
+    PaymentFormat:
+      enum:
+        - 0
+        - 1
+      type: number
+    PermissionLevel:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+        - 99
+      type: number
+    Portion:
       additionalProperties: false
       properties:
-        cnpj:
+        amount:
           type: number
+        offer:
+          $ref: '#/components/schemas/OfferXorCombo'
+      required:
+        - amount
+        - offer
+      type: object
+    Product:
+      additionalProperties: false
+      properties:
+        barCode:
+          anyOf:
+            - type: string
+            - type: 'null'
+        categories:
+          items:
+            $ref: '#/components/schemas/Category'
+          type: array
+        description:
+          type: string
+        id:
+          type: number
+        image:
+          additionalProperties:
+            type: number
+          description: >-
+            Raw data is stored in instances of the Buffer class.
+
+            A Buffer is similar to an array of integers but corresponds to a raw
+            memory allocation outside the V8 heap.  A Buffer cannot be resized.
+
+            Valid string encodings: 'ascii'|'utf8'|'utf16le'|'ucs2'(alias of
+            'utf16le')|'base64'|'binary'(deprecated)|'hex'
+          properties:
+            BYTES_PER_ELEMENT:
+              type: number
+            buffer:
+              additionalProperties: false
+              properties:
+                byteLength:
+                  type: number
+              required:
+                - byteLength
+              type: object
+            byteLength:
+              type: number
+            byteOffset:
+              type: number
+            length:
+              type: number
+          required:
+            - BYTES_PER_ELEMENT
+            - buffer
+            - byteLength
+            - byteOffset
+            - length
+          type: object
+        name:
+          type: string
+        recognitionTerm:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/RecognitionTerm'
+              type: array
+            - type: 'null'
+        suppliedProducts:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/SuppliedProduct'
+              type: array
+            - type: 'null'
+      required:
+        - id
+        - barCode
+        - name
+        - image
+        - description
+        - categories
+        - suppliedProducts
+        - recognitionTerm
+      type: object
+    ProductXorCombo:
+      $ref: '#/components/schemas/XOR%3CProduct%2CCombo%3CProduct%3E%3E'
+    Purchase:
+      additionalProperties: false
+      properties:
+        amount:
+          type: number
+        card:
+          anyOf:
+            - $ref: '#/components/schemas/Card'
+            - type: 'null'
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        delivery:
+          anyOf:
+            - $ref: '#/components/schemas/Delivery'
+            - type: 'null'
+        id:
+          type: number
+        inStoreUserAccount:
+          anyOf:
+            - $ref: '#/components/schemas/InStoreUserAccount'
+            - type: 'null'
+        paymentFormat:
+          $ref: '#/components/schemas/PaymentFormat'
+        statementItems:
+          items:
+            $ref: '#/components/schemas/StatementItem'
+          type: array
+        updatedAt:
+          format: date-time
+          type: string
+        value:
+          type: number
+      required:
+        - amount
+        - card
+        - createdAt
+        - deletedAt
+        - delivery
+        - id
+        - inStoreUserAccount
+        - paymentFormat
+        - statementItems
+        - updatedAt
+        - value
+      type: object
+    RecognitionTerm:
+      additionalProperties: false
+      properties:
+        id:
+          type: number
+        product:
+          $ref: '#/components/schemas/Product'
+        term:
+          type: string
+      required:
+        - id
+        - term
+        - product
+      type: object
+    ResponseDeleted:
+      additionalProperties: false
+      properties:
+        deletedObject: {}
+        message:
+          type: string
+      required:
+        - message
+      type: object
+    ResponseError:
+      additionalProperties: false
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorMessage'
+      required:
+        - error
+      type: object
+    ResponseSuccess:
+      additionalProperties: false
+      properties:
+        message:
+          type: string
+      required:
+        - message
+      type: object
+    Server:
+      additionalProperties: false
+      type: object
+    Service:
+      additionalProperties: false
+      properties:
         id:
           type: number
         image:
           type: string
         name:
           type: string
-        sector:
-          type: string
+        value:
+          type: number
       required:
         - id
+        - image
+        - name
+        - value
+      type: object
+    ServiceXorCombo:
+      $ref: '#/components/schemas/XOR%3CService%2CCombo%3CService%3E%3E'
+    Shopkeeper:
+      additionalProperties: false
+      properties:
+        advancedUser:
+          $ref: '#/components/schemas/AdvancedUser'
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        id:
+          type: number
+        signedPlan:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/SignedPlan'
+              type: array
+            - type: 'null'
+        unitStores:
+          items:
+            $ref: '#/components/schemas/UnitStore'
+          type: array
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - advancedUser
+        - createdAt
+        - deletedAt
+        - id
+        - signedPlan
+        - unitStores
+        - updatedAt
+      type: object
+    SignedPlan:
+      additionalProperties: false
+      properties:
+        contractedValue:
+          type: number
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        highlightPlan:
+          $ref: '#/components/schemas/HighlightsPlan'
+        id:
+          type: number
+        shopkeeper:
+          $ref: '#/components/schemas/Shopkeeper'
+        storeHighlight:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/StoreHighlight'
+              type: array
+            - type: 'null'
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - contractedValue
+        - createdAt
+        - deletedAt
+        - highlightPlan
+        - id
+        - shopkeeper
+        - storeHighlight
+        - updatedAt
+      type: object
+    SimpleRegisterRequest:
+      additionalProperties: false
+      properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+        phone:
+          type: string
+      required:
+        - displayName
+        - phone
+        - email
+        - password
+      type: object
+    StatementItem:
+      additionalProperties: false
+      description: Produtos de extrato
+      properties:
+        amount:
+          type: number
+        description:
+          type: string
+        id:
+          type: number
+        name:
+          type: string
+        product:
+          anyOf:
+            - $ref: '#/components/schemas/Product'
+            - type: 'null'
+        purchase:
+          $ref: '#/components/schemas/Purchase'
+        signedPlan:
+          anyOf:
+            - $ref: '#/components/schemas/SignedPlan'
+            - type: 'null'
+        suppliedService:
+          anyOf:
+            - $ref: '#/components/schemas/SuppliedService'
+            - type: 'null'
+        unitStore:
+          $ref: '#/components/schemas/UnitStore'
+        value:
+          type: number
+      required:
+        - id
+        - value
+        - amount
+        - name
+        - description
+        - purchase
+        - unitStore
+        - product
+        - suppliedService
+        - signedPlan
+      type: object
+    StatusController:
+      additionalProperties: false
+      type: object
+    Store:
+      additionalProperties: false
+      properties:
+        cnpj:
+          type: number
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        id:
+          type: number
+        image:
+          additionalProperties:
+            type: number
+          description: >-
+            Raw data is stored in instances of the Buffer class.
+
+            A Buffer is similar to an array of integers but corresponds to a raw
+            memory allocation outside the V8 heap.  A Buffer cannot be resized.
+
+            Valid string encodings: 'ascii'|'utf8'|'utf16le'|'ucs2'(alias of
+            'utf16le')|'base64'|'binary'(deprecated)|'hex'
+          properties:
+            BYTES_PER_ELEMENT:
+              type: number
+            buffer:
+              additionalProperties: false
+              properties:
+                byteLength:
+                  type: number
+              required:
+                - byteLength
+              type: object
+            byteLength:
+              type: number
+            byteOffset:
+              type: number
+            length:
+              type: number
+          required:
+            - BYTES_PER_ELEMENT
+            - buffer
+            - byteLength
+            - byteOffset
+            - length
+          type: object
+        inStoreUserAccounts:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/InStoreUserAccount'
+              type: array
+            - type: 'null'
+        name:
+          type: string
+        sector:
+          $ref: '#/components/schemas/StoreSector'
+        unitaryStores:
+          items:
+            $ref: '#/components/schemas/UnitStore'
+          type: array
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - cnpj
+        - createdAt
+        - deletedAt
+        - id
+        - image
+        - inStoreUserAccounts
         - name
         - sector
-        - image
-        - cnpj
+        - unitaryStores
+        - updatedAt
       type: object
+    StoreHighlight:
+      additionalProperties: false
+      properties:
+        bannerImage:
+          additionalProperties:
+            type: number
+          description: >-
+            Raw data is stored in instances of the Buffer class.
+
+            A Buffer is similar to an array of integers but corresponds to a raw
+            memory allocation outside the V8 heap.  A Buffer cannot be resized.
+
+            Valid string encodings: 'ascii'|'utf8'|'utf16le'|'ucs2'(alias of
+            'utf16le')|'base64'|'binary'(deprecated)|'hex'
+          properties:
+            BYTES_PER_ELEMENT:
+              type: number
+            buffer:
+              additionalProperties: false
+              properties:
+                byteLength:
+                  type: number
+              required:
+                - byteLength
+              type: object
+            byteLength:
+              type: number
+            byteOffset:
+              type: number
+            length:
+              type: number
+          required:
+            - BYTES_PER_ELEMENT
+            - buffer
+            - byteLength
+            - byteOffset
+            - length
+          type: object
+        id:
+          type: number
+        signedPlan:
+          anyOf:
+            - $ref: '#/components/schemas/SignedPlan'
+            - type: 'null'
+        title:
+          additionalProperties:
+            type: string
+          properties:
+            length:
+              type: number
+          required:
+            - length
+          type: object
+        unitStore:
+          $ref: '#/components/schemas/UnitStore'
+      required:
+        - id
+        - bannerImage
+        - title
+        - unitStore
+        - signedPlan
+      type: object
+    StoreSector:
+      const: 0
+      type: number
     StoreUserAccount:
       additionalProperties: false
       properties:
@@ -65,77 +1021,283 @@ components:
         - balance
         - store
       type: object
+    SubscriptionType:
+      enum:
+        - 0
+        - 1
+        - 2
+        - 3
+      type: number
+    SuppliedProduct:
+      additionalProperties: false
+      properties:
+        id:
+          type: number
+        product:
+          $ref: '#/components/schemas/Product'
+        stockAmount:
+          type: number
+        unitStore:
+          $ref: '#/components/schemas/UnitStore'
+        value:
+          type: number
+      required:
+        - id
+        - value
+        - stockAmount
+        - unitStore
+        - product
+      type: object
+    SuppliedService:
+      additionalProperties: false
+      properties:
+        description:
+          type: string
+        id:
+          type: number
+        name:
+          type: string
+        presentationImage:
+          additionalProperties:
+            type: number
+          description: >-
+            Raw data is stored in instances of the Buffer class.
+
+            A Buffer is similar to an array of integers but corresponds to a raw
+            memory allocation outside the V8 heap.  A Buffer cannot be resized.
+
+            Valid string encodings: 'ascii'|'utf8'|'utf16le'|'ucs2'(alias of
+            'utf16le')|'base64'|'binary'(deprecated)|'hex'
+          properties:
+            BYTES_PER_ELEMENT:
+              type: number
+            buffer:
+              additionalProperties: false
+              properties:
+                byteLength:
+                  type: number
+              required:
+                - byteLength
+              type: object
+            byteLength:
+              type: number
+            byteOffset:
+              type: number
+            length:
+              type: number
+          required:
+            - BYTES_PER_ELEMENT
+            - buffer
+            - byteLength
+            - byteOffset
+            - length
+          type: object
+        unitStore:
+          $ref: '#/components/schemas/UnitStore'
+        value:
+          type: number
+      required:
+        - id
+        - name
+        - value
+        - description
+        - presentationImage
+        - unitStore
+      type: object
+    TimeStamp:
+      additionalProperties: false
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - createdAt
+        - updatedAt
+      type: object
+    TimeStampParanoid:
+      additionalProperties: false
+      properties:
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - createdAt
+        - deletedAt
+        - updatedAt
+      type: object
+    UnitStore:
+      additionalProperties: false
+      properties:
+        address:
+          $ref: '#/components/schemas/Address'
+        id:
+          type: number
+        shopkeepers:
+          items:
+            $ref: '#/components/schemas/Shopkeeper'
+          type: array
+        store:
+          $ref: '#/components/schemas/Store'
+        storeHighlights:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/StoreHighlight'
+              type: array
+            - type: 'null'
+        suppliedProducts:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/SuppliedProduct'
+              type: array
+            - type: 'null'
+        suppliedServices:
+          anyOf:
+            - items:
+                $ref: '#/components/schemas/SuppliedService'
+              type: array
+            - type: 'null'
+      required:
+        - id
+        - shopkeepers
+        - storeHighlights
+        - suppliedProducts
+        - suppliedServices
+        - store
+        - address
+      type: object
+    UnitStoreController:
+      additionalProperties: false
+      type: object
     UnitStoreOfferResponse:
       additionalProperties: false
       properties:
-        hasNextPage:
-          type: boolean
+        count:
+          type: number
         offers:
           items:
             $ref: '#/components/schemas/OfferXorCombo'
           type: array
       required:
-        - hasNextPage
+        - count
         - offers
       type: object
     UnitStoreResponse:
       additionalProperties: false
       properties:
-        hasNextPage:
-          type: boolean
-        store:
-          $ref: '#/components/schemas/Store'
+        unitStore:
+          $ref: '#/components/schemas/UnitStore'
       required:
-        - hasNextPage
-        - store
+        - unitStore
+      type: object
+    UnitStoresResponse:
+      additionalProperties: false
+      properties:
+        count:
+          type: number
+        unitStores:
+          items:
+            $ref: '#/components/schemas/UnitStore'
+          type: array
+      required:
+        - count
+        - unitStores
       type: object
     User:
       additionalProperties: false
       properties:
+        advancedUser:
+          $ref: '#/components/schemas/AdvancedUser'
+        createdAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
         displayName:
           type: string
+        email:
+          type: string
+        favoriteUnitStores:
+          items:
+            $ref: '#/components/schemas/UnitStore'
+          type: array
         id:
           type: number
-        profilePhoto:
+        password:
+          type: string
+        permissionLevel:
+          $ref: '#/components/schemas/PermissionLevel'
+        phone:
+          type: string
+        updatedAt:
+          format: date-time
           type: string
       required:
-        - id
+        - advancedUser
+        - createdAt
+        - deletedAt
         - displayName
-        - profilePhoto
+        - email
+        - favoriteUnitStores
+        - id
+        - password
+        - permissionLevel
+        - phone
+        - updatedAt
+      type: object
+    UserAccountStore:
+      additionalProperties: false
+      properties:
+        balance:
+          type: number
+        basket:
+          $ref: '#/components/schemas/Basket'
+        store:
+          $ref: '#/components/schemas/Store'
+      required:
+        - balance
+        - store
+        - basket
+      type: object
+    UserController:
+      additionalProperties: false
       type: object
     UserResponse:
       additionalProperties: false
       properties:
-        hasNextPage:
-          type: boolean
         user:
           $ref: '#/components/schemas/User'
       required:
-        - hasNextPage
         - user
       type: object
     UserStoreAccountResponse:
       additionalProperties: false
       properties:
-        hasNextPage:
-          type: boolean
         storeAccount:
           $ref: '#/components/schemas/StoreUserAccount'
       required:
-        - hasNextPage
         - storeAccount
       type: object
     UsersResponse:
       additionalProperties: false
       properties:
-        hasNextPage:
-          type: boolean
+        count:
+          type: number
         users:
           items:
             $ref: '#/components/schemas/User'
           type: array
       required:
-        - hasNextPage
+        - count
         - users
       type: object
     'XOR<Offer,Combo<Offer>>':
@@ -149,6 +1311,78 @@ components:
             offers:
               items:
                 $ref: '#/components/schemas/Offer'
+              type: array
+            value:
+              type: number
+          required:
+            - id
+            - name
+            - offers
+            - value
+          type: object
+        - additionalProperties: false
+          properties:
+            id:
+              type: number
+            image:
+              type: string
+            name:
+              type: string
+            value:
+              type: number
+          required:
+            - id
+            - image
+            - name
+            - value
+          type: object
+    'XOR<Product,Combo<Product>>':
+      anyOf:
+        - additionalProperties: false
+          properties:
+            id:
+              type: number
+            name:
+              type: string
+            offers:
+              items:
+                $ref: '#/components/schemas/Product'
+              type: array
+            value:
+              type: number
+          required:
+            - id
+            - name
+            - offers
+            - value
+          type: object
+        - additionalProperties: false
+          properties:
+            id:
+              type: number
+            image:
+              type: string
+            name:
+              type: string
+            value:
+              type: number
+          required:
+            - id
+            - image
+            - name
+            - value
+          type: object
+    'XOR<Service,Combo<Service>>':
+      anyOf:
+        - additionalProperties: false
+          properties:
+            id:
+              type: number
+            name:
+              type: string
+            offers:
+              items:
+                $ref: '#/components/schemas/Service'
               type: array
             value:
               type: number

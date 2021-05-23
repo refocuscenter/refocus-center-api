@@ -3,7 +3,7 @@ import { TimeStampParanoid } from "../utils/timeStampModels";
 import { InStoreUserAccount } from "./inStoreUserAccount";
 import { UnitStore } from "./unitStore";
 
-export enum StoreType {
+export enum StoreSector {
 	/**
 	 * Lavanderia
 	 */
@@ -22,7 +22,7 @@ export class Store extends TimeStampParanoid {
 	name!: string;
 
 	@Column("smallint")
-	type!: StoreType;
+	sector!: StoreSector;
 
 	@Column("bytea")
 	image!: Buffer;
