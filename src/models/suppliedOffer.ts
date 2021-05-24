@@ -16,14 +16,17 @@ export class SuppliedOffer {
 	@Column("bigint")
 	value!: number;
 
-	@Column()
-	stockAmount!: number;
+	@Column("int", { nullable: true })
+	stockAmount!: number | null;
 
 	@ManyToOne(() => UnitStore, (model) => model.suppliedOffers)
 	@JoinColumn()
 	unitStore!: UnitStore;
 
-	@ManyToOne(() => Offer, (model) => model.suppliedOffers, { eager: true })
+	@ManyToOne(() => Offer, (model) => model.suppliedOffers, {
+		cascade: true,
+		eager: true,
+	})
 	@JoinColumn()
 	offer!: Offer;
 }

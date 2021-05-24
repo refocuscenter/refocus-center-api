@@ -24,7 +24,9 @@ export class UnitStore {
 	@OneToMany(() => StoreHighlight, (model) => model.unitStore)
 	storeHighlights!: StoreHighlight[] | null;
 
-	@OneToMany(() => SuppliedOffer, (model) => model.unitStore)
+	@OneToMany(() => SuppliedOffer, (model) => model.unitStore, {
+		cascade: ["insert", "update"],
+	})
 	suppliedOffers!: SuppliedOffer[] | null;
 
 	@ManyToOne(() => Store, (model) => model.unitaryStores, {

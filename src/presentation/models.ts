@@ -39,10 +39,10 @@ export interface Basket {
 
 export interface BasketItem {
 	// totalValue?: number;
-	portion: Portion;
+	portion: OfferPortion;
 }
 
-export interface Portion {
+export interface OfferPortion {
 	amount: number;
 	offer: OfferXorCombo;
 }
@@ -55,7 +55,14 @@ export interface Offer {
 	id: number;
 	name: string;
 	image: string;
+	description: string;
+}
+
+export interface SuppliedOffer {
+	id: number;
+	offer: Offer;
 	value: number;
+	stockAmount?: number;
 }
 
 export interface Combo<Offer> {

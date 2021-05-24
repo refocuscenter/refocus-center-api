@@ -1,4 +1,4 @@
-/unit-store/{unit_store_id}/offer:
+/unit-store/{unit_store_id}/supplied-offer:
   get:
     tags:
       - "Unit Store Offers (products and services)"
