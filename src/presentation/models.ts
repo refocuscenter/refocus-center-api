@@ -58,10 +58,18 @@ export interface Offer {
 	description: string;
 }
 
+/**
+ * Supplied Offer is offers available of a unitary store
+ * Offers is services and products
+ */
 export interface SuppliedOffer {
 	id: number;
 	offer: Offer;
 	value: number;
+
+	/**
+	 * Only for Products, services not have stockAmount
+	 */
 	stockAmount?: number;
 }
 

@@ -43,22 +43,43 @@ components:
       additionalProperties: false
       description: "Aquilo que se oferece (serviço ou produto)\r\nWhat is offered (service or product)"
       properties:
+        description:
+          type: string
         id:
           type: number
         image:
           type: string
         name:
           type: string
-        value:
-          type: number
       required:
         - id
         - name
         - image
-        - value
+        - description
+      type: object
+    OfferResponse:
+      additionalProperties: false
+      properties:
+        offer:
+          $ref: '#/components/schemas/Offer'
+      required:
+        - offer
       type: object
     OfferXorCombo:
       $ref: '#/components/schemas/XOR%3COffer%2CCombo%3COffer%3E%3E'
+    OffersResponse:
+      additionalProperties: false
+      properties:
+        count:
+          type: number
+        offers:
+          items:
+            $ref: '#/components/schemas/Offer'
+          type: array
+      required:
+        - count
+        - offers
+      type: object
     Store:
       additionalProperties: false
       properties:
@@ -95,6 +116,45 @@ components:
         - user
         - balance
         - store
+      type: object
+    SuppliedOffer:
+      additionalProperties: false
+      description: "Supplied Offer is offers available of a unitary store\r\nOffers is services and products"
+      properties:
+        id:
+          type: number
+        offer:
+          $ref: '#/components/schemas/Offer'
+        stockAmount:
+          description: 'Only for Products, services not have stockAmount'
+          type: number
+        value:
+          type: number
+      required:
+        - id
+        - offer
+        - value
+      type: object
+    SuppliedOfferResponse:
+      additionalProperties: false
+      properties:
+        suppliedOffer:
+          $ref: '#/components/schemas/SuppliedOffer'
+      required:
+        - suppliedOffer
+      type: object
+    SuppliedOffersResponse:
+      additionalProperties: false
+      properties:
+        count:
+          type: number
+        suppliedOffers:
+          items:
+            $ref: '#/components/schemas/SuppliedOffer'
+          type: array
+      required:
+        - count
+        - suppliedOffers
       type: object
     UnitStore:
       additionalProperties: false
@@ -236,18 +296,18 @@ components:
           type: object
         - additionalProperties: false
           properties:
+            description:
+              type: string
             id:
               type: number
             image:
               type: string
             name:
               type: string
-            value:
-              type: number
           required:
+            - description
             - id
             - image
             - name
-            - value
           type: object
 

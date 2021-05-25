@@ -1,8 +1,8 @@
 /unit-store/{unit_store_id}/supplied-offer:
   get:
     tags:
-      - "Unit Store Offers (products and services)"
-    summary: List offers from unit store
+      - "Unit Store Supplied Offers"
+    summary: List supplied offers from unit store (products and services available)
     parameters:
       - in: path
         name: unit_store_id
@@ -36,7 +36,28 @@
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UnitStoreOfferResponse"
+              $ref: "#/components/schemas/SuppliedOffersResponse"
+
+/supplied-offer/{id}:
+  get:
+    tags:
+      - "Unit Store Supplied Offers"
+    summary: Get supplied offer (products and services available)
+    parameters:
+      - in: path
+        name: id
+        required: true
+        schema:
+          type: integer
+          minimum: 1
+        description: The Supplied Offer ID
+    responses:
+      200:
+        description: Ok
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/SuppliedOfferResponse"
 
 #/unit-store/{unit_store_id}/sale:
 #  post:

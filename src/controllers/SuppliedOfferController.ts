@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import { Controller, Get, Req, Res } from "routing-controllers";
 import { getRepository } from "typeorm";
 import { SuppliedOffer } from "../models/suppliedOffer";
-import { UnitStore } from "../models/unitStore";
 import { responseError500 } from "../utils/serviceResponse";
 import { SuppliedOfferConvert } from "./convert/SuppliedOfferConvert";
 
@@ -10,7 +9,6 @@ const SUPPLIED_OFFER_NOT_FOUND = "Supplied Offer not found";
 
 @Controller()
 export default class SuppliedOfferController {
-	private unitStoreRepository = getRepository(UnitStore);
 	private suppliedOfferRepository = getRepository(SuppliedOffer);
 
 	@Get("/unit-store/:id/supplied-offer")
