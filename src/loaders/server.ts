@@ -1,5 +1,5 @@
 import { green, red } from "chalk";
-import { startMocks } from "../mocks";
+import { startMocks } from "../data/mocks";
 import { createApp } from "./app";
 import Database from "./database";
 

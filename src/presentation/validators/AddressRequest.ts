@@ -1,5 +1,5 @@
 import { Length } from "class-validator";
-import { LocalityType } from "../models/address";
+import { LocalityType } from "../../data/models/address";
 
 export class AddressRequest {
 	localityType!: LocalityType;

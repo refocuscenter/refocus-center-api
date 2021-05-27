@@ -1,9 +1,9 @@
 import { Request, Response } from "express";
 import { Controller, Get, Req, Res } from "routing-controllers";
 import { getRepository } from "typeorm";
-import { SuppliedOffer } from "../models/suppliedOffer";
-import { responseError500 } from "../utils/serviceResponse";
-import { SuppliedOfferConvert } from "./convert/SuppliedOfferConvert";
+import { SuppliedOffer } from "../../data/models/suppliedOffer";
+import { responseError500 } from "../../utils/serviceResponse";
+import { SuppliedOfferConvert } from "../convert/SuppliedOfferConvert";
 
 const SUPPLIED_OFFER_NOT_FOUND = "Supplied Offer not found";
 

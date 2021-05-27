@@ -1,7 +1,7 @@
-import { Address, LocalityType } from "../../models/address";
-import { User } from "../../models/user";
-import * as PresentationModels from "../../presentation/models";
-import { UserResponse, UsersResponse } from "../../presentation/responses";
+import { Address, LocalityType } from "../../data/models/address";
+import { User } from "../../data/models/user";
+import * as PresentationModels from "../models";
+import { UserResponse, UsersResponse } from "../responses";
 
 export const UserConvert = function () {
 	return { toUserResponse, toUsersResponse, toUser };

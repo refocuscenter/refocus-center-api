@@ -8,9 +8,9 @@ import {
 	Res,
 } from "routing-controllers";
 import { DeepPartial, getRepository } from "typeorm";
-import { User } from "../models/user";
-import { responseError500 } from "../utils/serviceResponse";
-import { UserConvert } from "./convert/UserConvert";
+import { User } from "../../data/models/user";
+import { responseError500 } from "../../utils/serviceResponse";
+import { UserConvert } from "../convert/UserConvert";
 
 const USER_NOT_FOUND = "User not found";
 //const WRONG_PASSWORD = 'Password does not match';

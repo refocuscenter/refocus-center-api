@@ -19,7 +19,7 @@ export const swaggerJSDocOptions: Options = {
 			},
 		],
 	},
-	apis: ["src/docs/**/*.yml"],
+	apis: ["src/presentation/docs/**/*.yml"],
 };
 
 export const swaggerUiOptions: SwaggerUiOptions = {

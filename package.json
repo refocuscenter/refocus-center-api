@@ -12,7 +12,7 @@
     "clear:watch": "nodemon --config nodemon.config.json --exec \"npm run clear:compile\"",
     "start": "npm run compile",
     "schemaspy": "schemaspy && schemaspy\\index.html",
-    "docs:schemas": "ts-to-openapi -f ./src/presentation/responses.ts --no-as-comment > ./src/docs/_schemas.yml"
+    "docs:schemas": "ts-to-openapi -f ./src/presentation/responses.ts --no-as-comment > ./src/presentation/docs/_schemas.yml"
   },
   "keywords": [],
   "author": "Time 3",

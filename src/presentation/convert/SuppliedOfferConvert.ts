@@ -1,10 +1,7 @@
-import * as DataModels from "../../models/suppliedOffer";
-import * as PresentationModels from "../../presentation/models";
-import {
-	SuppliedOfferResponse,
-	SuppliedOffersResponse,
-} from "../../presentation/responses";
+import * as DataModels from "../../data/models/suppliedOffer";
 import { toBase64Png } from "../../utils/convert";
+import * as PresentationModels from "../models";
+import { SuppliedOfferResponse, SuppliedOffersResponse } from "../responses";
 
 export const SuppliedOfferConvert = function () {
 	return { toSuppliedOffersResponse, toSuppliedOfferResponse };

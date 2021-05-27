@@ -1,9 +1,12 @@
 import { Request, Response } from "express";
 import { Controller, Get, Req, Res } from "routing-controllers";
 import { getRepository } from "typeorm";
-import { StoreUserAccount } from "../models/StoreUserAccount";
-import { responseError404, responseError500 } from "../utils/serviceResponse";
-import { StoreUserAccountConvert } from "./convert/StoreUserAccountConvert";
+import { StoreUserAccount } from "../../data/models/StoreUserAccount";
+import {
+	responseError404,
+	responseError500,
+} from "../../utils/serviceResponse";
+import { StoreUserAccountConvert } from "../convert/StoreUserAccountConvert";
 
 const STORE_USER_ACCOUNT_NOT_FOUND = "Store User Account not found";
 

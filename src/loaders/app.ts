@@ -7,7 +7,7 @@ import swaggerUi from "swagger-ui-express";
 import { corsConfig } from "../config/cors";
 import { routingControllersOptions } from "../config/routing-controller";
 import { swaggerJSDocOptions, swaggerUiOptions } from "../config/swagger";
-import { redirectToDocs } from "../middlewares/redirect";
+import { redirectToDocs } from "../presentation/middlewares/redirect";
 
 const SCHEMASPY_OUTPUT = __dirname + "/../../../schemaspy";
 

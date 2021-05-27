@@ -6,7 +6,7 @@ import {
 	OneToOne,
 	PrimaryColumn,
 } from "typeorm";
-import { TimeStampParanoid } from "../utils/timeStampModels";
+import { TimeStampParanoid } from "../../utils/timeStampModels";
 import { Purchase } from "./purchase";
 import { StoreUserAccount } from "./StoreUserAccount";
 
