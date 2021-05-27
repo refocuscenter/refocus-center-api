@@ -4,10 +4,12 @@ import {
 	JoinColumn,
 	JoinTable,
 	ManyToMany,
+	OneToMany,
 	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
 import { TimeStampParanoid } from "../utils/timeStampModels";
+import { StoreUserAccount } from "./StoreUserAccount";
 import { UnitStore } from "./unitStore";
 import { UserDetails } from "./userDetails";
 
@@ -39,4 +41,9 @@ export class User extends TimeStampParanoid {
 	@ManyToMany(() => UnitStore)
 	@JoinTable()
 	favoriteUnitStores!: UnitStore[];
+
+	@OneToMany(() => StoreUserAccount, (stUserAccount) => stUserAccount.user, {
+		cascade: true,
+	})
+	storeUserAccounts!: StoreUserAccount[];
 }

@@ -4,7 +4,7 @@ import * as PresentationModels from "../../presentation/models";
 import { UserResponse, UsersResponse } from "../../presentation/responses";
 
 export const UserConvert = function () {
-	return { toUserResponse, toUsersResponse };
+	return { toUserResponse, toUsersResponse, toUser };
 
 	function toUserResponse(user: User): UserResponse {
 		return {

@@ -117,6 +117,14 @@ components:
         - balance
         - store
       type: object
+    StoreUserAccountResponse:
+      additionalProperties: false
+      properties:
+        storeUserAccount:
+          $ref: '#/components/schemas/StoreUserAccount'
+      required:
+        - storeUserAccount
+      type: object
     SuppliedOffer:
       additionalProperties: false
       description: "Supplied Offer is offers available of a unitary store\r\nOffers is services and products"
@@ -252,14 +260,6 @@ components:
           $ref: '#/components/schemas/User'
       required:
         - user
-      type: object
-    UserStoreAccountResponse:
-      additionalProperties: false
-      properties:
-        storeAccount:
-          $ref: '#/components/schemas/StoreUserAccount'
-      required:
-        - storeAccount
       type: object
     UsersResponse:
       additionalProperties: false

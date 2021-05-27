@@ -29,7 +29,7 @@ export default class SuppliedOfferController {
 
 			return toSuppliedOffersResponse(suppliedOffers, count);
 		} catch (error) {
-			responseError500(error, response);
+			responseError500(response, error);
 		}
 	}
 
@@ -48,7 +48,7 @@ export default class SuppliedOfferController {
 
 			return toSuppliedOfferResponse(suppliedOffers);
 		} catch (error) {
-			responseError500(error, response);
+			responseError500(response, error);
 		}
 	}
 }

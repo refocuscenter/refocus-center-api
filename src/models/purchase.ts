@@ -9,8 +9,8 @@ import {
 import { TimeStampParanoid } from "../utils/timeStampModels";
 import { Card } from "./card";
 import { Delivery } from "./delivery";
-import { InStoreUserAccount } from "./inStoreUserAccount";
 import { StatementItem } from "./statementItem";
+import { StoreUserAccount } from "./StoreUserAccount";
 
 export enum PaymentFormat {
 	PhysicalMoney,
@@ -31,11 +31,8 @@ export class Purchase extends TimeStampParanoid {
 	@Column("smallint")
 	paymentFormat!: PaymentFormat;
 
-	@ManyToOne(
-		() => InStoreUserAccount,
-		(stUserAccount) => stUserAccount.purchases
-	)
-	inStoreUserAccount!: InStoreUserAccount | null;
+	@ManyToOne(() => StoreUserAccount, (stUserAccount) => stUserAccount.purchases)
+	storeUserAccount!: StoreUserAccount | null;
 
 	@ManyToOne(() => Card, (card) => card.purchases)
 	card!: Card | null;

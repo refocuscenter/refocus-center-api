@@ -1,7 +1,7 @@
 import { red } from "chalk";
 import { Response } from "express";
 
-export function responseError500(error: Error, response: Response) {
+export function responseError500(response: Response, error: Error) {
 	console.error(red(error.stack));
 	response.status(500).json(error.message);
 }

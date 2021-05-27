@@ -7,8 +7,8 @@ import {
 	PrimaryColumn,
 } from "typeorm";
 import { TimeStampParanoid } from "../utils/timeStampModels";
-import { InStoreUserAccount } from "./inStoreUserAccount";
 import { Purchase } from "./purchase";
+import { StoreUserAccount } from "./StoreUserAccount";
 
 export enum ExistenceType {
 	Virtual,
@@ -59,7 +59,7 @@ export class Card extends TimeStampParanoid {
 	@JoinColumn()
 	purchases!: Purchase[] | null;
 
-	@OneToOne(() => InStoreUserAccount, (sUserAccount) => sUserAccount.card)
+	@OneToOne(() => StoreUserAccount, (sUserAccount) => sUserAccount.card)
 	@JoinColumn()
-	inStoreUserAccount!: InStoreUserAccount;
+	storeUserAccount!: StoreUserAccount;
 }

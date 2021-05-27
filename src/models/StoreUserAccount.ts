@@ -11,9 +11,10 @@ import { TimeStampParanoid } from "../utils/timeStampModels";
 import { Card } from "./card";
 import { Purchase } from "./purchase";
 import { Store } from "./store";
+import { User } from "./user";
 
-@Entity({ name: "in_store_user_accounts" })
-export class InStoreUserAccount extends TimeStampParanoid {
+@Entity({ name: "store_user_accounts" })
+export class StoreUserAccount extends TimeStampParanoid {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
@@ -23,14 +24,18 @@ export class InStoreUserAccount extends TimeStampParanoid {
 	@Column({ default: 0 })
 	balance!: number;
 
-	@OneToMany(() => Purchase, (purch) => purch.inStoreUserAccount)
+	@OneToMany(() => Purchase, (purch) => purch.storeUserAccount)
 	@JoinColumn()
 	purchases!: Purchase[] | null;
 
-	@OneToOne(() => Card, (card) => card.inStoreUserAccount)
+	@OneToOne(() => Card, (card) => card.storeUserAccount)
 	card!: Card | null;
 
-	@ManyToOne(() => Store, (st) => st.inStoreUserAccounts)
+	@ManyToOne(() => Store, (st) => st.storeUserAccounts, { eager: true })
 	@JoinColumn()
 	store!: Store;
+
+	@ManyToOne(() => User, (user) => user.storeUserAccounts, { eager: true })
+	@JoinColumn()
+	user!: User;
 }

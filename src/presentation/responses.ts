@@ -31,10 +31,6 @@ export interface UnitStoreOfferResponse extends ListMetaData {
 	offers: OfferXorCombo[];
 }
 
-export interface UserStoreAccountResponse {
-	storeAccount: StoreUserAccount;
-}
-
 export interface OfferResponse {
 	offer: Offer;
 }
@@ -49,4 +45,8 @@ export interface SuppliedOfferResponse {
 
 export interface SuppliedOffersResponse extends ListMetaData {
 	suppliedOffers: SuppliedOffer[];
+}
+
+export interface StoreUserAccountResponse {
+	storeUserAccount: StoreUserAccount;
 }

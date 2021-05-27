@@ -26,7 +26,7 @@ export default class UnitStoreController {
 
 			return toUnitStoresResponse(unitStores, count);
 		} catch (error) {
-			responseError500(error, response);
+			responseError500(response, error);
 		}
 	}
 
@@ -45,7 +45,7 @@ export default class UnitStoreController {
 
 			return toUnitStoreResponse(unitStore);
 		} catch (error) {
-			responseError500(error, response);
+			responseError500(response, error);
 		}
 	}
 }

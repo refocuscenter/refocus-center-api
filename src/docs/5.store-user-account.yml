@@ -16,16 +16,15 @@
       description: The store ID
   get:
     tags:
-      - "User Store Account"
-    summary: Return a account details from user and store
+      - "Store User Account (Financial Account)"
+    summary: Return a financial account details from user and store
     responses:
        200:
         description: 
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserStoreAccountResponse"
-
+              $ref: "#/components/schemas/StoreUserAccountResponse"
 
 #store/{store_id}/user-account:
 #  parameters:

@@ -1,6 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
 import { TimeStampParanoid } from "../utils/timeStampModels";
-import { InStoreUserAccount } from "./inStoreUserAccount";
+import { StoreUserAccount } from "./StoreUserAccount";
 import { UnitStore } from "./unitStore";
 
 export enum StoreSector {
@@ -32,6 +32,6 @@ export class Store extends TimeStampParanoid {
 	})
 	unitaryStores!: UnitStore[];
 
-	@OneToMany(() => InStoreUserAccount, (model) => model.store)
-	inStoreUserAccounts!: InStoreUserAccount[] | null;
+	@OneToMany(() => StoreUserAccount, (model) => model.store)
+	storeUserAccounts!: StoreUserAccount[] | null;
 }

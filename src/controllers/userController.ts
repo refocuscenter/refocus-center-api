@@ -34,7 +34,7 @@ export default class UserController {
 
 			return toUsersResponse(users, count);
 		} catch (error) {
-			responseError500(error, response);
+			responseError500(response, error);
 		}
 	}
 
@@ -53,7 +53,7 @@ export default class UserController {
 
 			return toUserResponse(user);
 		} catch (error) {
-			responseError500(error, response);
+			responseError500(response, error);
 		}
 	}
 
@@ -92,7 +92,7 @@ export default class UserController {
 
             response.send(user);
         } catch (error) {
-            responseError500(error, response);
+            responseError500(response, error);
         }
 
     }*/
