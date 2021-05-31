@@ -1,0 +1,331 @@
+components:
+  schemas:
+    Address:
+      additionalProperties: false
+      properties:
+        addressLines:
+          items:
+            type: string
+          type: array
+        city:
+          type: string
+        countryCode:
+          type: number
+        id:
+          type: number
+        localityType:
+          type: string
+        neighborhood:
+          type: string
+        state:
+          type: string
+        zipCode:
+          type: number
+      required:
+        - id
+        - addressLines
+        - localityType
+        - city
+        - state
+        - neighborhood
+        - zipCode
+        - countryCode
+      type: object
+    Error:
+      additionalProperties: false
+      properties:
+        message:
+          type: string
+        stack:
+          type: string
+      required:
+        - message
+      type: object
+    ListMetaData:
+      additionalProperties: false
+      properties:
+        count:
+          type: number
+      required:
+        - count
+      type: object
+    Offer:
+      additionalProperties: false
+      description: "Aquilo que se oferece (serviço ou produto)\r\nWhat is offered (service or product)"
+      properties:
+        description:
+          type: string
+        id:
+          type: number
+        image:
+          type: string
+        name:
+          type: string
+      required:
+        - id
+        - name
+        - image
+        - description
+      type: object
+    OfferResponse:
+      additionalProperties: false
+      properties:
+        offer:
+          $ref: '#/components/schemas/Offer'
+      required:
+        - offer
+      type: object
+    OfferXorCombo:
+      $ref: '#/components/schemas/XOR%3COffer%2CCombo%3COffer%3E%3E'
+    OffersResponse:
+      additionalProperties: false
+      properties:
+        count:
+          type: number
+        offers:
+          items:
+            $ref: '#/components/schemas/Offer'
+          type: array
+      required:
+        - count
+        - offers
+      type: object
+    ResponseError:
+      additionalProperties: false
+      properties:
+        error:
+          $ref: '#/components/schemas/Error'
+      required:
+        - error
+      type: object
+    Store:
+      additionalProperties: false
+      properties:
+        cnpj:
+          type: number
+        id:
+          type: number
+        image:
+          type: string
+        name:
+          type: string
+        sector:
+          type: string
+      required:
+        - id
+        - name
+        - sector
+        - image
+        - cnpj
+      type: object
+    StoreUserAccount:
+      additionalProperties: false
+      properties:
+        balance:
+          type: number
+        id:
+          type: number
+        store:
+          $ref: '#/components/schemas/Store'
+        user:
+          $ref: '#/components/schemas/User'
+      required:
+        - id
+        - user
+        - balance
+        - store
+      type: object
+    StoreUserAccountResponse:
+      additionalProperties: false
+      properties:
+        storeUserAccount:
+          $ref: '#/components/schemas/StoreUserAccount'
+      required:
+        - storeUserAccount
+      type: object
+    SuppliedOffer:
+      additionalProperties: false
+      description: "Supplied Offer is offers available of a unitary store\r\nOffers is services and products"
+      properties:
+        id:
+          type: number
+        offer:
+          $ref: '#/components/schemas/Offer'
+        stockAmount:
+          description: 'Only for Products, services not have stockAmount'
+          type: number
+        value:
+          type: number
+      required:
+        - id
+        - offer
+        - value
+      type: object
+    SuppliedOfferResponse:
+      additionalProperties: false
+      properties:
+        suppliedOffer:
+          $ref: '#/components/schemas/SuppliedOffer'
+      required:
+        - suppliedOffer
+      type: object
+    SuppliedOffersResponse:
+      additionalProperties: false
+      properties:
+        count:
+          type: number
+        suppliedOffers:
+          items:
+            $ref: '#/components/schemas/SuppliedOffer'
+          type: array
+      required:
+        - count
+        - suppliedOffers
+      type: object
+    UnitStore:
+      additionalProperties: false
+      properties:
+        id:
+          type: number
+        image:
+          type: string
+        name:
+          type: string
+        store:
+          $ref: '#/components/schemas/Store'
+      required:
+        - id
+        - store
+      type: object
+    UnitStoreOfferResponse:
+      additionalProperties: false
+      properties:
+        count:
+          type: number
+        offers:
+          items:
+            $ref: '#/components/schemas/OfferXorCombo'
+          type: array
+      required:
+        - count
+        - offers
+      type: object
+    UnitStoreResponse:
+      additionalProperties: false
+      properties:
+        unitStore:
+          $ref: '#/components/schemas/UnitStore'
+      required:
+        - unitStore
+      type: object
+    UnitStoresResponse:
+      additionalProperties: false
+      properties:
+        count:
+          type: number
+        unitStores:
+          items:
+            $ref: '#/components/schemas/UnitStore'
+          type: array
+      required:
+        - count
+        - unitStores
+      type: object
+    User:
+      additionalProperties: false
+      properties:
+        displayName:
+          type: string
+        email:
+          type: string
+        id:
+          type: number
+        phone:
+          type: string
+        userDetails:
+          $ref: '#/components/schemas/UserDetails'
+      required:
+        - id
+        - displayName
+        - phone
+        - email
+        - userDetails
+      type: object
+    UserDetails:
+      additionalProperties: false
+      properties:
+        addresses:
+          items:
+            $ref: '#/components/schemas/Address'
+          type: array
+        birthDate:
+          format: date-time
+          type: string
+        fullName:
+          type: string
+        identityDocumentNumber:
+          type: number
+      required:
+        - fullName
+        - identityDocumentNumber
+        - birthDate
+        - addresses
+      type: object
+    UserResponse:
+      additionalProperties: false
+      properties:
+        user:
+          $ref: '#/components/schemas/User'
+      required:
+        - user
+      type: object
+    UsersResponse:
+      additionalProperties: false
+      properties:
+        count:
+          type: number
+        users:
+          items:
+            $ref: '#/components/schemas/User'
+          type: array
+      required:
+        - count
+        - users
+      type: object
+    'XOR<Offer,Combo<Offer>>':
+      anyOf:
+        - additionalProperties: false
+          properties:
+            id:
+              type: number
+            name:
+              type: string
+            offers:
+              items:
+                $ref: '#/components/schemas/Offer'
+              type: array
+            value:
+              type: number
+          required:
+            - id
+            - name
+            - offers
+            - value
+          type: object
+        - additionalProperties: false
+          properties:
+            description:
+              type: string
+            id:
+              type: number
+            image:
+              type: string
+            name:
+              type: string
+          required:
+            - description
+            - id
+            - image
+            - name
+          type: object
+

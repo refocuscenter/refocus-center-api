@@ -1,6 +1,6 @@
-import { StoreUserAccount } from "../../data/models/StoreUserAccount";
-import * as PresentationModels from "../models";
-import { StoreUserAccountResponse } from "../responses";
+import { StoreUserAccount } from "../../data/model/storeUserAccount";
+import * as PresentationModels from "../model";
+import { StoreUserAccountResponse } from "../response/success";
 import { StoreConvert } from "./StoreConvert";
 import { UserConvert } from "./UserConvert";
 

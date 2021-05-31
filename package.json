@@ -1,21 +1,19 @@
 {
-  "name": "cestou-api",
+  "name": "refocus-center-api",
   "version": "1.0.0",
   "description": "",
-  "main": "src/start.ts",
+  "main": "src/start/index.ts",
   "scripts": {
     "test": "jest --silent --runInBand",
-    "compile": "ts-node src/start.ts",
-    "clear": "ts-node src/tasks/clear.ts",
-    "clear:compile": "npm run clear && npm run compile",
+    "compile": "ts-node src/start/index.ts",
+    "clear": "ts-node task/clear.ts",
     "watch": "nodemon --config nodemon.config.json",
-    "clear:watch": "nodemon --config nodemon.config.json --exec \"npm run clear:compile\"",
     "start": "npm run compile",
     "schemaspy": "schemaspy && schemaspy\\index.html",
-    "docs:schemas": "ts-to-openapi -f ./src/presentation/responses.ts --no-as-comment > ./src/presentation/docs/_schemas.yml"
+    "docs:schemas": "ts-to-openapi -f ./src/presentation/response/**/*.ts --no-as-comment > ./src/rest/doc/_schemas.yml"
   },
   "keywords": [],
-  "author": "Time 3",
+  "author": "Refocus",
   "license": "ISC",
   "dependencies": {
     "@babel/cli": "^7.11.6",

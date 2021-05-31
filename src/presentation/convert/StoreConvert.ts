@@ -1,6 +1,6 @@
-import { Store, StoreSector } from "../../data/models/store";
-import { toBase64Png } from "../../utils/convert";
-import * as PresentationModels from "../models";
+import { Store, StoreSector } from "../../data/model/store";
+import * as PresentationModels from "../model";
+import { toBase64Png } from "../util/convert";
 
 export const StoreConvert = function () {
 	return { toStore };

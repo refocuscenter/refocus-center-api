@@ -1,6 +1,6 @@
-import { UnitStore } from "../../data/models/unitStore";
-import * as PresentationModels from "../models";
-import { UnitStoreResponse, UnitStoresResponse } from "../responses";
+import { UnitStore } from "../../data/model/unitStore";
+import * as PresentationModels from "../model";
+import { UnitStoreResponse, UnitStoresResponse } from "../response/success";
 import { StoreConvert } from "./StoreConvert";
 
 export const UnitStoreConvert = function () {
