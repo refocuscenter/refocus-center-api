@@ -5,11 +5,12 @@ import {
 	ManyToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import { ISuppliedOffer } from "../../domain/model/suppliedOffer";
 import { Offer } from "./offer";
 import { UnitStore } from "./unitStore";
 
 @Entity({ name: "supplied_offers" })
-export class SuppliedOffer {
+export class SuppliedOffer implements ISuppliedOffer {
 	@PrimaryGeneratedColumn()
 	id!: number;
 

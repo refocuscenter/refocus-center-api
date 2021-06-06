@@ -6,13 +6,14 @@ import {
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import { ISignedPlan } from "../../domain/model/signedPlan";
 import { TimeStampParanoid } from "../util/timeStampModel";
 import { HighlightsPlan } from "./highlightPlan";
 import { Shopkeeper } from "./shopkeeper";
 import { StoreHighlight } from "./storeHighlight";
 
 @Entity({ name: "signed_plans" })
-export class SignedPlan extends TimeStampParanoid {
+export class SignedPlan extends TimeStampParanoid implements ISignedPlan {
 	@PrimaryGeneratedColumn()
 	id!: number;
 

@@ -1,6 +1,7 @@
 import { DeepPartial } from "typeorm";
-import { LocalityType } from "../model/address";
-import { Store, StoreSector } from "../model/store";
+import { LocalityType } from "../../domain/model/address";
+import { StoreSector } from "../../domain/model/store";
+import { Store } from "../model/store";
 
 export const stores: DeepPartial<Store>[] = [
 	{

@@ -1,4 +1,5 @@
-import { Store, StoreSector } from "../../data/model/store";
+import { Store } from "../../data/model/store";
+import { StoreSector } from "../../domain/model/store";
 import * as PresentationModels from "../model";
 import { toBase64Png } from "../util/convert";
 

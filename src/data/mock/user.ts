@@ -1,6 +1,6 @@
 import { DeepPartial } from "typeorm";
 import { v4 as uuid } from "uuid";
-import { LocalityType } from "../model/address";
+import { LocalityType } from "../../domain/model/address";
 import { Store } from "../model/store";
 import { User } from "../model/user";
 import { stores } from "./store";

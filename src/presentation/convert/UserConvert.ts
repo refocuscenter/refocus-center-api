@@ -1,5 +1,6 @@
-import { Address, LocalityType } from "../../data/model/address";
+import { Address } from "../../data/model/address";
 import { User } from "../../data/model/user";
+import { LocalityType } from "../../domain/model/address";
 import * as PresentationModels from "../model";
 import { UserResponse, UsersResponse } from "../response/success";
 

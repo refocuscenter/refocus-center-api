@@ -5,11 +5,12 @@ import {
 	ManyToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import { IStoreHighlight } from "../../domain/model/storeHighlight";
 import { SignedPlan } from "./signedPlan";
 import { UnitStore } from "./unitStore";
 
 @Entity({ name: "store_highlights" })
-export class StoreHighlight {
+export class StoreHighlight implements IStoreHighlight {
 	@PrimaryGeneratedColumn()
 	id!: number;
 

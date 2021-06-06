@@ -8,13 +8,14 @@ import {
 	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import { IUser } from "../../domain/model/user";
 import { TimeStampParanoid } from "../util/timeStampModel";
 import { StoreUserAccount } from "./storeUserAccount";
 import { UnitStore } from "./unitStore";
 import { UserDetails } from "./userDetails";
 
 @Entity({ name: "users" })
-export class User extends TimeStampParanoid {
+export class User extends TimeStampParanoid implements IUser {
 	@PrimaryGeneratedColumn()
 	id!: number;
 

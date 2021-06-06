@@ -5,6 +5,7 @@ import {
 	ManyToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import { IStatementItem } from "../../domain/model/statementItem";
 import { Offer } from "./offer";
 import { Purchase } from "./purchase";
 import { SignedPlan } from "./signedPlan";
@@ -14,7 +15,7 @@ import { UnitStore } from "./unitStore";
  * Produtos de extrato
  */
 @Entity({ name: "statement_items" })
-export class StatementItem {
+export class StatementItem implements IStatementItem {
 	@PrimaryGeneratedColumn()
 	id!: number;
 

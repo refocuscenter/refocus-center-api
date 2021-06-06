@@ -6,6 +6,7 @@ import {
 	OneToOne,
 	PrimaryColumn,
 } from "typeorm";
+import { ICard } from "../../domain/model/card";
 import { TimeStampParanoid } from "../util/timeStampModel";
 import { Purchase } from "./purchase";
 import { StoreUserAccount } from "./storeUserAccount";
@@ -21,7 +22,7 @@ export enum FinancialType {
 }
 
 @Entity({ name: "card" })
-export class Card extends TimeStampParanoid {
+export class Card extends TimeStampParanoid implements ICard {
 	@PrimaryColumn("uuid")
 	id!: number;
 

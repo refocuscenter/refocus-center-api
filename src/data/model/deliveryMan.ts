@@ -5,11 +5,12 @@ import {
 	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import { IDeliveryMan } from "../../domain/model/deliveryMan";
 import { Delivery } from "./delivery";
 import { UserDetails } from "./userDetails";
 
 @Entity({ name: "delivery_people" })
-export class DeliveryMan {
+export class DeliveryMan implements IDeliveryMan {
 	@PrimaryGeneratedColumn()
 	id!: number;
 

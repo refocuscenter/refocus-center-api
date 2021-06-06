@@ -7,6 +7,7 @@ import {
 	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import { IStoreUserAccount } from "../../domain/model/storeUserAccount";
 import { TimeStampParanoid } from "../util/timeStampModel";
 import { Card } from "./card";
 import { Purchase } from "./purchase";
@@ -14,7 +15,10 @@ import { Store } from "./store";
 import { User } from "./user";
 
 @Entity({ name: "store_user_accounts" })
-export class StoreUserAccount extends TimeStampParanoid {
+export class StoreUserAccount
+	extends TimeStampParanoid
+	implements IStoreUserAccount
+{
 	@PrimaryGeneratedColumn()
 	id!: number;
 

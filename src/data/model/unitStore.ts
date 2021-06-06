@@ -7,6 +7,7 @@ import {
 	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import { IUnitStore } from "../../domain/model/unitStore";
 import { Address } from "./address";
 import { Shopkeeper } from "./shopkeeper";
 import { Store } from "./store";
@@ -14,7 +15,7 @@ import { StoreHighlight } from "./storeHighlight";
 import { SuppliedOffer } from "./suppliedOffer";
 
 @Entity({ name: "unit_stores" })
-export class UnitStore {
+export class UnitStore implements IUnitStore {
 	@PrimaryGeneratedColumn()
 	id!: number;
 

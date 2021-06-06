@@ -6,22 +6,15 @@ import {
 	OneToOne,
 	PrimaryColumn,
 } from "typeorm";
+import { IUserDetails } from "../../domain/model/userDetails";
 import { TimeStampParanoid } from "../util/timeStampModel";
 import { Address } from "./address";
 import { DeliveryMan } from "./deliveryMan";
 import { Shopkeeper } from "./shopkeeper";
 import { User } from "./user";
 
-/**
- * Pessoa física ou Jurídica
- */
-/*export enum Person {
-    NaturalPerson,
-    JuridicalPerson
-}*/
-
 @Entity({ name: "user_details" })
-export class UserDetails extends TimeStampParanoid {
+export class UserDetails extends TimeStampParanoid implements IUserDetails {
 	@PrimaryColumn()
 	id!: string;
 
@@ -30,12 +23,6 @@ export class UserDetails extends TimeStampParanoid {
 
 	@Column({ unique: true })
 	identityDocumentNumber!: number; //RG
-
-	//@Column("varchar", { nullable: true, unique: true })
-	//cpfCnpj!: string | null;
-
-	//@Column("smallint")
-	//person!: Person;
 
 	@Column()
 	birthDate!: Date;

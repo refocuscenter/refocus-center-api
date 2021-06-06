@@ -6,13 +6,14 @@ import {
 	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import { IDelivery } from "../../domain/model/delivery";
 import { TimeStampParanoid } from "../util/timeStampModel";
 import { Address } from "./address";
 import { DeliveryMan } from "./deliveryMan";
 import { Purchase } from "./purchase";
 
 @Entity({ name: "delivery" })
-export class Delivery extends TimeStampParanoid {
+export class Delivery extends TimeStampParanoid implements IDelivery {
 	@PrimaryGeneratedColumn()
 	id!: number;
 

@@ -6,23 +6,18 @@ import {
 	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import {
+	CountryCode,
+	IAddress,
+	LocalityType,
+} from "../../domain/model/address";
 import { TimeStampParanoid } from "../util/timeStampModel";
 import { Delivery } from "./delivery";
 import { UnitStore } from "./unitStore";
 import { UserDetails } from "./userDetails";
 
-export enum CountryCode {
-	Brazil = 55,
-}
-
-export enum LocalityType {
-	Residence, //Local de residência
-	Workplace, //Local de trabalho
-	Other = 99,
-}
-
 @Entity({ name: "address" })
-export class Address extends TimeStampParanoid {
+export class Address extends TimeStampParanoid implements IAddress {
 	@PrimaryGeneratedColumn()
 	id!: number;
 

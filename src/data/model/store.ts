@@ -1,17 +1,11 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from "typeorm";
+import { IStore, StoreSector } from "../../domain/model/store";
 import { TimeStampParanoid } from "../util/timeStampModel";
 import { StoreUserAccount } from "./storeUserAccount";
 import { UnitStore } from "./unitStore";
 
-export enum StoreSector {
-	/**
-	 * Lavanderia
-	 */
-	Laundry,
-}
-
 @Entity({ name: "stores" })
-export class Store extends TimeStampParanoid {
+export class Store extends TimeStampParanoid implements IStore {
 	@PrimaryGeneratedColumn()
 	id!: number;
 

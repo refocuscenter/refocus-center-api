@@ -5,12 +5,13 @@ import {
 	OneToMany,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import { IOffer } from "../../domain/model/offer";
 import { Category } from "./category";
 import { RecognitionTerm } from "./recognitionTerm";
 import { SuppliedOffer } from "./suppliedOffer";
 
 @Entity({ name: "offers" })
-export class Offer {
+export class Offer implements IOffer {
 	@PrimaryGeneratedColumn()
 	id!: number;
 

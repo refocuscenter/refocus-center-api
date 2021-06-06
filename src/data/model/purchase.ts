@@ -6,19 +6,15 @@ import {
 	OneToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
+import { IPurchase, PaymentFormat } from "../../domain/model/purchase";
 import { TimeStampParanoid } from "../util/timeStampModel";
 import { Card } from "./card";
 import { Delivery } from "./delivery";
 import { StatementItem } from "./statementItem";
 import { StoreUserAccount } from "./storeUserAccount";
 
-export enum PaymentFormat {
-	PhysicalMoney,
-	CestouCard,
-}
-
 @Entity({ name: "purchases" })
-export class Purchase extends TimeStampParanoid {
+export class Purchase extends TimeStampParanoid implements IPurchase {
 	@PrimaryGeneratedColumn()
 	id!: number;
 
