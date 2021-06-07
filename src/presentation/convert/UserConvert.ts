@@ -1,19 +1,18 @@
-import { Address } from "../../data/model/address";
-import { User } from "../../data/model/user";
-import { LocalityType } from "../../domain/model/address";
+import { IAddress, LocalityType } from "../../domain/model/address";
+import { IUser } from "../../domain/model/user";
 import * as PresentationModels from "../model";
 import { UserResponse, UsersResponse } from "../response/success";
 
 export const UserConvert = function () {
 	return { toUserResponse, toUsersResponse, toUser };
 
-	function toUserResponse(user: User): UserResponse {
+	function toUserResponse(user: IUser): UserResponse {
 		return {
 			user: toUser(user),
 		};
 	}
 
-	function toUsersResponse(users: User[], count: number): UsersResponse {
+	function toUsersResponse(users: IUser[], count: number): UsersResponse {
 		return {
 			users: users.map((user) => {
 				return toUser(user);
@@ -22,7 +21,7 @@ export const UserConvert = function () {
 		};
 	}
 
-	function toUser(user: User): PresentationModels.User {
+	function toUser(user: IUser): PresentationModels.User {
 		const { id, displayName, email, phone, userDetails } = user;
 		const { birthDate, fullName, identityDocumentNumber, addresses } =
 			userDetails;
@@ -41,7 +40,7 @@ export const UserConvert = function () {
 		};
 	}
 
-	function toAddress(addresses: Address[]) {
+	function toAddress(addresses: IAddress[]) {
 		return addresses.map(
 			({
 				id,
