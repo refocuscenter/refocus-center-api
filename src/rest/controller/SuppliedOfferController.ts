@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { Controller, Get, Req, Res } from "routing-controllers";
-import { getRepository } from "typeorm";
-import { SuppliedOffer } from "../../data/model/suppliedOffer";
+import {
+	ISuppliedOfferRepository,
+	SuppliedOfferRepository,
+} from "../../data/repository/SuppliedOfferRepository";
 import { SuppliedOfferConvert } from "../../presentation/convert/SuppliedOfferConvert";
 import { responseError500 } from "../util/error";
 
@@ -9,7 +11,8 @@ const SUPPLIED_OFFER_NOT_FOUND = "Supplied Offer not found";
 
 @Controller()
 export default class SuppliedOfferController {
-	private suppliedOfferRepository = getRepository(SuppliedOffer);
+	private suppliedOfferRepository: ISuppliedOfferRepository =
+		new SuppliedOfferRepository();
 
 	@Get("/unit-store/:id/supplied-offer")
 	async listSuppliedOffer(@Req() request: Request, @Res() response: Response) {
@@ -18,12 +21,7 @@ export default class SuppliedOfferController {
 
 		try {
 			const [suppliedOffers, count] =
-				await this.suppliedOfferRepository.findAndCount({
-					where: { unitStore: { id } },
-					loadEagerRelations: true,
-					take: limit,
-					skip: page * limit,
-				});
+				await this.suppliedOfferRepository.findAndCount(id, { page, limit });
 
 			const { toSuppliedOffersResponse } = SuppliedOfferConvert();
 
