@@ -1,4 +1,4 @@
-import { UnitStore } from "../../data/model/unitStore";
+import { IUnitStore } from "../../domain/model/unitStore";
 import * as PresentationModels from "../model";
 import { UnitStoreResponse, UnitStoresResponse } from "../response/success";
 import { StoreConvert } from "./StoreConvert";
@@ -6,14 +6,14 @@ import { StoreConvert } from "./StoreConvert";
 export const UnitStoreConvert = function () {
 	return { toUnitStoreResponse, toUnitStoresResponse };
 
-	function toUnitStoreResponse(unitStore: UnitStore): UnitStoreResponse {
+	function toUnitStoreResponse(unitStore: IUnitStore): UnitStoreResponse {
 		return {
 			unitStore: toUnitStore(unitStore),
 		};
 	}
 
 	function toUnitStoresResponse(
-		unitStores: UnitStore[],
+		unitStores: IUnitStore[],
 		count: number
 	): UnitStoresResponse {
 		return {
@@ -24,7 +24,7 @@ export const UnitStoreConvert = function () {
 		};
 	}
 
-	function toUnitStore(unitStore: UnitStore): PresentationModels.UnitStore {
+	function toUnitStore(unitStore: IUnitStore): PresentationModels.UnitStore {
 		const { toStore } = StoreConvert();
 
 		return { id: unitStore.id, store: toStore(unitStore.store) };

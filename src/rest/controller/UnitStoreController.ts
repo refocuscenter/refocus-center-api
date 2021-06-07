@@ -1,7 +1,9 @@
 import { Request, Response } from "express";
 import { Controller, Get, QueryParams, Req, Res } from "routing-controllers";
-import { getRepository } from "typeorm";
-import { UnitStore } from "../../data/model/unitStore";
+import {
+	IUnitStoreRepository,
+	UnitStoreRepository,
+} from "../../data/repository/UnitStoreRepository";
 import { UnitStoreConvert } from "../../presentation/convert/UnitStoreConvert";
 import { responseError500 } from "../util/error";
 
@@ -9,7 +11,7 @@ const UNIT_STORE_NOT_FOUND = "UnitStore not found";
 
 @Controller()
 export default class UnitStoreController {
-	private unitStoreRepository = getRepository(UnitStore);
+	private unitStoreRepository: IUnitStoreRepository = new UnitStoreRepository();
 
 	@Get("/unit-store")
 	async listUnitStores(@QueryParams() query: any, @Res() response: Response) {
@@ -17,9 +19,8 @@ export default class UnitStoreController {
 
 		try {
 			const [unitStores, count] = await this.unitStoreRepository.findAndCount({
-				loadEagerRelations: true,
-				take: limit,
-				skip: page * limit,
+				page,
+				limit,
 			});
 
 			const { toUnitStoresResponse } = UnitStoreConvert();

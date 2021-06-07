@@ -1,4 +1,4 @@
-import { StoreUserAccount } from "../../data/model/storeUserAccount";
+import { IStoreUserAccount } from "../../domain/model/storeUserAccount";
 import * as PresentationModels from "../model";
 import { StoreUserAccountResponse } from "../response/success";
 import { StoreConvert } from "./StoreConvert";
@@ -8,7 +8,7 @@ export const StoreUserAccountConvert = function () {
 	return { toStoreUserAccountResponse };
 
 	function toStoreUserAccountResponse(
-		storeUserAccount: StoreUserAccount
+		storeUserAccount: IStoreUserAccount
 	): StoreUserAccountResponse {
 		return {
 			storeUserAccount: toStoreUserAccount(storeUserAccount),
@@ -16,7 +16,7 @@ export const StoreUserAccountConvert = function () {
 	}
 
 	function toStoreUserAccount(
-		storeUserAccount: StoreUserAccount
+		storeUserAccount: IStoreUserAccount
 	): PresentationModels.StoreUserAccount {
 		const { id, balance, store, user } = storeUserAccount;
 

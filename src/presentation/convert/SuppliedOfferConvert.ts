@@ -1,4 +1,4 @@
-import * as DataModels from "../../data/model/suppliedOffer";
+import { ISuppliedOffer } from "../../domain/model/suppliedOffer";
 import * as PresentationModels from "../model";
 import {
 	SuppliedOfferResponse,
@@ -10,7 +10,7 @@ export const SuppliedOfferConvert = function () {
 	return { toSuppliedOffersResponse, toSuppliedOfferResponse };
 
 	function toSuppliedOfferResponse(
-		offer: DataModels.SuppliedOffer
+		offer: ISuppliedOffer
 	): SuppliedOfferResponse {
 		return {
 			suppliedOffer: toSuppliedOffer(offer),
@@ -18,7 +18,7 @@ export const SuppliedOfferConvert = function () {
 	}
 
 	function toSuppliedOffersResponse(
-		offers: DataModels.SuppliedOffer[],
+		offers: ISuppliedOffer[],
 		count: number
 	): SuppliedOffersResponse {
 		return {
@@ -30,7 +30,7 @@ export const SuppliedOfferConvert = function () {
 	}
 
 	function toSuppliedOffer(
-		suppliedOffer: DataModels.SuppliedOffer
+		suppliedOffer: ISuppliedOffer
 	): PresentationModels.SuppliedOffer {
 		const { stockAmount, value, offer } = suppliedOffer;
 		const { name, description, presentationImage } = offer;
