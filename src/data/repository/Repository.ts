@@ -1,4 +1,4 @@
-import { getRepository } from "typeorm";
+import { FindManyOptions, FindOneOptions, getRepository } from "typeorm";
 import { Id, IPagination } from "../util/types";
 
 export interface IRepository<IEntity> {
@@ -12,17 +12,23 @@ export interface IRepository<IEntity> {
 export class Repository<Entity> implements IRepository<Entity> {
 	private repositoryTypeORM = getRepository<Entity>(this.entity);
 
-	constructor(protected entity: { new (): Entity }) {}
+	constructor(
+		protected entity: { new (): Entity },
+		protected findManyOptions: FindManyOptions<Entity> = {
+			loadEagerRelations: true,
+		},
+		protected findOneOptions?: FindOneOptions<Entity>
+	) {}
 
 	async findAndCount({ limit, page }: IPagination) {
 		return await this.repositoryTypeORM.findAndCount({
-			loadEagerRelations: true,
+			...this.findManyOptions,
 			take: limit,
 			skip: page * limit,
 		});
 	}
 
 	async findOne(id: Id) {
-		return await this.repositoryTypeORM.findOne(id);
+		return await this.repositoryTypeORM.findOne(id, this.findOneOptions);
 	}
 }
