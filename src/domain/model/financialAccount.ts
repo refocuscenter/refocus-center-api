@@ -3,7 +3,7 @@ import { IPurchase } from "./purchase";
 import { IStore } from "./store";
 import { IUser } from "./user";
 
-export interface IStoreUserAccount {
+export interface IFinancialAccount {
 	id: number;
 
 	/**

@@ -1,7 +1,7 @@
 import {
+	FinancialAccount,
 	Offer,
 	OfferXorCombo,
-	StoreUserAccount,
 	SuppliedOffer,
 	UnitStore,
 	User,
@@ -47,6 +47,6 @@ export interface SuppliedOffersResponse extends ListMetaData {
 	suppliedOffers: SuppliedOffer[];
 }
 
-export interface StoreUserAccountResponse {
-	storeUserAccount: StoreUserAccount;
+export interface FinancialAccountResponse {
+	financialAccount: FinancialAccount;
 }

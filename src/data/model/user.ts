@@ -10,7 +10,7 @@ import {
 } from "typeorm";
 import { IUser } from "../../domain/model/user";
 import { TimeStampParanoid } from "../util/timeStampModel";
-import { StoreUserAccount } from "./storeUserAccount";
+import { FinancialAccount } from "./financialAccount";
 import { UnitStore } from "./unitStore";
 import { UserDetails } from "./userDetails";
 
@@ -43,8 +43,8 @@ export class User extends TimeStampParanoid implements IUser {
 	@JoinTable()
 	favoriteUnitStores!: UnitStore[];
 
-	@OneToMany(() => StoreUserAccount, (stUserAccount) => stUserAccount.user, {
+	@OneToMany(() => FinancialAccount, (stUserAccount) => stUserAccount.user, {
 		cascade: true,
 	})
-	storeUserAccounts!: StoreUserAccount[];
+	financialAccounts!: FinancialAccount[];
 }

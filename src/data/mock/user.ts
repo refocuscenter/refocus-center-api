@@ -11,7 +11,7 @@ export const users: DeepPartial<User>[] = [
 		password: "123",
 		phone: "5521999999999",
 		email: "conradopsa@gmail.com",
-		storeUserAccounts: [{ balance: 1000000, store: stores[0] }],
+		financialAccounts: [{ balance: 1000000, store: stores[0] }],
 		userDetails: {
 			id: uuid(),
 			fullName: "Conrado Pinheiro ...",

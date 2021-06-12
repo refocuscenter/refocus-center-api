@@ -41,6 +41,31 @@ components:
       required:
         - message
       type: object
+    FinancialAccount:
+      additionalProperties: false
+      properties:
+        balance:
+          type: number
+        id:
+          type: number
+        store:
+          $ref: '#/components/schemas/Store'
+        user:
+          $ref: '#/components/schemas/User'
+      required:
+        - id
+        - user
+        - balance
+        - store
+      type: object
+    FinancialAccountResponse:
+      additionalProperties: false
+      properties:
+        financialAccount:
+          $ref: '#/components/schemas/FinancialAccount'
+      required:
+        - financialAccount
+      type: object
     ListMetaData:
       additionalProperties: false
       properties:
@@ -117,31 +142,6 @@ components:
         - sector
         - image
         - cnpj
-      type: object
-    StoreUserAccount:
-      additionalProperties: false
-      properties:
-        balance:
-          type: number
-        id:
-          type: number
-        store:
-          $ref: '#/components/schemas/Store'
-        user:
-          $ref: '#/components/schemas/User'
-      required:
-        - id
-        - user
-        - balance
-        - store
-      type: object
-    StoreUserAccountResponse:
-      additionalProperties: false
-      properties:
-        storeUserAccount:
-          $ref: '#/components/schemas/StoreUserAccount'
-      required:
-        - storeUserAccount
       type: object
     SuppliedOffer:
       additionalProperties: false

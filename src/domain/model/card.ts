@@ -1,5 +1,5 @@
+import { IFinancialAccount } from "./financialAccount";
 import { IPurchase } from "./purchase";
-import { IStoreUserAccount } from "./storeUserAccount";
 
 export enum ExistenceType {
 	Virtual,
@@ -38,5 +38,5 @@ export interface ICard {
 
 	purchases: IPurchase[] | null;
 
-	storeUserAccount: IStoreUserAccount;
+	financialAccount: IFinancialAccount;
 }

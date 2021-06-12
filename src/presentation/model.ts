@@ -108,7 +108,7 @@ export interface Store {
 	cnpj: number;
 }
 
-export interface StoreUserAccount {
+export interface FinancialAccount {
 	id: number;
 	user: User;
 	balance: number;

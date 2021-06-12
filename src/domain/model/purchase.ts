@@ -1,7 +1,7 @@
 import { ICard } from "./card";
 import { IDelivery } from "./delivery";
+import { IFinancialAccount } from "./financialAccount";
 import { IStatementItem } from "./statementItem";
-import { IStoreUserAccount } from "./storeUserAccount";
 
 export enum PaymentFormat {
 	PhysicalMoney,
@@ -17,7 +17,7 @@ export interface IPurchase {
 
 	paymentFormat: PaymentFormat;
 
-	storeUserAccount: IStoreUserAccount | null;
+	financialAccount: IFinancialAccount | null;
 
 	card: ICard | null;
 

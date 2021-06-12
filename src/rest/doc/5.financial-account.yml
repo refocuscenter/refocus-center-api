@@ -1,0 +1,27 @@
+/user/{user_id}/store/{store_id}/financial-account:
+  parameters:
+    - in: path
+      name: user_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The user ID
+    - in: path
+      name: store_id
+      required: true
+      schema:
+        type: integer
+        minimum: 1
+      description: The store ID
+  get:
+    tags:
+      - "Financial Account"
+    summary: Return a financial account details from user and store
+    responses:
+       200:
+        description: 
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/FinancialAccountResponse"

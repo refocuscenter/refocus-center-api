@@ -8,8 +8,8 @@ import {
 } from "typeorm";
 import { ICard } from "../../domain/model/card";
 import { TimeStampParanoid } from "../util/timeStampModel";
+import { FinancialAccount } from "./financialAccount";
 import { Purchase } from "./purchase";
-import { StoreUserAccount } from "./storeUserAccount";
 
 export enum ExistenceType {
 	Virtual,
@@ -60,7 +60,7 @@ export class Card extends TimeStampParanoid implements ICard {
 	@JoinColumn()
 	purchases!: Purchase[] | null;
 
-	@OneToOne(() => StoreUserAccount, (sUserAccount) => sUserAccount.card)
+	@OneToOne(() => FinancialAccount, (sUserAccount) => sUserAccount.card)
 	@JoinColumn()
-	storeUserAccount!: StoreUserAccount;
+	financialAccount!: FinancialAccount;
 }

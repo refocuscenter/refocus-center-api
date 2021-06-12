@@ -10,8 +10,8 @@ import { IPurchase, PaymentFormat } from "../../domain/model/purchase";
 import { TimeStampParanoid } from "../util/timeStampModel";
 import { Card } from "./card";
 import { Delivery } from "./delivery";
+import { FinancialAccount } from "./financialAccount";
 import { StatementItem } from "./statementItem";
-import { StoreUserAccount } from "./storeUserAccount";
 
 @Entity({ name: "purchases" })
 export class Purchase extends TimeStampParanoid implements IPurchase {
@@ -27,8 +27,11 @@ export class Purchase extends TimeStampParanoid implements IPurchase {
 	@Column("smallint")
 	paymentFormat!: PaymentFormat;
 
-	@ManyToOne(() => StoreUserAccount, (stUserAccount) => stUserAccount.purchases)
-	storeUserAccount!: StoreUserAccount | null;
+	@ManyToOne(
+		() => FinancialAccount,
+		(financialAccount) => financialAccount.purchases
+	)
+	financialAccount!: FinancialAccount | null;
 
 	@ManyToOne(() => Card, (card) => card.purchases)
 	card!: Card | null;

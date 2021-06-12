@@ -1,4 +1,4 @@
-import { IStoreUserAccount } from "./storeUserAccount";
+import { IFinancialAccount } from "./financialAccount";
 import { IUnitStore } from "./unitStore";
 
 export enum StoreSector {
@@ -21,5 +21,5 @@ export interface IStore {
 
 	unitaryStores: IUnitStore[];
 
-	storeUserAccounts: IStoreUserAccount[] | null;
+	financialAccounts: IFinancialAccount[] | null;
 }
