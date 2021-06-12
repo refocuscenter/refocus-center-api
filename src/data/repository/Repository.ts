@@ -8,6 +8,7 @@ export interface IRepository<IEntity> {
 
 /**
  * Generic implementation for TypeORM Repository
+ * This is good only for common behaviors
  */
 export class Repository<Entity> implements IRepository<Entity> {
 	private repositoryTypeORM = getRepository<Entity>(this.entity);
