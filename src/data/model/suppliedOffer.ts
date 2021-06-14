@@ -2,10 +2,12 @@ import {
 	Column,
 	Entity,
 	JoinColumn,
+	ManyToMany,
 	ManyToOne,
 	PrimaryGeneratedColumn,
 } from "typeorm";
 import { ISuppliedOffer } from "../../domain/model/suppliedOffer";
+import { ComboSuppliedOffers } from "./comboSuppliedOffer";
 import { Offer } from "./offer";
 import { UnitStore } from "./unitStore";
 
@@ -30,4 +32,11 @@ export class SuppliedOffer implements ISuppliedOffer {
 	})
 	@JoinColumn()
 	offer!: Offer;
+
+	@ManyToMany(
+		() => ComboSuppliedOffers,
+		(comboSuppliedOffers) => comboSuppliedOffers.suppliedOffers,
+		{ nullable: true }
+	)
+	comboSuppliedOffers!: ComboSuppliedOffers[] | null;
 }

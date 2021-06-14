@@ -1,6 +1,10 @@
 import { Request, Response } from "express";
 import { Controller, Get, Req, Res } from "routing-controllers";
 import {
+	ComboSuppliedOffersRepository,
+	IComboSuppliedOffersRepository,
+} from "../../data/repository/ComboSuppliedOffersRepository";
+import {
 	ISuppliedOfferRepository,
 	SuppliedOfferRepository,
 } from "../../data/repository/SuppliedOfferRepository";
@@ -14,6 +18,9 @@ export default class SuppliedOfferController {
 	private suppliedOfferRepository: ISuppliedOfferRepository =
 		new SuppliedOfferRepository();
 
+	private comboSuppliedOfferRepository: IComboSuppliedOffersRepository =
+		new ComboSuppliedOffersRepository();
+
 	@Get("/unit-store/:id/supplied-offer")
 	async listSuppliedOffer(@Req() request: Request, @Res() response: Response) {
 		const { id } = request.params as any;
@@ -23,9 +30,18 @@ export default class SuppliedOfferController {
 			const [suppliedOffers, count] =
 				await this.suppliedOfferRepository.findAndCount(id, { page, limit });
 
+			const [comboSuppliedOfferRepository, countCombo] =
+				await this.comboSuppliedOfferRepository.findAndCount(id, {
+					page,
+					limit,
+				});
+
 			const { toSuppliedOffersResponse } = SuppliedOfferConvert();
 
-			return toSuppliedOffersResponse(suppliedOffers, count);
+			return toSuppliedOffersResponse(
+				[...suppliedOffers, ...comboSuppliedOfferRepository],
+				count + countCombo
+			);
 		} catch (error) {
 			responseError500(response, error);
 		}

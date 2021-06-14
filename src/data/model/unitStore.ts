@@ -9,6 +9,7 @@ import {
 } from "typeorm";
 import { IUnitStore } from "../../domain/model/unitStore";
 import { Address } from "./address";
+import { ComboSuppliedOffers } from "./comboSuppliedOffer";
 import { Shopkeeper } from "./shopkeeper";
 import { Store } from "./store";
 import { StoreHighlight } from "./storeHighlight";
@@ -26,9 +27,16 @@ export class UnitStore implements IUnitStore {
 	storeHighlights!: StoreHighlight[] | null;
 
 	@OneToMany(() => SuppliedOffer, (model) => model.unitStore, {
-		cascade: ["insert", "update"],
+		eager: true,
+		cascade: true,
 	})
 	suppliedOffers!: SuppliedOffer[] | null;
+
+	@OneToMany(() => ComboSuppliedOffers, (model) => model.unitStore, {
+		eager: true,
+		cascade: true,
+	})
+	comboSuppliedOffers!: ComboSuppliedOffers[] | null;
 
 	@ManyToOne(() => Store, (model) => model.unitaryStores, {
 		eager: true,

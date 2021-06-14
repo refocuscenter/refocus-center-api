@@ -1,8 +1,7 @@
 import {
 	FinancialAccount,
 	Offer,
-	OfferXorCombo,
-	SuppliedOffer,
+	SuppliedOfferXorCombo,
 	UnitStore,
 	User,
 } from "../model";
@@ -27,10 +26,6 @@ export interface UnitStoresResponse extends ListMetaData {
 	unitStores: UnitStore[];
 }
 
-export interface UnitStoreOfferResponse extends ListMetaData {
-	offers: OfferXorCombo[];
-}
-
 export interface OfferResponse {
 	offer: Offer;
 }
@@ -40,11 +35,11 @@ export interface OffersResponse extends ListMetaData {
 }
 
 export interface SuppliedOfferResponse {
-	suppliedOffer: SuppliedOffer;
+	suppliedOffer: SuppliedOfferXorCombo;
 }
 
 export interface SuppliedOffersResponse extends ListMetaData {
-	suppliedOffers: SuppliedOffer[];
+	suppliedOffers: SuppliedOfferXorCombo[];
 }
 
 export interface FinancialAccountResponse {

@@ -39,12 +39,7 @@ export interface Basket {
 
 export interface BasketItem {
 	// totalValue?: number;
-	portion: OfferPortion;
-}
-
-export interface OfferPortion {
-	amount: number;
-	offer: OfferXorCombo;
+	portion: SuppliedOfferPortion;
 }
 
 /**
@@ -56,6 +51,11 @@ export interface Offer {
 	name: string;
 	image: string;
 	description: string;
+}
+
+export interface SuppliedOfferPortion {
+	amount: number;
+	suppliedOffer: SuppliedOfferXorCombo;
 }
 
 /**
@@ -73,20 +73,19 @@ export interface SuppliedOffer {
 	stockAmount?: number;
 }
 
-export interface Combo<Offer> {
+export type SuppliedOfferXorCombo = XOR<SuppliedOffer, ComboSuppliedOffer>;
+
+export interface ComboSuppliedOffer {
 	id: number;
 	name: string;
 	value: number;
-	offers: Offer[];
+	suppliedOffers: SuppliedOffer[];
 }
 
-export type OfferXorCombo = XOR<Offer, Combo<Offer>>;
-export type ProductXorCombo = XOR<Product, Combo<Product>>;
-export type ServiceXorCombo = XOR<Service, Combo<Service>>;
-
-export interface Product extends Offer {}
-
-export interface Service extends Offer {}
+export interface SuppliedOfferPortion {
+	amount: number;
+	suppliedOffer: SuppliedOfferXorCombo;
+}
 
 export interface OfferCategory {
 	offer: Offer;

@@ -1,4 +1,9 @@
+import { IComboSuppliedOffers } from "../../domain/model/comboSuppliedOffers";
 import { ISuppliedOffer } from "../../domain/model/suppliedOffer";
+import {
+	isISuppliedOffer,
+	SuppliedOfferXorCombo,
+} from "../../domain/model/suppliedOfferXorCombo";
 import * as PresentationModels from "../model";
 import {
 	SuppliedOfferResponse,
@@ -10,20 +15,20 @@ export const SuppliedOfferConvert = function () {
 	return { toSuppliedOffersResponse, toSuppliedOfferResponse };
 
 	function toSuppliedOfferResponse(
-		offer: ISuppliedOffer
+		supOffer: SuppliedOfferXorCombo
 	): SuppliedOfferResponse {
 		return {
-			suppliedOffer: toSuppliedOffer(offer),
+			suppliedOffer: toSuppliedOfferXorCombo(supOffer),
 		};
 	}
 
 	function toSuppliedOffersResponse(
-		offers: ISuppliedOffer[],
+		supOffers: SuppliedOfferXorCombo[],
 		count: number
 	): SuppliedOffersResponse {
 		return {
-			suppliedOffers: offers.map((offer) => {
-				return toSuppliedOffer(offer);
+			suppliedOffers: supOffers.map((supOffer) => {
+				return toSuppliedOfferXorCombo(supOffer);
 			}),
 			count: count,
 		};
@@ -46,5 +51,30 @@ export const SuppliedOfferConvert = function () {
 				id: offer.id,
 			},
 		};
+	}
+
+	function toCombo(
+		combo: IComboSuppliedOffers
+	): PresentationModels.ComboSuppliedOffer {
+		const { id, value, name, suppliedOffers } = combo;
+
+		return {
+			id,
+			value,
+			name,
+			suppliedOffers: suppliedOffers.map((suppliedOffer) =>
+				toSuppliedOffer(suppliedOffer)
+			),
+		};
+	}
+
+	function toSuppliedOfferXorCombo(
+		supXorCombo: SuppliedOfferXorCombo
+	): PresentationModels.SuppliedOfferXorCombo {
+		if (isISuppliedOffer(supXorCombo)) {
+			return toSuppliedOffer(supXorCombo);
+		} else {
+			return toCombo(supXorCombo);
+		}
 	}
 };
