@@ -10,7 +10,7 @@
         schema:
           type: integer
           minimum: 1
-        description: The unit store ID 
+        description: The unit store ID
       - $ref: "#/components/paginationParams/page"
       - $ref: "#/components/paginationParams/limit"
       # - in: query
@@ -51,6 +51,12 @@
           type: integer
           minimum: 1
         description: The Supplied Offer ID
+      - in: query
+        name: type
+        required: true
+        schema:
+          type: string
+          enum: ["offer", "combo"]
     responses:
       200:
         description: Ok
@@ -58,7 +64,6 @@
           application/json:
             schema:
               $ref: "#/components/schemas/SuppliedOfferResponse"
-
 #/unit-store/{unit_store_id}/sale:
 #  post:
 #    tags:
@@ -70,7 +75,7 @@
 #        schema:
 #          type: integer
 #          minimum: 1
-#        description: The unit store ID 
+#        description: The unit store ID
 #    requestBody:
 #      required: true
 #      content:
@@ -95,7 +100,7 @@
 #      schema:
 #        type: integer
 #        minimum: 1
-#      description: The product ID 
+#      description: The product ID
 #  get:
 #    tags:
 #      -  "Unit Store Sales (Products & Services)"
@@ -111,7 +116,7 @@
 #      content:
 #        application/json:
 #          schema:
-#            $ref: "#/definitions/object"      
+#            $ref: "#/definitions/object"
 #    responses:
 #      200:
 #        $ref: "#/components/responses/200"
@@ -131,7 +136,7 @@
 #      schema:
 #        type: integer
 #        minimum: 1
-#      description: The service ID 
+#      description: The service ID
 #  get:
 #    tags:
 #      -  "Unit Store Sales (Products & Services)"
@@ -147,7 +152,7 @@
 #      content:
 #        application/json:
 #          schema:
-#            $ref: "#/definitions/object"      
+#            $ref: "#/definitions/object"
 #    responses:
 #      200:
 #        $ref: "#/components/responses/200"

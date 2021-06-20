@@ -2,33 +2,30 @@ import { IComboSuppliedOffersRepository } from "../../data/repository/ComboSuppl
 import { ISuppliedOfferRepository } from "../../data/repository/SuppliedOfferRepository";
 import { Id } from "../../data/util/types";
 import { SuppliedOfferConvert } from "../../presentation/convert/SuppliedOfferConvert";
-import { SuppliedOffersResponse } from "../../presentation/response/success";
-import { Result } from "../../presentation/util/result";
+import { getError, getSuccess } from "../../presentation/util/result";
 import { PAGE_DEFAULT, PAGE_LIMIT_DEFAULT } from "../constant";
 import { PaginationRequest } from "../util/pagination";
 import { UseCase } from "./UseCase";
 
 export interface RequestListSup extends PaginationRequest {
-	unitStoreid: Id;
+	unitStoreId: Id;
 }
 
 /**
  * List Offers and Combos of Offers
  */
-export class ListSuppliedOffers
-	implements UseCase<RequestListSup, Result<SuppliedOffersResponse>>
-{
+export class ListSuppliedOffers implements UseCase<RequestListSup> {
 	constructor(
 		private supOfferRepo: ISuppliedOfferRepository,
 		private comboSupOfferRepo: IComboSuppliedOffersRepository
 	) {}
 
-	async run({ unitStoreid, pagination }: RequestListSup) {
+	async run({ unitStoreId: unitStoreId, pagination }: RequestListSup) {
 		try {
 			const { page = PAGE_DEFAULT, limit = PAGE_LIMIT_DEFAULT } = pagination;
 
 			const [supOffers, countSup] = await this.supOfferRepo.findAndCount(
-				unitStoreid,
+				unitStoreId,
 				{
 					page,
 					limit,
@@ -36,7 +33,7 @@ export class ListSuppliedOffers
 			);
 
 			const [comboSupOfferRepository, countCombo] =
-				await this.comboSupOfferRepo.findAndCount(unitStoreid, {
+				await this.comboSupOfferRepo.findAndCount(unitStoreId, {
 					page,
 					limit,
 				});
@@ -48,9 +45,9 @@ export class ListSuppliedOffers
 
 			const result = toSuppliedOffersResponse(offersAndCombos, totalCount);
 
-			return { status: 200, data: result };
+			return getSuccess(200, result);
 		} catch (error) {
-			return { status: 500, data: error };
+			return getError(500, error);
 		}
 	}
 }
