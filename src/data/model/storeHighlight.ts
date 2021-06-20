@@ -18,7 +18,7 @@ export class StoreHighlight implements IStoreHighlight {
 	bannerImage!: Buffer;
 
 	@Column()
-	title!: String;
+	title!: string;
 
 	@ManyToOne(() => UnitStore, (uStore) => uStore.storeHighlights)
 	@JoinColumn()

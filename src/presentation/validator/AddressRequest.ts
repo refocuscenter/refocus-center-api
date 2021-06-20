@@ -5,15 +5,15 @@ export class AddressRequest {
 	localityType!: LocalityType;
 
 	@Length(1, 3)
-	addressLines!: String[];
+	addressLines!: string[];
 
-	city!: String;
+	city!: string;
 
-	state!: String;
+	state!: string;
 
-	neighborhood!: String;
+	neighborhood!: string;
 
-	zipCode!: String;
+	zipCode!: string;
 
 	countryCode!: number;
 }

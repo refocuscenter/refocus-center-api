@@ -11,7 +11,8 @@
     "start": "npm run compile",
     "schemaspy": "schemaspy && schemaspy\\index.html",
     "docs:schemas": "ts-to-openapi -f ./src/presentation/response/**/*.ts --no-as-comment > ./src/rest/doc/_schemas.yml",
-    "lint": "eslint ./src ./task --ext .ts"
+    "lint": "eslint ./src ./task --ext .ts",
+    "lint:fix": "npm run lint -- --fix"
   },
   "keywords": [],
   "author": "Refocus",

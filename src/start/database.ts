@@ -1,7 +1,7 @@
 import { red } from "chalk";
 import { Connection, createConnection } from "typeorm";
 
-const { log, error } = console;
+const { error } = console;
 
 export default class Database {
 	private connection: Connection | null = null;

@@ -6,7 +6,7 @@ export interface IStoreHighlight {
 
 	bannerImage: Buffer;
 
-	title: String;
+	title: string;
 
 	unitStore: IUnitStore;
 
