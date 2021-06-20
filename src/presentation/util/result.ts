@@ -1,27 +1,27 @@
-export interface Result {
+export interface Result<Data> {
 	status: number;
-	data: any;
+	data: Data;
 }
 
 export function getErrorFromMsg(
 	status: number,
 	message: string,
 	stack?: string
-): Result {
+): Result<Error> {
 	return {
 		status,
 		data: { message, stack } as Error,
 	};
 }
 
-export function getError(status: number, error: Error): Result {
+export function getError(status: number, error: Error): Result<Error> {
 	return {
 		status,
 		data: error,
 	};
 }
 
-export function getSuccess(status: number, data: any): Result {
+export function getSuccess<Data>(status: number, data: Data): Result<Data> {
 	return {
 		status,
 		data,

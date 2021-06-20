@@ -2,6 +2,7 @@ import { IComboSuppliedOffersRepository } from "../../data/repository/ComboSuppl
 import { ISuppliedOfferRepository } from "../../data/repository/SuppliedOfferRepository";
 import { Id } from "../../data/util/types";
 import { SuppliedOfferConvert } from "../../presentation/convert/SuppliedOfferConvert";
+import { SuppliedOffersResponse } from "../../presentation/response/success";
 import { getError, getSuccess } from "../../presentation/util/result";
 import { PAGE_DEFAULT, PAGE_LIMIT_DEFAULT } from "../constant";
 import { PaginationRequest } from "../util/pagination";
@@ -14,7 +15,9 @@ export interface RequestListSup extends PaginationRequest {
 /**
  * List Offers and Combos of Offers
  */
-export class ListSuppliedOffers implements UseCase<RequestListSup> {
+export class ListSuppliedOffers
+	implements UseCase<RequestListSup, SuppliedOffersResponse>
+{
 	constructor(
 		private supOfferRepo: ISuppliedOfferRepository,
 		private comboSupOfferRepo: IComboSuppliedOffersRepository

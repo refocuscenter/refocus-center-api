@@ -2,11 +2,11 @@ import { IComboSuppliedOffersRepository } from "../../data/repository/ComboSuppl
 import { ISuppliedOfferRepository } from "../../data/repository/SuppliedOfferRepository";
 import { Id } from "../../data/util/types";
 import { SuppliedOfferConvert } from "../../presentation/convert/SuppliedOfferConvert";
+import { SuppliedOfferResponse } from "../../presentation/response/success";
 import {
 	getError,
 	getErrorFromMsg,
 	getSuccess,
-	Result,
 } from "../../presentation/util/result";
 import { IComboSuppliedOffers } from "../model/comboSuppliedOffers";
 import { ISuppliedOffer } from "../model/suppliedOffer";
@@ -25,7 +25,9 @@ export interface RequestGetSup {
 /**
  * Get Offer or Combo
  */
-export class GetSuppliedOffer implements UseCase<RequestGetSup> {
+export class GetSuppliedOffer
+	implements UseCase<RequestGetSup, SuppliedOfferResponse>
+{
 	constructor(
 		private supOfferRepo: ISuppliedOfferRepository,
 		private comboSupOfferRepo: IComboSuppliedOffersRepository
@@ -35,7 +37,7 @@ export class GetSuppliedOffer implements UseCase<RequestGetSup> {
 		return types.some((t) => t === req.type);
 	}
 
-	async run(req: RequestGetSup): Promise<Result> {
+	async run(req: RequestGetSup) {
 		try {
 			const { id, type } = req;
 
@@ -60,7 +62,7 @@ export class GetSuppliedOffer implements UseCase<RequestGetSup> {
 
 			const result = toSuppliedOfferResponse(data);
 
-			return getSuccess(200, result);
+			return getSuccess<SuppliedOfferResponse>(200, result);
 		} catch (error) {
 			return getError(500, error);
 		}

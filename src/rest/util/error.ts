@@ -8,17 +8,7 @@ export function responseError500(response: Response, error: Error) {
 
 export function responseError404(
 	response: Response,
-	message: string = "Object not found"
+	message = "Object not found"
 ) {
 	response.status(404).send(message);
-}
-export function responseError409(
-	response: Response,
-	message: string = "Conflict"
-) {
-	response.status(409).send(message);
-}
-
-export function responseDeleted(response: Response, deletedObject: any) {
-	return response.status(200).json(deletedObject);
 }
