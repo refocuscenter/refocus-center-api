@@ -1,53 +1,35 @@
 import { Request, Response } from "express";
 import { Controller, Get, Req, Res } from "routing-controllers";
-import {
-	ComboSuppliedOffersRepository,
-	IComboSuppliedOffersRepository,
-} from "../../data/repository/ComboSuppliedOffersRepository";
-import {
-	ISuppliedOfferRepository,
-	SuppliedOfferRepository,
-} from "../../data/repository/SuppliedOfferRepository";
-import { SuppliedOfferConvert } from "../../presentation/convert/SuppliedOfferConvert";
-import { responseError500 } from "../util/error";
+import { ComboSuppliedOffersRepository } from "../../data/repository/ComboSuppliedOffersRepository";
+import { SuppliedOfferRepository } from "../../data/repository/SuppliedOfferRepository";
+import { ListSuppliedOffersXorCombos } from "../../domain/use_case/ListSuppliedOffersXorCombos";
 
 const SUPPLIED_OFFER_NOT_FOUND = "Supplied Offer not found";
 
 @Controller()
 export default class SuppliedOfferController {
-	private suppliedOfferRepository: ISuppliedOfferRepository =
-		new SuppliedOfferRepository();
+	private supOfferRepo = new SuppliedOfferRepository();
+	private comboSupOfferRepo = new ComboSuppliedOffersRepository();
 
-	private comboSuppliedOfferRepository: IComboSuppliedOffersRepository =
-		new ComboSuppliedOffersRepository();
+	private listUseCase = new ListSuppliedOffersXorCombos(
+		this.supOfferRepo,
+		this.comboSupOfferRepo
+	);
 
 	@Get("/unit-store/:id/supplied-offer")
 	async listSuppliedOffer(@Req() request: Request, @Res() response: Response) {
 		const { id } = request.params as any;
-		const { page = 0, limit = 10 } = request.query as any;
+		const { page, limit } = request.query as any;
 
-		try {
-			const [suppliedOffers, count] =
-				await this.suppliedOfferRepository.findAndCount(id, { page, limit });
+		const result = await this.listUseCase.run({
+			id,
+			pagination: { page, limit },
+		});
 
-			const [comboSuppliedOfferRepository, countCombo] =
-				await this.comboSuppliedOfferRepository.findAndCount(id, {
-					page,
-					limit,
-				});
-
-			const { toSuppliedOffersResponse } = SuppliedOfferConvert();
-
-			return toSuppliedOffersResponse(
-				[...suppliedOffers, ...comboSuppliedOfferRepository],
-				count + countCombo
-			);
-		} catch (error) {
-			responseError500(response, error);
-		}
+		return response.status(result.status).send(result.data);
 	}
 
-	@Get("/supplied-offer/:id")
+	/*@Get("/supplied-offer/:id")
 	async getSuppliedOffer(@Req() request: Request, @Res() response: Response) {
 		const { id } = request.params;
 
@@ -64,5 +46,5 @@ export default class SuppliedOfferController {
 		} catch (error) {
 			responseError500(response, error);
 		}
-	}
+	}*/
 }
