@@ -1,3 +1,6 @@
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export type ResultAny = Result<any>;
+
 export interface Result<Data> {
 	status: number;
 	data: Data;
