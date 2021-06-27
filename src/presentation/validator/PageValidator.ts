@@ -1,11 +1,11 @@
-import { IsNumberString, IsOptional } from "class-validator";
+import { IsNumber, IsOptional } from "class-validator";
 
 export class PageValidator {
 	@IsOptional()
-	@IsNumberString()
+	@IsNumber()
 	public page!: number;
 
 	@IsOptional()
-	@IsNumberString()
+	@IsNumber()
 	public limit!: number;
 }
