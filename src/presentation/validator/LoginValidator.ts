@@ -1,6 +1,6 @@
 import { IsEmail, IsOptional } from "class-validator";
 
-export class LoginRequest {
+export class LoginValidator {
 	@IsOptional()
 	phone!: string;
 

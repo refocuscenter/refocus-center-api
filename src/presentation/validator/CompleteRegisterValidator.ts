@@ -1,7 +1,6 @@
 import { Length } from "class-validator";
-import { AddressRequest } from "./AddressRequest";
 
-export class CompleteRegisterRequest {
+export class CompleteRegisterValidator {
 	@Length(1, 25)
 	displayName!: string;
 
@@ -12,6 +11,4 @@ export class CompleteRegisterRequest {
 	birthDate!: Date;
 
 	phone!: string;
-
-	addresses!: AddressRequest[];
 }

@@ -1,7 +1,7 @@
 import { Length } from "class-validator";
-import { LocalityType } from "../../data/model/address";
+import { LocalityType } from "../../domain/model/address";
 
-export class AddressRequest {
+export class AddressValidator {
 	localityType!: LocalityType;
 
 	@Length(1, 3)
