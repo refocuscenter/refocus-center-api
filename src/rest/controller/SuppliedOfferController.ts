@@ -7,8 +7,7 @@ import {
 } from "routing-controllers";
 import { ComboSuppliedOffersRepository } from "../../data/repository/ComboSuppliedOffersRepository";
 import { SuppliedOfferRepository } from "../../data/repository/SuppliedOfferRepository";
-import { GetSuppliedOffer } from "../../domain/use_case/GetSuppliedOffer";
-import { ListSuppliedOffers } from "../../domain/use_case/ListSuppliedOffers";
+import { SuppliedOfferUseCase } from "../../domain/use_case/SuppliedOfferUseCase";
 import { SuppliedOfferConvert } from "../../presentation/convert/SuppliedOfferConvert";
 import {
 	SupOfferGetPathParams,
@@ -23,25 +22,17 @@ const { toSuppliedOfferResponse, toSuppliedOffersResponse } =
 
 @Controller()
 export default class SuppliedOfferController {
-	private supOfferRepo = new SuppliedOfferRepository();
-	private comboSupOfferRepo = new ComboSuppliedOffersRepository();
-
-	private listSupOffers = new ListSuppliedOffers(
-		this.supOfferRepo,
-		this.comboSupOfferRepo
-	);
-
-	private getSupOffer = new GetSuppliedOffer(
-		this.supOfferRepo,
-		this.comboSupOfferRepo
+	private useCase = SuppliedOfferUseCase(
+		new SuppliedOfferRepository(),
+		new ComboSuppliedOffersRepository()
 	);
 
 	@Get("/unit-store/:unitStoreId/supplied-offer")
-	async listSuppliedOffer(
+	async list(
 		@Params() params: SupOfferListPathParams,
 		@QueryParams() query: SupOfferListQueryParams
 	) {
-		const { offersAndCombos, totalCount } = await this.listSupOffers.run({
+		const { offersAndCombos, totalCount } = await this.useCase.list({
 			unitStoreId: params.unitStoreId,
 			pagination: {
 				page: query.page,
@@ -53,11 +44,11 @@ export default class SuppliedOfferController {
 	}
 
 	@Get("/supplied-offer/:id")
-	async getSuppliedOffer(
+	async get(
 		@Params() params: SupOfferGetPathParams,
 		@QueryParams() query: SupOfferGetQueryParams
 	) {
-		const supOffer = await this.getSupOffer.run({
+		const supOffer = await this.useCase.get({
 			id: params.id,
 			type: query.type,
 		});
